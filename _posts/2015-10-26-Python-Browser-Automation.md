@@ -8,7 +8,7 @@ colour:
 
 
 
-## Implementing Selenium, Page Objects and BDD with Python
+## Selenium, Page Objects and BDD in Python
 
 Insert Text Here!
 
