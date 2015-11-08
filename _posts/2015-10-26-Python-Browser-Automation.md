@@ -26,7 +26,7 @@ Insert Text Here!
 ### Page Objects
 
 ### Execution
-> Test
+
 >
 ~~~ python
 def what?
