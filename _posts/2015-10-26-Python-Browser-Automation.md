@@ -8,7 +8,7 @@ colour:
 
 
 
-## Selenium, Page Objects, Lettuce, Nose in Python
+## Selenium, Page Objects and BDD with Python
 
 Insert Text Here!
 
