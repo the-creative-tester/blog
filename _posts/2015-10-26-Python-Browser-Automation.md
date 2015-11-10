@@ -75,16 +75,16 @@ import os
 from lettuce import before, world, after
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-
+  
 @before.all
 def open_shop():
     open_drivers()
-
+  
 @after.all
 def close_shop(total):
     print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
     close_drivers()
-
+  
 def open_drivers():
     world.driver = get_firefox()
     world.driver.set_page_load_timeout(10)
