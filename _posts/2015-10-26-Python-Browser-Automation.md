@@ -36,7 +36,12 @@ bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
 ~~~
 
-You can now use ```pip install <package>``` to install the required packages.
+You can now use the following command to install packages:
+
+>
+~~~
+pip install <package>
+~~~
 
 ##### Selenium  
 
