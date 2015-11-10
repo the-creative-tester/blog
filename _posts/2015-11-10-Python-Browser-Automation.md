@@ -164,16 +164,16 @@ def step_impl(step):
 >
 @step('When I search for "([^"]*)"')
 def step_impl(step, search_term):
-	world.driver.find_element(By.ID, "term").send_keys(search_term)
-	world.driver.find_element(By.ID, "submit").click()
+    world.driver.find_element(By.ID, "term").send_keys(search_term)
+    world.driver.find_element(By.ID, "submit").click()
 >
 @step('Then I am taken to the PyPi Search Results page')
 def step_impl(step):
-	assert_equal(world.driver.title, "Index of Packages Matching 'lettuce' : Python Package Index")
+    assert_equal(world.driver.title, "Index of Packages Matching 'lettuce' : Python Package Index")
 >
 @step('And I see a search result "([^"]*)"')
 def step_impl(step, search_result):
-	assert_true(world.driver.find_element(By.LINK_TEXT, search_result))
+    assert_true(world.driver.find_element(By.LINK_TEXT, search_result))
 >
 ~~~
 
@@ -260,15 +260,15 @@ def step_impl(step):
 >
 @step('When I search for "([^"]*)"')
 def step_impl(step, search_term):
-	world.home_page.search(search_term)
+    world.home_page.search(search_term)
 >
 @step('Then I am taken to the PyPi Search Results page')
 def step_impl(step):
-	assert_equal(world.search_results_page.get_page_title(), "Index of Packages Matching 'lettuce' : Python Package Index")
+    assert_equal(world.search_results_page.get_page_title(), "Index of Packages Matching 'lettuce' : Python Package Index")
 >
 @step('And I see a search result "([^"]*)"')
 def step_impl(step, search_result):
-	assert_true(world.search_results_page.find_search_result(search_result))
+    assert_true(world.search_results_page.find_search_result(search_result))
 >
 ~~~
 
@@ -298,7 +298,7 @@ def open_drivers():
     world.driver.set_page_load_timeout(10)
     world.driver.implicitly_wait(10)
     world.driver.maximize_window()
- >   
+>
 def get_firefox():
     # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
     try:
