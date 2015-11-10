@@ -342,4 +342,4 @@ Total 1 of 1 scenarios passed!
 
 ### Full Example
 
-https://github.com/the-creative-tester/python-web-browser-automation-example
+<https://github.com/the-creative-tester/python-web-browser-automation-example>
