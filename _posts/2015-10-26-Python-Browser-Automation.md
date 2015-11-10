@@ -146,15 +146,34 @@ def step_impl(step, search_result):
 
 ### Using Selenium
 
-Let's make some changes to ```pypi_automated_tests/steps/search_steps.py```.  We will import ```world``` so that we can make use of the ```world.driver``` that we had setup in ```pypi_automated_tests/terrain.py```. We can start to use the [Selenium Python Bindings](http://selenium-python.readthedocs.org/) to also drive the browser:
+Let's make some changes to ```pypi_automated_tests/steps/search_steps.py```.  We will add ```from lettuce import step, world``` so that we can make use of the ```world.driver``` that we had setup in ```pypi_automated_tests/terrain.py```. We will also add ```from nose.tools import assert_equal, assert_true``` so that we can use matchers. We can then start to use the [Selenium Python Bindings](http://selenium-python.readthedocs.org/) to drive the browser:
 
 >
 ~~~
-
+from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+>
+@step('Given I navigate to the PyPi Home page')
+def step_impl(step):
+    world.driver.get("https://pypi.python.org/pypi")
+    assert_equal(world.driver.title, "PyPI - the Python Package Index : Python Package Index")
+>
+@step('When I search for "([^"]*)"')
+def step_impl(step, search_term):
+	world.driver.find_element(By.ID, "term").send_keys(search_term)
+	world.driver.find_element(By.ID, "submit").click()
+>
+@step('Then I am taken to the PyPi Search Results page')
+def step_impl(step):
+	assert_equal(world.driver.title, "Index of Packages Matching 'lettuce' : Python Package Index")
+>
+@step('And I see a search result "([^"]*)"')
+def step_impl(step, search_result):
+	assert_true(world.driver.find_element(By.LINK_TEXT, search_result))
+>
 ~~~
 
 ### Using Page Objects
-
-### Using Nose
 
 ### Execution
