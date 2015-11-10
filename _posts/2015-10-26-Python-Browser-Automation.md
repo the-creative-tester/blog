@@ -22,6 +22,7 @@ Install [Python 2.7.10](https://www.python.org/downloads/release/python-2710/). 
 
 Ensure that you have successfully installed Python:  
 
+>
 ~~~
 bash-3.2$ python --version  
 Python 2.7.10
@@ -29,6 +30,7 @@ Python 2.7.10
 
 Ensure that you have successfully installed pip: 
 
+>
 ~~~
 bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
@@ -38,18 +40,21 @@ You can now use ```pip install <package>``` to install the required packages.
 
 ##### Selenium  
 
+>
 ~~~
 pip install selenium
 ~~~
 
 ##### Lettuce  
 
+>
 ~~~
 pip install lettuce
 ~~~
 
 ##### Nose  
 
+>
 ~~~
 pip install nose
 ~~~
