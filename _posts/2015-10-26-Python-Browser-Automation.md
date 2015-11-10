@@ -36,37 +36,30 @@ bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
 ~~~
 
-You can now use the following command to install packages:
-
->
-~~~
-pip install <package>
-~~~
-
-##### Selenium  
+You can now use the following commands to install the Selenium, Lettuce and Nose packages:
 
 >
 ~~~
 pip install selenium
-~~~
-
-##### Lettuce  
-
->
-~~~
 pip install lettuce
-~~~
-
-##### Nose  
-
->
-~~~
 pip install nose
 ~~~
 
 ##### Sublime Text
 
 Install [Sublime Text 3](http://www.sublimetext.com/3).
+
+### Initial Setup
+
+We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:
+
+>
+~~~
+pypi_automated_tests/
+  features/
+    pages/
+    steps/
+~~~
 
 ### BDD
 
