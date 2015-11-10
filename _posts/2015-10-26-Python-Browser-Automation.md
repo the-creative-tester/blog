@@ -179,4 +179,143 @@ def step_impl(step, search_result):
 
 ### Using Page Objects
 
+To make use of Page Objects, let's first move the functionality that resided in ```pypi_automated_tests/steps/search_steps.py``` to two different files, ```pypi_automated_tests/pages/home_page.py``` and ```pypi_automated_tests/pages/search_results_page.py```.  Firstly, in ```pypi_automated_tests/pages/home_page.py```:
+
+>
+~~~
+from selenium.webdriver.common.by import By
+>
+class HomePageLocator(object):
+    # Home Page Locators
+>
+    HEADER_TEXT = (By.XPATH, "//h1")
+    SEARCH_FIELD = (By.ID, "term")
+    SUBMIT_BUTTON = (By.ID, "submit")
+>
+>
+class HomePage(object):
+    # Home Page Actions
+>
+    def __init__(self, browser):
+        self.driver = browser
+>
+    def fill(self, text, *locator):
+        self.driver.find_element(*locator).send_keys(text)
+>
+    def click_element(self, *locator):
+        self.driver.find_element(*locator).click()
+>
+    def navigate(self, address):
+        self.driver.get(address)
+>
+    def get_page_title(self):
+        return self.driver.title
+>
+    def search(self, search_term):
+        self.fill(search_term, *HomePageLocator.SEARCH_FIELD)
+        self.click_element(*HomePageLocator.SUBMIT_BUTTON)
+>
+~~~
+
+Secondly, in ```pypi_automated_tests/pages/search_results.py```:
+
+>
+~~~
+from selenium.webdriver.common.by import By
+>
+class SearchResultsPageLocator(object):
+    # Search Results Page Locators
+>
+    HEADER_TEXT = (By.XPATH, "//h1")
+>
+>
+class SearchResultsPage(object):
+    # Search Results Page Actions
+>
+    def __init__(self, browser):
+        self.driver = browser
+>
+    def get_element(self, *locator):
+        return self.driver.find_element(*locator)
+>
+    def get_page_title(self):
+        return self.driver.title
+>
+    def find_search_result(self, search_result):
+        return self.get_element(By.LINK_TEXT, search_result)
+>
+~~~
+
+Now, let's update ```pypi_automated_tests/steps/search_steps.py``` to reference the right Page Objects:
+
+>
+~~~
+from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+>
+@step('Given I navigate to the PyPi Home page')
+def step_impl(step):
+    world.home_page.navigate("https://pypi.python.org/pypi")
+    assert_equal(world.home_page.get_page_title(), "PyPI - the Python Package Index : Python Package Index")
+>
+@step('When I search for "([^"]*)"')
+def step_impl(step, search_term):
+	world.home_page.search(search_term)
+>
+@step('Then I am taken to the PyPi Search Results page')
+def step_impl(step):
+	assert_equal(world.search_results_page.get_page_title(), "Index of Packages Matching 'lettuce' : Python Package Index")
+>
+@step('And I see a search result "([^"]*)"')
+def step_impl(step, search_result):
+	assert_true(world.search_results_page.find_search_result(search_result))
+>
+~~~
+
+Finally, in our ```pypi_automated_tests/terrain.py``` we will need to make these Page Objects avaiable through ```world```:
+
+>
+~~~
+import os
+from lettuce import before, world, after
+from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from features.pages.home_page import HomePage
+from features.pages.search_results_page import SearchResultsPage
+>
+@before.all
+def open_shop():
+    open_drivers()
+    prepare_pages(world.driver)
+>
+@after.all
+def close_shop(total):
+    print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
+    close_drivers()
+>
+def open_drivers():
+    world.driver = get_firefox()
+    world.driver.set_page_load_timeout(10)
+    world.driver.implicitly_wait(10)
+    world.driver.maximize_window()
+ >   
+def get_firefox():
+    # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
+    try:
+        driver = webdriver.Firefox()
+    except Exception:
+        my_local_firefox_bin = os.environ.get('FIREFOX_BIN')
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+>
+def prepare_pages(driver):
+    world.home_page = HomePage(driver)
+    world.search_results_page = SearchResultsPage(driver)
+>
+def close_drivers():
+    if world.driver:
+        world.driver.quit()
+~~~
+
 ### Execution
