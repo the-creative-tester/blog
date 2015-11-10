@@ -65,9 +65,9 @@ pypi_automated_tests/
     steps/
 ~~~
 
-### Lettuce Setup
+### Using Lettuce
 
-To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about [terrain](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following code:
+To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about the usage of terrain [here](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following code:
 
 >
 ~~~ python
@@ -107,9 +107,7 @@ def close_drivers():
 >
 ~~~
 
-Run ```lettuce``` from ```pypi_automated_tests/```.  You should have successfully launched an instance of Firefox!
-
-Now, let's create a new file ```pypi_automated_tests/features/search.feature```.  In this file, let's describe the scenario that we want to test:
+Run ```lettuce``` from ```pypi_automated_tests/```.  You should have successfully launched an instance of Firefox! Now, let's create a new file ```pypi_automated_tests/features/search.feature```.  In this file, let's describe the scenario that we want to test:
 
 >
 ~~~
@@ -122,9 +120,7 @@ Feature: Search
     And I see a search result "lettuce 0.2.21"
 ~~~
 
-If you run ```lettuce``` from ```pypi_automated_tests/``` you will see that we now have to implement the steps for the above feature.
-
-Let's create a new file ```pypi_automated_tests/steps/search_steps.py```.  In this file, let's define our steps:
+If you run ```lettuce``` from ```pypi_automated_tests/``` you will see that we now have to implement the steps for the above feature.  Now, let's create a new file ```pypi_automated_tests/steps/search_steps.py```.  In this file, let's first define a shell for our steps:
 
 >
 ~~~
@@ -148,6 +144,17 @@ def step_impl(step, search_result):
 >
 ~~~
 
-### Selenium
+### Using Selenium
+
+Let's make some changes to ```pypi_automated_tests/steps/search_steps.py```.  We will import ```world``` so that we can make use of the ```world.driver``` that we had setup in ```pypi_automated_tests/terrain.py```. We can start to use the [Selenium Python Bindings](http://selenium-python.readthedocs.org/) to also drive the browser:
+
+>
+~~~
+
+~~~
+
+### Using Page Objects
+
+### Using Nose
 
 ### Execution
