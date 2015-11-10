@@ -179,7 +179,7 @@ def step_impl(step, search_result):
 
 ### Using Page Objects
 
-To make use of Page Objects, let's first move the functionality that resided in ```pypi_automated_tests/steps/search_steps.py``` to two different files, ```pypi_automated_tests/pages/home_page.py``` and ```pypi_automated_tests/pages/search_results_page.py```.  Firstly, in ```pypi_automated_tests/pages/home_page.py```:
+To make use of Page Objects, let's first move the functionality that resided in ```pypi_automated_tests/steps/search_steps.py``` to two new files, ```pypi_automated_tests/pages/home_page.py``` and ```pypi_automated_tests/pages/search_results_page.py```.  Firstly, in ```pypi_automated_tests/pages/home_page.py``` make the following updates:
 
 >
 ~~~
@@ -217,7 +217,7 @@ class HomePage(object):
 >
 ~~~
 
-Secondly, in ```pypi_automated_tests/pages/search_results.py```:
+Secondly, in ```pypi_automated_tests/pages/search_results.py``` make the following updates:
 
 >
 ~~~
@@ -246,7 +246,7 @@ class SearchResultsPage(object):
 >
 ~~~
 
-Now, let's update ```pypi_automated_tests/steps/search_steps.py``` to reference the right Page Objects:
+Now, let's update ```pypi_automated_tests/steps/search_steps.py``` to make use of the newly added Page Objects:
 
 >
 ~~~
@@ -272,7 +272,7 @@ def step_impl(step, search_result):
 >
 ~~~
 
-Finally, in our ```pypi_automated_tests/terrain.py``` we will need to make these Page Objects avaiable through ```world```:
+Finally, in our ```pypi_automated_tests/terrain.py``` we will need to make these Page Objects avaiable through ```world``` by making the following updates:
 
 >
 ~~~
@@ -319,3 +319,27 @@ def close_drivers():
 ~~~
 
 ### Execution
+
+You can now run ```lettuce``` from ```pypi_automated_tests/```, and you should get the following successful results:
+
+>
+~~~
+bash-3.2$ lettuce
+>
+Feature: Search                                     # features/search.feature:1
+>
+  Scenario: Search PyPI                             # features/search.feature:3
+    Given I navigate to the PyPi Home page          # features/steps/search_steps.py:5
+    When I search for "lettuce"                     # features/steps/search_steps.py:10
+    Then I am taken to the PyPi Search Results page # features/steps/search_steps.py:14
+    And I see a search result "lettuce 0.2.21"      # features/steps/search_steps.py:18
+Total 1 of 1 scenarios passed!
+>
+1 feature (1 passed)
+1 scenario (1 passed)
+4 steps (4 passed)
+~~~
+
+### Close
+
+
