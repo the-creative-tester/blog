@@ -18,16 +18,23 @@ In this post, we will have a look at using [Selenium WebDriver](http://www.selen
 
 1. Install [Sublime Text 3](http://www.sublimetext.com/3)
 2. Install [Python 2.7.10](https://www.python.org/downloads/release/python-2710/).  Please ensure that you allow the installer to update your PATH.  As part of your installation, pleaes also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.
-  * Ensure that you have successfully installed Python:  
-   > ```bash-3.2$ python --version```  
-   > ```Python 2.7.10```
-   
-  * Ensure that you have successfully installed pip:  
-   ```
+
+   Ensure that you have successfully installed Python:  
+   > 
+   ~~~
+   bash-3.2$ python --version  
+   Python 2.7.10
+   ~~~
+
+   Ensure that you have successfully installed pip: 
+   > 
+   ~~~
    bash-3.2$ pip --version
    pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
-   ```
-  * You can now use ```pip install <package>``` to install the required packages.
+   ~~~
+
+   You can now use ```pip install <package>``` to install the required packages.
+
 3. Install Selenium  
    ```
    pip install selenium
