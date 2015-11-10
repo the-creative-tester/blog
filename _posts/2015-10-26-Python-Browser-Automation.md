@@ -70,27 +70,27 @@ pypi_automated_tests/
 To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about [terrain](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following contents:
 
 >
-~~~
+~~~ python
 import os
 from lettuce import before, world, after
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-  
+>
 @before.all
 def open_shop():
     open_drivers()
-  
+>
 @after.all
 def close_shop(total):
     print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
     close_drivers()
-  
+> 
 def open_drivers():
     world.driver = get_firefox()
     world.driver.set_page_load_timeout(10)
     world.driver.implicitly_wait(10)
     world.driver.maximize_window()
-    
+>
 def get_firefox():
     # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
     try:
@@ -100,10 +100,11 @@ def get_firefox():
         firefox_binary = FirefoxBinary(my_local_firefox_bin)
         driver = webdriver.Firefox(firefox_binary=firefox_binary)
     return driver
-
+>
 def close_drivers():
     if world.driver:
         world.driver.quit()
+>
 ~~~
 
 Run ```lettuce``` from ```pypi_automated_tests/```.
