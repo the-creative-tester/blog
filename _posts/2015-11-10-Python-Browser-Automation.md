@@ -340,5 +340,6 @@ Total 1 of 1 scenarios passed!
 4 steps (4 passed)
 ~~~
 
-### Close
+### Full Example
 
+(https://github.com/the-creative-tester/python-web-browser-automation-example)
