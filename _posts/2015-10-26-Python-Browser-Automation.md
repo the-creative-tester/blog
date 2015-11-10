@@ -65,9 +65,9 @@ pypi_automated_tests/
     steps/
 ~~~
 
-### BDD
+### Lettuce Setup
 
-To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about [terrain](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following contents:
+To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about [terrain](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following code:
 
 >
 ~~~ python
@@ -84,7 +84,7 @@ def open_shop():
 def close_shop(total):
     print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
     close_drivers()
-> 
+>
 def open_drivers():
     world.driver = get_firefox()
     world.driver.set_page_load_timeout(10)
@@ -107,10 +107,47 @@ def close_drivers():
 >
 ~~~
 
-Run ```lettuce``` from ```pypi_automated_tests/```.
+Run ```lettuce``` from ```pypi_automated_tests/```.  You should have successfully launched an instance of Firefox!
+
+Now, let's create a new file ```pypi_automated_tests/features/search.feature```.  In this file, let's describe the scenario that we want to test:
+
+>
+~~~
+Feature: Search
+>
+  Scenario: Search PyPI
+    Given I navigate to the PyPi Home page
+    When I search for "lettuce"
+    Then I am taken to the PyPi Search Results page
+    And I see a search result "lettuce 0.2.21"
+~~~
+
+If you run ```lettuce``` from ```pypi_automated_tests/``` you will see that we now have to implement the steps for the above feature.
+
+Let's create a new file ```pypi_automated_tests/steps/search_steps.py```.  In this file, let's define our steps:
+
+>
+~~~
+from lettuce import step
+>
+@step('Given I navigate to the PyPi Home page')
+def step_impl(step):
+    assert True, 'This step must be implemented'
+>
+@step('When I search for "([^"]*)"')
+def step_impl(step, search_term):
+    assert True, 'This step must be implemented'
+>
+@step('Then I am taken to the PyPi Search Results page')
+def step_impl(step):
+    assert True, 'This step must be implemented'
+>
+@step('And I see a search result "([^"]*)"')
+def step_impl(step, search_result):
+    assert True, 'This step must be implemented'
+>
+~~~
 
 ### Selenium
-
-### Page Objects
 
 ### Execution
