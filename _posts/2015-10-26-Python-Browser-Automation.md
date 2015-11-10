@@ -61,8 +61,11 @@ We are going to write our first automated test against [PyPI](https://pypi.pytho
 ~~~
 pypi_automated_tests/
   features/
+    __init__.py
     pages/
+    	__init__.py
     steps/
+    	__init__.py
 ~~~
 
 ### Using Lettuce
