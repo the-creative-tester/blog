@@ -12,7 +12,7 @@ colour:
 
 ### Introduction
 
-In this post, we will have a look at using [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) within a Python context.  This is my first usage of Python, and I thought it would be useful to share how we can use Selenium WebDriver for those that a new to Web Browser Automation.  We will make use of the [Page Objects](http://selenium-python.readthedocs.org/page-objects.html) design pattern which allows for reusability and also reduction in duplicatted code.  We will then make us of [Lettuce](http://lettuce.it/), which is a BDD tool based on Cucumber which will allow us to describe our features and scenarios in a natural language with steps that ultimately call our Python functions and drive the browser.  We will also make use of [Nose](http://nose.readthedocs.org/en/latest/testing_tools.html), which will allow us to use friendly aids to help with our assertions.
+In this post, we will have a look at using [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) within a Python context.  This is my first usage of Python, and I thought it would be useful to share how to use and setup Selenium WebDriver for those that are new to Web Browser Automation.  We will make use of the [Page Objects](http://selenium-python.readthedocs.org/page-objects.html) design pattern which allows for reusability and also reduction in duplicated code.  We will then make use of [Lettuce](http://lettuce.it/), which is a BDD tool based on Cucumber which allows us to describe our features and scenarios in a natural language wrapping steps that ultimately call our Python functions and drive the browser.  We will also make use of [Nose](http://nose.readthedocs.org/en/latest/testing_tools.html), which allows us to use friendly aids to help with our assertions.
 
 ### Installation
 
@@ -68,9 +68,11 @@ pypi_automated_tests/
     	__init__.py
 ~~~
 
+The __init__.py files can be left empty, but will allow for the containing directories to recognised as Python packages.
+
 ### Using Lettuce
 
-To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about the usage of terrain [here](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to dump stuff that you want to use across your automated tests.  In this file, place the following code:
+To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about the usage of terrain [here](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to hold anything that you want to use across your automated tests.  In this file, place the following code:
 
 >
 ~~~ python
@@ -147,6 +149,8 @@ def step_impl(step, search_result):
 >
 ~~~
 
+If you run ```lettuce``` from ```pypi_automated_tests/``` you will now see that the shell of the implemented steps has succesfully executed due to ```assert True```.
+
 ### Using Selenium
 
 Let's make some changes to ```pypi_automated_tests/steps/search_steps.py```.  We will add ```from lettuce import step, world``` so that we can make use of the ```world.driver``` that we had setup in ```pypi_automated_tests/terrain.py```. We will also add ```from nose.tools import assert_equal, assert_true``` so that we can use matchers. We can then start to use the [Selenium Python Bindings](http://selenium-python.readthedocs.org/) to drive the browser:
@@ -176,6 +180,8 @@ def step_impl(step, search_result):
     assert_true(world.driver.find_element(By.LINK_TEXT, search_result))
 >
 ~~~
+
+If you run ```lettuce``` from ```pypi_automated_tests/``` you will now see that the implemented steps has succesfully executed.  At this point you have completed your Selenium WebDriver test!
 
 ### Using Page Objects
 
