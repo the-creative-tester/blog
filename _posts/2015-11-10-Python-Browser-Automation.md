@@ -68,7 +68,7 @@ pypi_automated_tests/
     	__init__.py
 ~~~
 
-The __init__.py files can be left empty, but will allow for the containing directories to recognised as Python packages.
+The ```__init__.py``` files can be left empty, but will allow for the containing directories to recognised as Python packages.
 
 ### Using Lettuce
 
