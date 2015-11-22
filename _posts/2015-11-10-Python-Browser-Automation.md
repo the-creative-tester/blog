@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python Web Browser Automation
-desc: Tutorial: Automation with Python, Selenium, Page Objects, Lettuce and Nose
+desc: Selenium, Page Objects, Lettuce and Nose
 proj-num: 02
 colour: 
 ---
