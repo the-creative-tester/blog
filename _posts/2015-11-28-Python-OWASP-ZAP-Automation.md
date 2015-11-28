@@ -66,10 +66,13 @@ Clone the repository located [here](https://github.com/the-creative-tester/pytho
 ~~~
 git clone https://github.com/the-creative-tester/python-zap-example.git
 ~~~
+
 You will notice the latest version of ZAP, 2.4.2 is contained in /bin/
+
 ### ZAP Configuration in Lettuce
 
 First, let's start the OWASP ZAP server on a specified port of 8090.  Note, we are start ZAP in daemon or headless mode, and we are also disabling the [API key](https://github.com/zaproxy/zaproxy/wiki/FAQapikey) through ```'bin/zap_2.4.2/zap.sh','-daemon', '-config api.disablekey=true'```.  We will also create a Firefox profile that is automatically configured for the OWASP ZAP server and port, which allows all traffic from Firefox to be sent through the started OWASP ZAP server:
+
 >
 ~~~
 import os
@@ -131,6 +134,7 @@ def get_firefox(firefox_profile):
 ### Selenium + Lettuce Setup
 
 Our test that we are executing against Gruyere is defined in ```features/gruyere.feature```:
+
 >
 ~~~
 Feature: Gruyere
@@ -150,6 +154,7 @@ Feature: Gruyere
 ~~~
 
 The corresponding steps for ```gruyere.feature``` are defined in ```features/steps/gruyere.py```:
+
 >
 ~~~
 from lettuce import step, world
@@ -193,6 +198,7 @@ def step_impl(step, user_name, password):
 ### ZAP Execution in Lettuce
 
 After we have finished the execution of the Selenium test, we will then instruct ZAP to run a Spider Scan, an Active Scan and finally produce an XML report:
+
 >
 ~~~
 @after.all
@@ -231,9 +237,11 @@ def do_some_zap_stuff():
     world.zap.core.shutdown()
 >
 ~~~
+
 ### Execution
 
 You can now run ```lettuce```, and you should see something similar to the following results:
+
 >
 ~~~
 Total 1 of 1 scenarios passed!
@@ -266,7 +274,6 @@ spider scan progress %: 94
   ..
   ..
 ]
->
 ~~~
 
 ### Full Example
