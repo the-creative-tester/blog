@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Python OWASP ZAP Automation
-desc: Using Selenium to Drive OWASP ZAP
+title: Python Security Automation
+desc: Tutorial: Selenium, OWASP ZAP and Lettuce
 proj-num: 03
 colour: 
 ---
