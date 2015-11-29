@@ -1,14 +1,14 @@
 ---
 layout: post
 title: Python Security Automation
-desc: Tutorial: Selenium, OWASP ZAP and Lettuce
+desc: Selenium, OWASP ZAP and Lettuce
 proj-num: 03
 colour: 
 ---
 
 
 
-## Selenium, BDD and OWASP ZAP in Python
+## Selenium, Lettuce and OWASP ZAP in Python
 
 ### Introduction
 
