@@ -40,9 +40,9 @@ You can now use the following commands to install the Selenium, Lettuce and Nose
 
 >
 ~~~
-pip install selenium
-pip install lettuce
-pip install nose
+bash-3.2$ pip install selenium
+bash-3.2$ pip install lettuce
+bash-3.2$ pip install nose
 ~~~
 
 ##### Sublime Text

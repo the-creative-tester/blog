@@ -40,10 +40,10 @@ You can now use the following commands to install the Selenium, OWASP ZAP, Lettu
 
 >
 ~~~
-pip install selenium
-pip install python-owasp-zap-v2.4
-pip install lettuce
-pip install nose
+bash-3.2$ pip install selenium
+bash-3.2$ pip install python-owasp-zap-v2.4
+bash-3.2$ pip install lettuce
+bash-3.2$ pip install nose
 ~~~
 
 ##### Sublime Text
@@ -64,7 +64,7 @@ Clone the repository located [here](https://github.com/the-creative-tester/pytho
 
 >
 ~~~
-git clone https://github.com/the-creative-tester/python-zap-example.git
+bash-3.2$ git clone https://github.com/the-creative-tester/python-zap-example.git
 ~~~
 
 You will notice the latest version of ZAP, 2.4.2 is contained in /bin/
