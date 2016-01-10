@@ -78,7 +78,8 @@ frisby.create('GET: International Space Station Current Location')
           .toss();
 ~~~
 
-Let's now make this test a bit more useful, by using the expectJSONTypes() method to check the structure of the response:
+Let's now make this test a bit more useful, by using the expectJSONTypes() method to check the structure of the response rather than the data:
+
 >
 ~~~
 var frisby = require('frisby');
@@ -99,6 +100,7 @@ frisby.create('GET: International Space Station Current Location')
 ~~~
 
 We can also use the expectJSON() method to check the data of the response:
+
 >
 ~~~
 var frisby = require('frisby');
@@ -123,13 +125,12 @@ frisby.create('GET: International Space Station Current Location')
 
 ### Execution
 
-You can now run your Frisby test using jasmine-node, and you should see something similar to the following results:
+You can now run your Frisby test by using jasmine-node, and you should see something similar to the following results:
 
 >
 ~~~
 bash-3.2$ jasmine-node iss_spec.js 
-.
-
+>
 Finished in 1.736 seconds
 1 test, 7 assertions, 0 failures, 0 skipped
 ~~~
