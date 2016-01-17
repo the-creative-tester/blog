@@ -1,6 +1,6 @@
 ---
 layout: post
-title: REST API Testing
+title: JavaScript REST API Testing
 desc: Node.js, Frisby and Jasmine
 proj-num: 04
 colour: 
