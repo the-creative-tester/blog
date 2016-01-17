@@ -179,7 +179,7 @@ strong, b {
 blockquote {
   margin: 1.8em .8em;
   padding: 0.1em 1em;
-  background-color: $xlightGray;
+  background-color: #3f3f3f;
   font-family: $helveticaNeue;
 }
 
@@ -326,6 +326,7 @@ article {
     border-left: 1px dotted $gray;
     padding: 0.1em 1em;
     color: $gray;
+    overflow-x: auto;
   }
 
   .eyebrow {
