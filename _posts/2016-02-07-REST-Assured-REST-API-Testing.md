@@ -1,14 +1,14 @@
 ---
 layout: post
-title: JavaScript REST API Testing
-desc: Node.js, Frisby and Jasmine
+title: REST Assured REST API Testing
+desc: REST Assured, Cucumber-JVM and Gradle
 proj-num: 04
 colour: 
 ---
 
 
 
-## Node.js, Frisby and Jasmine in JavaScript
+## REST Assured, Cucumber-JVM and Gradle
 
 ### Introduction
 
