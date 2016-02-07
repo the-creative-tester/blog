@@ -1,6 +1,6 @@
 ---
 layout: post
-title: REST Assured REST API Testing
+title: Java REST API Testing
 desc: REST Assured, Cucumber-JVM and Gradle
 proj-num: 04
 colour: 
