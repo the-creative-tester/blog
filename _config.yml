@@ -50,7 +50,7 @@ url: http://the-creative-tester.github.io
 #
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 permalink: /:title/
 
 # The release of Jekyll Now that you're using
