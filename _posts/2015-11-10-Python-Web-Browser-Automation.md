@@ -58,7 +58,7 @@ Install [Firefox](https://www.mozilla.org/en-US/firefox/all/).
 We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:
 
 >
-~~~ shell
+~~~
 pypi_automated_tests/
   features/
     __init__.py
@@ -115,7 +115,7 @@ def close_drivers():
 Run ```lettuce``` from ```pypi_automated_tests/```.  You should have successfully launched an instance of Firefox! Now, let's create a new file ```pypi_automated_tests/features/search.feature```.  In this file, let's describe the scenario that we want to test:
 
 >
-~~~
+~~~ gherkin
 Feature: Search
 >
   Scenario: Search PyPI
