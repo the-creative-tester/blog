@@ -23,7 +23,7 @@ Install [Node.js](https://nodejs.org/en/).  As part of the installation, you wil
 Ensure that you have successfully installed Node.js:  
 
 >
-~~~
+~~~ shell
 bash-3.2$ node --version
 v4.2.4
 ~~~
@@ -31,7 +31,7 @@ v4.2.4
 Ensure that you have successfully installed npm: 
 
 >
-~~~
+~~~ shell
 bash-3.2$ npm --version
 2.14.12
 ~~~
@@ -39,7 +39,7 @@ bash-3.2$ npm --version
 You can now use the following npm commands to install the Frisby and Jasmine packages:
 
 >
-~~~
+~~~ shell
 bash-3.2$ sudo npm install frisby -g
 bash-3.2$ sudo npm install jasmine-node -g
 ~~~
@@ -61,14 +61,14 @@ We are going to write our first automated test against <http://api.open-notify.o
 In your newly created file, place the following code to allow you to utilise the previously installed Frisby module:
 
 >
-~~~ 
+~~~ javascript
 var frisby = require('frisby');
 ~~~
 
 Let's write a simple test. We will first make use of the Frisby ```create()``` method to define the new test, and the parameter supplied defines the name of the test. Next, the ```get()``` method performs a HTTP GET request on the supplied URL. We can use the ```expectStatus()``` method to verify the returned HTTP status code, and the ```expectHeaderContains()``` method can be used to verify contents within the returned header. Since the API returns its payload in JSON, the content-type should be 'application/json' on the request. The last method we will use is ```toss()```, which is used to execute the test. Here's an example of these methods being used:
 
 >
-~~~ 
+~~~ javascript
 var frisby = require('frisby');
 >
 frisby.create('GET: International Space Station Current Location')
@@ -81,7 +81,7 @@ frisby.create('GET: International Space Station Current Location')
 Let's now make this test a bit more useful, by using the ```expectJSONTypes()``` method to check the structure of the response rather than the data:
 
 >
-~~~
+~~~ javascript
 var frisby = require('frisby');
 >
 frisby.create('GET: International Space Station Current Location')
@@ -102,7 +102,7 @@ frisby.create('GET: International Space Station Current Location')
 We can also use the ```expectJSON()``` method to check the data of the response:
 
 >
-~~~
+~~~ javascript
 var frisby = require('frisby');
 >
 frisby.create('GET: International Space Station Current Location')
@@ -128,7 +128,7 @@ frisby.create('GET: International Space Station Current Location')
 You can now run your Frisby test by using jasmine-node, and you should see something similar to the following results:
 
 >
-~~~
+~~~ shell
 bash-3.2$ jasmine-node iss_spec.js 
 >
 Finished in 1.736 seconds

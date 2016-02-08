@@ -23,7 +23,7 @@ Install [Python 2.7.10](https://www.python.org/downloads/release/python-2710/). 
 Ensure that you have successfully installed Python:  
 
 >
-~~~
+~~~ shell
 bash-3.2$ python --version  
 Python 2.7.10
 ~~~
@@ -31,7 +31,7 @@ Python 2.7.10
 Ensure that you have successfully installed pip: 
 
 >
-~~~
+~~~ shell
 bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
 ~~~
@@ -39,7 +39,7 @@ pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/s
 You can now use the following commands to install the Selenium, OWASP ZAP, Lettuce and Nose packages:
 
 >
-~~~
+~~~ shell
 bash-3.2$ pip install selenium
 bash-3.2$ pip install python-owasp-zap-v2.4
 bash-3.2$ pip install lettuce
@@ -63,7 +63,7 @@ Install [Firefox](https://www.mozilla.org/en-US/firefox/all/).
 Clone the repository located [here](https://github.com/the-creative-tester/python-zap-example):
 
 >
-~~~
+~~~ shell
 bash-3.2$ git clone https://github.com/the-creative-tester/python-zap-example.git
 ~~~
 
@@ -74,7 +74,7 @@ You will notice the latest version of ZAP, 2.4.2 is contained in /bin/
 First, let's start the OWASP ZAP server on a specified port of 8090.  Note, we are start ZAP in daemon or headless mode, and we are also disabling the [API key](https://github.com/zaproxy/zaproxy/wiki/FAQapikey) through ```'bin/zap_2.4.2/zap.sh','-daemon', '-config api.disablekey=true'```.  We will also create a Firefox profile that is automatically configured for the OWASP ZAP server and port, which allows all traffic from Firefox to be sent through the started OWASP ZAP server:
 
 >
-~~~
+~~~ python
 import os
 import subprocess
 from lettuce import before, world, after
@@ -136,7 +136,7 @@ def get_firefox(firefox_profile):
 Our test that we are executing against Gruyere is defined in ```features/gruyere.feature```:
 
 >
-~~~
+~~~ gherkin
 Feature: Gruyere
 >
   Scenario: Gruyere
@@ -156,7 +156,7 @@ Feature: Gruyere
 The corresponding steps for ```gruyere.feature``` are defined in ```features/steps/gruyere.py```:
 
 >
-~~~
+~~~ python
 from lettuce import step, world
 from nose.tools import assert_equal, assert_true
 from selenium.webdriver.common.by import By
@@ -200,7 +200,7 @@ def step_impl(step, user_name, password):
 After we have finished the execution of the Selenium test, we will then instruct ZAP to run a Spider Scan, an Active Scan and finally produce an XML report:
 
 >
-~~~
+~~~ python
 @after.all
 def close_shop(total):
     print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
@@ -243,7 +243,7 @@ def do_some_zap_stuff():
 You can now run ```lettuce```, and you should see something similar to the following results:
 
 >
-~~~
+~~~ shell
 Total 1 of 1 scenarios passed!
 opening target: http://google-gruyere.appspot.com
 starting spider scan

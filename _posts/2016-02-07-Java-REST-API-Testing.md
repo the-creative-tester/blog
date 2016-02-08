@@ -23,7 +23,7 @@ Download and extract [Gradle](http://gradle.org/gradle-download/).  You will als
 Ensure that you have successfully installed Gradle:  
 
 >
-~~~
+~~~ shell
 bash-3.2$ gradle -v
 >
 ------------------------------------------------------------
@@ -34,7 +34,7 @@ Gradle 2.10
 In a directory of your choice, you are now going to use Gradle's [Build Init Plugin](https://docs.gradle.org/current/userguide/build_init_plugin.html) to bootstrap the process of creating a new Gradle build:
 
 >
-~~~
+~~~ shell
 bash-3.2$ gradle init --type java-library
 :wrapper
 :init
@@ -45,7 +45,7 @@ BUILD SUCCESSFUL
 As part of this command, you would now also have automatically generated [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).  Gradle Wrapper allows anybody to work on your project without having to install Gradle.  It ensures that the right version of Gradle that the build was designed for is shipped as part of the project repository.  As a result, you should have now the following project structure created:
 
 >
-~~~
+~~~ shell
 bash-3.2$ ls -ogR
 total 40
 -rw-r--r--  1   1220  7 Feb 23:01 build.gradle
@@ -95,8 +95,6 @@ total 8
 
 We are going to write our first automated test against <http://api.open-notify.org/iss-now>.  We will first need to make some changes to
 
-
-Create a new directory for your API test automation project, and open that directory in Sublime Text 3.  Now create a new file in that directory.  Tests scripts are usually named ```*spec.js``` in order for jasmine-node to find them. For this post, I will use ```iss-spec.js```.
 
 ### Using Frisby
 
