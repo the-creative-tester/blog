@@ -87,94 +87,219 @@ total 8
 >
 ~~~
 
+You can remove the ```src/main``` directory, and also the ```src/test/java/LibraryTest.java``` file.  Create the following new folders, ```src/test/resources```, ```src/test/java/restassuredexample```, ```src/test/java/restassuredexample/cucumber``` and ```src/test/java/restassuredexample/cucumber/steps```.
+
 ### Open Notify - International Space Station Current Location
 
 [Open Notify](http://open-notify.org/) is an open source project to provide an API for NASA data.  One such API is the [International Space Station Current Location](http://open-notify.org/Open-Notify-API/ISS-Location-Now/) which returns the current longitude and latitude of the ISS.  This is the target API that we will write our test against.
 
-### Initial Setup
+### Gradle Setup
 
-We are going to write our first automated test against <http://api.open-notify.org/iss-now>.  We will first need to make some changes to
-
-
-### Using Frisby
-
-In your newly created file, place the following code to allow you to utilise the previously installed Frisby module:
+We are going to write our first automated test against <http://api.open-notify.org/iss-now>.  We will first need to make some changes to ```build.gradle``` to download and setup our dependencies:
 
 >
-~~~ 
-var frisby = require('frisby');
+~~~ config
+// apply the java plugin to add support for Java
+apply plugin: 'java'
+>
+// in this section declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+>
+// in this section declare the dependencies for your production and test code
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'junit:junit:4.12'
+    testCompile 'info.cukes:cucumber-java:1.2.0'
+    testCompile 'info.cukes:cucumber-junit:1.2.0'
+    testCompile 'com.jayway.restassured:rest-assured:2.4.1'
+}
+>
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+>
+// setup the cucumber task
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'restassuredexample', 'src/test/resources']
+        }
+    }
+}
+>
+test {
+    systemProperties = System.properties
+    testLogging.showStandardStreams = true
+}
 ~~~
 
-Let's write a simple test. We will first make use of the Frisby ```create()``` method to define the new test, and the parameter supplied defines the name of the test. Next, the ```get()``` method performs a HTTP GET request on the supplied URL. We can use the ```expectStatus()``` method to verify the returned HTTP status code, and the ```expectHeaderContains()``` method can be used to verify contents within the returned header. Since the API returns its payload in JSON, the content-type should be 'application/json' on the request. The last method we will use is ```toss()```, which is used to execute the test. Here's an example of these methods being used:
+### Cucumber-JVM Setup
+
+Create a new file, ```Cucumber.java``` in ```src/test/java/restassuredexample/cucumber``` with the following contents:
 
 >
-~~~ 
-var frisby = require('frisby');
+~~~  java
+package restassuredexample.cucumber;
 >
-frisby.create('GET: International Space Station Current Location')
-          .get('http://api.open-notify.org/iss-now')
-          .expectStatus(200)
-          .expectHeaderContains('content-type', 'application/json')
-          .toss();
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import cucumber.api.junit.Cucumber;
+import cucumber.api.CucumberOptions;
+>
+@RunWith(Cucumber.class)
+@CucumberOptions(
+    features = {"src/test/resources"}
+)
+public class CucumberRunner {
+>
+}
 ~~~
 
-Let's now make this test a bit more useful, by using the ```expectJSONTypes()``` method to check the structure of the response rather than the data:
+Let's now create a new feature file, ```iss-current-location.feature``` in ```src/test/resources``` to test <http://api.open-notify.org/iss-now>:
 
 >
-~~~
-var frisby = require('frisby');
+~~~ gherkin
+Feature: International Space Station Current Location
 >
-frisby.create('GET: International Space Station Current Location')
-          .get('http://api.open-notify.org/iss-now')
-          .expectStatus(200)
-          .expectHeaderContains('content-type', 'application/json')
-          .expectJSONTypes({
-            message: String,
-            timestamp: Number,
-            iss_position: {
-                latitude: Number,
-                longitude: Number
-            }
-          })
-          .toss();
+  Scenario: Retrieve International Space Station Current Location
+    Given I access the ISS Current Location
+    When I retrieve the ISS Current Location
+    Then I see the ISS Current Location
+
 ~~~
 
-We can also use the ```expectJSON()``` method to check the data of the response:
+Write the matching step definitions, ```InternationalSpaceStationCurrentLocationSteps.java```, in ```src/test/java/restassuredexample/cucumber/steps```:
 
 >
-~~~
-var frisby = require('frisby');
+~~~ java
+package restassuredexample.cucumber.steps;
 >
-frisby.create('GET: International Space Station Current Location')
-          .get('http://api.open-notify.org/iss-now')
-          .expectStatus(200)
-          .expectHeaderContains('content-type', 'application/json')
-          .expectJSONTypes({
-            message: String,
-            timestamp: Number,
-            iss_position: {
-                latitude: Number,
-                longitude: Number
-            }
-          })
-          .expectJSON({
-            message: "success"
-          })
-          .toss();
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
+import restassuredexample.cucumber.InternationalSpaceStationCurrentLocationDefinition;
+>
+public class InternationalSpaceStationCurrentLocationSteps {
+>
+    InternationalSpaceStationCurrentLocationDefinition service;
+>
+    @Given("^I access the ISS Current Location$")
+    public void i_access_the_ISS_Current_Location() throws Throwable {
+        service = new InternationalSpaceStationCurrentLocationDefinition();
+    }
+>
+    @When("^I retrieve the ISS Current Location$")
+    public void i_retrieve_the_ISS_Current_Location() throws Throwable {
+        service.requestInternationalSpaceStationCurrentLocation();
+    }
+>
+    @Then("^I see the ISS Current Location$")
+    public void i_see_the_ISS_Current_Location() throws Throwable {
+        service.validateInternationalSpaceStationCurrentLocationContents();
+    }
+}
+~~~
+
+### REST Assured Setup
+
+Write the matching service configuration, ```InternationalSpaceStationCurrentLocationConfiguration.java```, in ```src/test/java/restassuredexample/cucumber```:
+
+>
+~~~ java
+package restassuredexample.cucumber;
+>
+public abstract class InternationalSpaceStationCurrentLocationConfiguration {
+>
+    public static final String OPEN_NOTIFY_API_URI = "http://api.open-notify.org";
+>
+}
+~~~
+
+Write the matching service definition, ```InternationalSpaceStationCurrentLocationDefinition.java```, in ```src/test/java/restassuredexample/cucumber```:
+
+>
+~~~ java
+package restassuredexample.cucumber;
+>
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
+>
+import static com.jayway.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+>
+public class InternationalSpaceStationCurrentLocationDefinition {
+>
+    public InternationalSpaceStationCurrentLocationDefinition() {
+        RestAssured.baseURI = InternationalSpaceStationCurrentLocationConfiguration.OPEN_NOTIFY_API_URI;
+    }
+>
+    public void requestInternationalSpaceStationCurrentLocation() {
+        Response response =
+                given().
+                        contentType("application/json").
+                when().
+                        get("/iss-now/").
+                then().
+                        statusCode(200).
+                        extract().response();
+    }
+>
+    public void validateInternationalSpaceStationCurrentLocationContents() {
+        Response response =
+                given().
+                        contentType("application/json").
+                when().
+                        get("/iss-now/").
+                then().
+                        body(containsString("iss_position")).
+                        body(containsString("message")).
+                        body(containsString("timestamp")).
+                        body(("message"), equalTo("success")).
+                extract().response();
+    }
+}
 ~~~
 
 ### Execution
 
-You can now run your Frisby test by using jasmine-node, and you should see something similar to the following results:
+You can now run your REST Assured with Cucumber-JVM test by using ```./gradlew cucumber``` or ```./gradlew test```, and you should see something similar to the following results:
 
 >
-~~~
-bash-3.2$ jasmine-node iss_spec.js 
+~~~ shell
+bash-3.2$ ./gradlew cucumber
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jar UP-TO-DATE
+:assemble UP-TO-DATE
+:compileTestJava UP-TO-DATE
+:cucumber
+Feature: International Space Station Current Location
 >
-Finished in 1.736 seconds
-1 test, 7 assertions, 0 failures, 0 skipped
+  Scenario: Retrieve International Space Station Current Location # iss-current-location.feature:3
+    Given I access the ISS Current Location                       # InternationalSpaceStationCurrentLocationSteps.i_access_the_ISS_Current_Location()
+    When I retrieve the ISS Current Location                      # InternationalSpaceStationCurrentLocationSteps.i_retrieve_the_ISS_Current_Location()
+    Then I see the ISS Current Location                           # InternationalSpaceStationCurrentLocationSteps.i_see_the_ISS_Current_Location()
+>
+1 Scenarios (1 passed)
+3 Steps (3 passed)
+0m3.523s
+>
+>
+BUILD SUCCESSFUL
+>
+Total time: 9.271 secs
+>
 ~~~
 
 ### Full Example
 
-<https://github.com/the-creative-tester/frisby-api-testing-example>
+<https://github.com/the-creative-tester/rest-assured-api-testing-example>
