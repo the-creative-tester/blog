@@ -2,7 +2,7 @@
 layout: post
 title: Java REST API Testing
 desc: REST Assured, Cucumber-JVM and Gradle
-proj-num: 04
+proj-num: 05
 colour: 
 ---
 
@@ -12,41 +12,80 @@ colour:
 
 ### Introduction
 
-In this post, we will have a look at using the [Node.js](https://nodejs.org/en/) JavaScript runtime with two packages.  The first, [Frisby](http://frisbyjs.com/), is an API testing framework and the second, [Jasmine](http://jasmine.github.io/), is a test runner.  These can be used together to create and execute automated REST API tests.
+In this post, we will have a look at using the power of [Gradle](http://gradle.org/) to drive [REST Assured](https://github.com/jayway/rest-assured).  REST Assured is a Java implementation of an API testing framework.  We will then be making use of [Cucumber-JVM](https://github.com/cucumber/cucumber-jvm), which is a Java implementation of Cucumber.  These can be all be used together to create and execute automated yet descriptive REST API tests.
 
 ### Installation
 
-##### Node.js
+##### Gradle
 
-Install [Node.js](https://nodejs.org/en/).  As part of the installation, you will also install [npm](https://docs.npmjs.com/getting-started/what-is-npm), which is the package manager for Node.js, allowing for easy access, installation and management of packages in the Node.js repository.
+Download and extract [Gradle](http://gradle.org/gradle-download/).  You will also have to set your add GRADLE_HOME/bin to your PATH environment variable.
 
-Ensure that you have successfully installed Node.js:  
-
->
-~~~
-bash-3.2$ node --version
-v4.2.4
-~~~
-
-Ensure that you have successfully installed npm: 
+Ensure that you have successfully installed Gradle:  
 
 >
 ~~~
-bash-3.2$ npm --version
-2.14.12
+bash-3.2$ gradle -v
+>
+------------------------------------------------------------
+Gradle 2.10
+------------------------------------------------------------
 ~~~
 
-You can now use the following npm commands to install the Frisby and Jasmine packages:
+In a directory of your choice, you are now going to use Gradle's [Build Init Plugin](https://docs.gradle.org/current/userguide/build_init_plugin.html) to bootstrap the process of creating a new Gradle build:
 
 >
 ~~~
-bash-3.2$ sudo npm install frisby -g
-bash-3.2$ sudo npm install jasmine-node -g
+bash-3.2$ gradle init --type java-library
+:wrapper
+:init
+>
+BUILD SUCCESSFUL
 ~~~
 
-##### Sublime Text
+As part of this command, you would now also have automatically generated [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).  Gradle Wrapper allows anybody to work on your project without having to install Gradle.  It ensures that the right version of Gradle that the build was designed for is shipped as part of the project repository.  As a result, you should have now the following project structure created:
 
-Install [Sublime Text 3](http://www.sublimetext.com/3).
+>
+~~~
+bash-3.2$ ls -ogR
+total 40
+-rw-r--r--  1   1220  7 Feb 23:01 build.gradle
+drwxr-xr-x  3    102  7 Feb 23:01 gradle
+-rwxr-xr-x  1   4971  7 Feb 23:01 gradlew
+-rw-r--r--  1   2404  7 Feb 23:01 gradlew.bat
+-rw-r--r--  1    646  7 Feb 23:01 settings.gradle
+drwxr-xr-x  4    136  7 Feb 23:01 src
+>
+./gradle:
+total 0
+drwxr-xr-x  4   136  7 Feb 23:01 wrapper
+>
+./gradle/wrapper:
+total 120
+-rw-r--r--  1   53636  7 Feb 23:01 gradle-wrapper.jar
+-rw-r--r--  1     232  7 Feb 23:01 gradle-wrapper.properties
+>
+./src:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 main
+drwxr-xr-x  3   102  7 Feb 23:01 test
+>
+./src/main:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+>
+./src/main/java:
+total 8
+-rw-r--r--  1   299  7 Feb 23:01 Library.java
+>
+./src/test:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+>
+./src/test/java:
+total 8
+-rw-r--r--  1   488  7 Feb 23:01 LibraryTest.java
+>
+~~~
 
 ### Open Notify - International Space Station Current Location
 
@@ -54,7 +93,10 @@ Install [Sublime Text 3](http://www.sublimetext.com/3).
 
 ### Initial Setup
 
-We are going to write our first automated test against <http://api.open-notify.org/iss-now>.  Create a new directory for your API test automation project, and open that directory in Sublime Text 3.  Now create a new file in that directory.  Tests scripts are usually named ```*spec.js``` in order for jasmine-node to find them. For this post, I will use ```iss-spec.js```.
+We are going to write our first automated test against <http://api.open-notify.org/iss-now>.  We will first need to make some changes to
+
+
+Create a new directory for your API test automation project, and open that directory in Sublime Text 3.  Now create a new file in that directory.  Tests scripts are usually named ```*spec.js``` in order for jasmine-node to find them. For this post, I will use ```iss-spec.js```.
 
 ### Using Frisby
 

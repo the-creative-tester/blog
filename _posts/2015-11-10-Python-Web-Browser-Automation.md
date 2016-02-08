@@ -23,7 +23,7 @@ Install [Python 2.7.10](https://www.python.org/downloads/release/python-2710/). 
 Ensure that you have successfully installed Python:  
 
 >
-~~~
+~~~ shell
 bash-3.2$ python --version  
 Python 2.7.10
 ~~~
@@ -31,7 +31,7 @@ Python 2.7.10
 Ensure that you have successfully installed pip: 
 
 >
-~~~
+~~~ shell
 bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
 ~~~
@@ -39,7 +39,7 @@ pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/s
 You can now use the following commands to install the Selenium, Lettuce and Nose packages:
 
 >
-~~~
+~~~ shell
 bash-3.2$ pip install selenium
 bash-3.2$ pip install lettuce
 bash-3.2$ pip install nose
@@ -58,7 +58,7 @@ Install [Firefox](https://www.mozilla.org/en-US/firefox/all/).
 We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:
 
 >
-~~~
+~~~ shell
 pypi_automated_tests/
   features/
     __init__.py
@@ -128,7 +128,7 @@ Feature: Search
 If you run ```lettuce``` from ```pypi_automated_tests/``` you will see that we now have to implement the steps for the above feature.  Now, let's create a new file ```pypi_automated_tests/steps/search_steps.py```.  In this file, let's first define a shell for our steps:
 
 >
-~~~
+~~~ python
 from lettuce import step
 >
 @step('Given I navigate to the PyPi Home page')
@@ -156,7 +156,7 @@ If you run ```lettuce``` from ```pypi_automated_tests/``` you will now see that 
 Let's make some changes to ```pypi_automated_tests/steps/search_steps.py```.  We will add ```from lettuce import step, world``` so that we can make use of the ```world.driver``` that we had setup in ```pypi_automated_tests/terrain.py```. We will also add ```from nose.tools import assert_equal, assert_true``` so that we can use matchers. We can then start to use the [Selenium Python Bindings](http://selenium-python.readthedocs.org/) to drive the browser:
 
 >
-~~~
+~~~ python
 from lettuce import step, world
 from nose.tools import assert_equal, assert_true
 from selenium.webdriver.common.by import By
@@ -188,7 +188,7 @@ If you run ```lettuce``` from ```pypi_automated_tests/``` you will now see that 
 To make use of Page Objects, let's first move the functionality that resided in ```pypi_automated_tests/steps/search_steps.py``` to two new files, ```pypi_automated_tests/pages/home_page.py``` and ```pypi_automated_tests/pages/search_results_page.py```.  Firstly, in ```pypi_automated_tests/pages/home_page.py``` make the following updates:
 
 >
-~~~
+~~~ python
 from selenium.webdriver.common.by import By
 >
 class HomePageLocator(object):
@@ -226,7 +226,7 @@ class HomePage(object):
 Secondly, in ```pypi_automated_tests/pages/search_results.py``` make the following updates:
 
 >
-~~~
+~~~ python
 from selenium.webdriver.common.by import By
 >
 class SearchResultsPageLocator(object):
@@ -255,7 +255,7 @@ class SearchResultsPage(object):
 Now, let's update ```pypi_automated_tests/steps/search_steps.py``` to make use of the newly added Page Objects:
 
 >
-~~~
+~~~ python
 from lettuce import step, world
 from nose.tools import assert_equal, assert_true
 >
@@ -281,7 +281,7 @@ def step_impl(step, search_result):
 Finally, in our ```pypi_automated_tests/terrain.py``` we will need to make these Page Objects avaiable through ```world``` by making the following updates:
 
 >
-~~~
+~~~ python
 import os
 from lettuce import before, world, after
 from selenium import webdriver
@@ -329,7 +329,7 @@ def close_drivers():
 You can now run ```lettuce``` from ```pypi_automated_tests/```, and you should get the following successful results:
 
 >
-~~~
+~~~ shell
 bash-3.2$ lettuce
 >
 Feature: Search                                     # features/search.feature:1
