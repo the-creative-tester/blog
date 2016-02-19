@@ -12,7 +12,7 @@ colour:
 
 ### Introduction
 
-In this post, we will have a look at using [Selenium Grid](http://www.seleniumhq.org/projects/grid/) within a Python context.  SeleniumGrid allows you run your tests on different machines against different browsers in parallel. If you haven't done so already, ensure that you have followed all the setup steps that are contained in <https://github.com/the-creative-tester/python-web-browser-automation-example>>.
+In this post, we will have a look at using [Selenium Grid](http://www.seleniumhq.org/projects/grid/) within a Python context.  SeleniumGrid allows you run your tests on different machines against different browsers in parallel. If you haven't done so already, ensure that you have followed all the setup steps that are contained in <https://github.com/the-creative-tester/python-web-browser-automation-example>.
 
 ### Installation
 
