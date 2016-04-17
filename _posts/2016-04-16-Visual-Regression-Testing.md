@@ -62,7 +62,7 @@ class SydneyMorningHeraldNetworkStripTest(unittest.TestCase):
 >
     def setUp(self):
         self.driver = webdriver.Firefox()
- >
+>
     def test_check_network_strip_of_sydney_morning_herald_home_page(self):
         self.driver.set_page_load_timeout(20)
         self.driver.implicitly_wait(20)
