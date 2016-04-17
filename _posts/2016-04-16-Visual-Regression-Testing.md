@@ -60,19 +60,17 @@ from selenium import webdriver
 >
 class SydneyMorningHeraldNetworkStripTest(unittest.TestCase):
 >
-    @classmethod
-    def setUpClass(cls):
-        cls.driver = webdriver.Firefox()
-> 
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+ >
     def test_check_network_strip_of_sydney_morning_herald_home_page(self):
         self.driver.set_page_load_timeout(20)
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get('http://www.smh.com.au/')
 >
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
+    def tearDown(self):
+        self.driver.quit()
 >
 ~~~
 
