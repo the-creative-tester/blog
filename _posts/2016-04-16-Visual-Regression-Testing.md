@@ -88,7 +88,7 @@ OK
 
 ### Using Needle and PerceptualDiff
 
-To make use of Needle and PerceptualDiff we will have to make a few small changes in ```sydney-morning-herald-network-strip-test.py```.  In this file, remove the two ```@classmethod```, and also make the following changes to import and use NeedleTestCase:
+To make use of Needle and PerceptualDiff we will have to make a few small changes in ```sydney-morning-herald-network-strip-test.py```.  In this file make the following changes to import and use NeedleTestCase:
 
 >
 ~~~ python
