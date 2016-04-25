@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python Web Browser Automation (Behave)
+title: Selenium & Behave (Python)
 desc: Selenium, Page Objects, Behave and Nose
 proj-num: 08
 colour: 
