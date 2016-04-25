@@ -159,7 +159,7 @@ class Browser(object):
 >
 ~~~
 
-Your ```environment.py``` can be updated to look like this:
+You can now also update ```environment.py``` to look like this:
 
 >
 ~~~ python
@@ -261,7 +261,7 @@ def step_impl(context):
 >
 @step('I see a search result "{search_result}"')
 def step_impl(context, search_result):
-    assert_true(context.search_results_page.find_search_result(search_result))~~~
+    assert_true(context.search_results_page.find_search_result(search_result))
 >
 ~~~
 
