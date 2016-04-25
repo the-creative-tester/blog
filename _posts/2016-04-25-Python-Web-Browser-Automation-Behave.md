@@ -12,7 +12,7 @@ colour:
 
 ### Introduction
 
-Earlier, I wrote a [post](http://the-creative-tester.github.io/Python-Web-Browser-Automation/) about using Selenium with Lettuce in a Python context.  In this post, we will have a look at using [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) with [Behave](https://github.com/behave/behave).  Behave is very similar to Lettuce, in that it allows for tests to be written in a natural language style, but it does seem a bit simpler to use and setup.  We will also make use of [Nose](http://nose.readthedocs.org/en/latest/) for its assertions.
+Earlier, I wrote a [post](http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/) about using Selenium with Lettuce in a Python context.  In this post, we will have a look at using [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) with [Behave](https://github.com/behave/behave).  Behave is very similar to Lettuce, in that it allows for tests to be written in a natural language style, but it does seem a bit simpler to use and setup.  We will also make use of [Nose](http://nose.readthedocs.org/en/latest/) for its assertions.
 
 ### Installation
 
