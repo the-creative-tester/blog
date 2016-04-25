@@ -322,6 +322,7 @@ def prepare_pages(driver):
 def close_drivers():
     if world.driver:
         world.driver.quit()
+>
 ~~~
 
 ### Execution

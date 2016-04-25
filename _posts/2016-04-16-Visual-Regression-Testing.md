@@ -2,7 +2,7 @@
 layout: post
 title: Visual Regression Testing
 desc: Needle, Selenium, Nose and Python
-proj-num: 06
+proj-num: 07
 colour: 
 ---
 
