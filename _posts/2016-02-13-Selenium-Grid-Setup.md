@@ -52,7 +52,7 @@ Clone a sample project that already has Selenium and Lettuce setup:
 
 >
 ~~~ bash
-bash-3.2$ git clone https://github.com/the-creative-tester/python-web-browser-automation-example
+bash-3.2$ git clone https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example
 Cloning into 'python-web-browser-automation-example'...
 remote: Counting objects: 25, done.
 remote: Total 25 (delta 0), reused 0 (delta 0), pack-reused 25
