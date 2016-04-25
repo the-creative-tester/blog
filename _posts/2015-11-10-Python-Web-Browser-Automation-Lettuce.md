@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Selenium & Lettuce (Python)
+title: Python Web Automation (Lettuce)
 desc: Selenium, Page Objects, Lettuce and Nose
 proj-num: 02
 colour: 
