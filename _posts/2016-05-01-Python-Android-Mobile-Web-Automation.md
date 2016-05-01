@@ -111,44 +111,22 @@ bash-3.2$ pip install nose
 
 ### Initial Setup
 
-We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:
+We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi). 
 
 >
 ~~~ python
-from selenium import webdriver
-from browser import Browser
-from pages.home_page import HomePage
-from pages.search_results_page import SearchResultsPage
->
-def before_all(context):
-    context.browser = Browser()
-    context.home_page = HomePage()
-    context.search_results_page = SearchResultsPage()
->
-def after_all(context):
-    context.browser.close()
+TBC
 >
 ~~~
 
 ### Execution
 
-You can now run ```behave``` from ```pypi_automated_tests/```, and you should get the following successful results:
+You can now run ```nosetests``` from ```pypi_automated_tests/```, and you should get the following successful results:
 
 >
 ~~~ shell
-bash-3.2$ behave
-Feature: Search # features/search.feature:1
->
-  Scenario: Search PyPI                             # features/search.feature:3
-    Given I navigate to the PyPi Home page          # features/steps/search_steps.py:4 1.807s
-    When I search for "behave"                      # features/steps/search_steps.py:9 5.057s
-    Then I am taken to the PyPi Search Results page # features/steps/search_steps.py:13 0.014s
-    And I see a search result "behave 1.2.5"        # features/steps/search_steps.py:17 0.142s
->
-1 feature passed, 0 failed, 0 skipped
-1 scenario passed, 0 failed, 0 skipped
-4 steps passed, 0 failed, 0 skipped, 0 undefined
-Took 0m7.020s
+bash-3.2$ nosetests
+TBC
 ~~~
 
 ### Full Example
