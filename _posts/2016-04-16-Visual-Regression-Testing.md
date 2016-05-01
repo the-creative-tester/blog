@@ -51,7 +51,7 @@ Download the latest version of [PerceptualDiff](https://sourceforge.net/projects
 
 ### Initial Setup
 
-Create a file such as ```sydney-morning-herald-network-strip-test.py``` and write a simple Selenium test:
+Create a file such as ```sydney-morning-herald-network-strip-test.py``` and write a simple Selenium test that invokes the ```setUp()``` and ```tearDown()``` methods for initialisation and cleanup of the fixture:
 
 >
 ~~~ python
