@@ -1,20 +1,24 @@
 ---
 layout: post
 title: Python Android Mobile Web Automation
-desc: Android SDK, Appium and Selenium
+desc: Android SDK, Appium, Selenium and Nose
 proj-num: 09
 colour: 
 ---
 
 
 
-## Android SDK, Appium and Selenium in Python
+## Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python
 
 ### Introduction
 
-Earlier, I wrote a [post](http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/) about using Selenium with Lettuce in a Python context.  In this post, we will have a look at using [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/) with [Behave](https://github.com/behave/behave).  Behave is very similar to Lettuce, in that it allows for tests to be written in a natural language style, but it does seem a bit simpler to use and setup.  We will also make use of [Nose](http://nose.readthedocs.org/en/latest/) for its assertions.
+In this post, we will write a simple Selenium test in Python for Android Mobile Web.  We will make use of the [Android SDK](http://developer.android.com/sdk/index.html) command line tools, [Appium](http://appium.io/) and the Selenium functionality made available by the [Appium Python Client](https://github.com/appium/python-client).
 
 ### Installation
+
+##### Android SDK
+
+##### Appium
 
 ##### Python
 
@@ -40,8 +44,7 @@ You can now use the following commands to install the Selenium, Lettuce and Nose
 
 >
 ~~~ shell
-bash-3.2$ pip install selenium
-bash-3.2$ pip install behave
+bash-3.2$ pip install Appium-Python-Client
 bash-3.2$ pip install nose
 ~~~
 

@@ -36,7 +36,7 @@ bash-3.2$ pip --version
 pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
 ~~~
 
-You can now use the following commands to install the Selenium, Lettuce and Nose packages:
+You can now use the following commands to install the Selenium, Behave and Nose packages:
 
 >
 ~~~ shell
