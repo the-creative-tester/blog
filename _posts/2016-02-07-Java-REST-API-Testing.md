@@ -8,7 +8,7 @@ colour:
 
 
 
-## REST Assured, Cucumber-JVM and Gradle
+## REST Assured, Cucumber-JVM and Gradle in Java
 
 ### Introduction
 

@@ -8,7 +8,7 @@ colour:
 
 
 
-## Needle, Selenium, Nose and Python
+## Needle, Selenium and Nose in Python
 
 ### Introduction
 

@@ -1,14 +1,14 @@
 ---
 layout: post
 title: Selenium Grid Setup
-desc: Selenium Grid, ChromeDriver and Python
+desc: Selenium Grid, ChromeDriver, Selenium and Python
 proj-num: 06
 colour: 
 ---
 
 
 
-## Selenium Grid, ChromeDriver and Python
+## Selenium Grid, ChromeDriver and Selenium in Python
 
 ### Introduction
 
