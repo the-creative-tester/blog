@@ -64,7 +64,7 @@ The ```__init__.py``` files can be left empty, but will allow for the containing
 
 ### Using Behave
 
-To make use of Behave, we will first have to create a new file ```pypi_automated_tests/features/environment.py```.  This file can be used by Behave to define the functions that run before or after certain events in your test.  In this file, place the following code:
+To make use of Behave, we will first have to create a new file ```pypi_automated_tests/features/environment.py```.  This file can be used by Behave to define the functions that run ```before_all()``` or ```after_all()``` certain events in your test.  In this file, place the following code:
 
 >
 ~~~ python

@@ -72,7 +72,7 @@ The ```__init__.py``` files can be left empty, but will allow for the containing
 
 ### Using Lettuce
 
-To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about the usage of terrain [here](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your setup and configuration, but also allows us to make use of ```world```, a place to hold anything that you want to use across your automated tests.  In this file, place the following code:
+To make use of Lettuce, we will first have to create a new file ```pypi_automated_tests/terrain.py```.  Have a read about the usage of terrain [here](http://lettuce.it/reference/terrain.html), but in summary, ```terrain.py``` is the place to put all your ```@before.all``` and ```@after_all``` configuration, but also allows us to make use of ```world```, a place to hold anything that you want to use across your automated tests.  In this file, place the following code:
 
 >
 ~~~ python
