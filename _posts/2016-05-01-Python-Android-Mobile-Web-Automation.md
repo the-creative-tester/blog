@@ -41,7 +41,6 @@ Create and start an Android Virtual Device.  When started, you should be able to
 bash-3.2$ adb devices
 List of devices attached
 emulator-5554   device
->  
 ~~~
 
 You have now successfully installed the Android SDK.  For the rest of the guide we will not use the recently created emulatated device, instead, we will make use of a real device.  Ensure that your device has USB Debugging enabled which can be done after Developer Options has been enabled on your device.  Once this is done, connect your device and run ```adb devices``` to ensure it has been connected.
