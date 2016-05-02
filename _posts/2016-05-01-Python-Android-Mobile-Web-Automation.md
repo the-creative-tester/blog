@@ -111,24 +111,48 @@ bash-3.2$ pip install nose
 
 ### Initial Setup
 
-We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi). 
+We are going to write our first automated test against [Google](http://www.google.com).  By using the ```unittest``` framework, we can make use of the setUp() and tearDown() methods to define the initialization and cleanup for the fixture.  You can run ```adb devices -l``` to get the model of your connected device, which should be used in the ```deviceName``` variable.  If you are running with an emulated device, you may wish to change your ```browserName``` variable to use ```'Browser'```, as emulated devices are not shippied with Chrome.  With this information, you can now create a file, ```appium_example.py``` with the following contents:
 
 >
 ~~~ python
-TBC
+import unittest
+from appium import webdriver
+>
+class AndroidMobileWebTest(unittest.TestCase):
+    def setUp(self):
+        desired_capabilities = {
+            'platformName': 'Android',
+            'platformVersion': '6.0',
+            'deviceName': 'Nexus_5',
+            'browserName': 'Chrome'
+        }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_capabilities)
+>
+    def test_mobileweb(self):
+        self.driver.get('http://www.google.com')
+        self.driver.find_element_by_name('q').clear()
+        self.driver.find_element_by_name('q').send_keys('Appium')
+        self.driver.find_element_by_name('q').submit()
+>
+    def tearDown(self):
+        self.driver.quit()
 >
 ~~~
 
 ### Execution
 
-You can now run ```nosetests``` from ```pypi_automated_tests/```, and you should get the following successful results:
+Start Appium, and ensure your device is connected with USB Debugging enabled and not locked.  You can now run ```nosetests appium-example.py``` and you should get the following successful results:
 
 >
 ~~~ shell
-bash-3.2$ nosetests
-TBC
+bash-3.2$ nosetests appium-example.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 19.118s
+>
+OK
 ~~~
 
 ### Full Example
 
-<https://github.com/the-creative-tester/python-behave-web-browser-automation-example>
+<https://github.com/the-creative-tester/python-android-mobile-web-automation-example>
