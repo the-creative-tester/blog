@@ -141,7 +141,7 @@ class AndroidMobileWebTest(unittest.TestCase):
 
 ### Execution
 
-Start Appium, and ensure your device is connected with USB Debugging enabled and not locked.  You can now run ```nosetests appium-example.py``` and you should get the following successful results:
+Start Appium, and ensure your device is connected with USB Debugging enabled and is not locked.  You can now run ```nosetests appium-example.py``` and you should get the following successful results after your test is run in your device:
 
 >
 ~~~ shell
