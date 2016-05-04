@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <title>THE CREATIVE TESTER – Jason Thye</title>
+    <title>Python Android Mobile Web Automation – THE CREATIVE TESTER – Jason Thye</title>
 
     <meta name="author" content="THE CREATIVE TESTER" />
     <meta name="description" content="Jason Thye">
@@ -20,7 +20,7 @@
 
   </head>
 
-  <body id="home">
+  <body>
     <div class="content-wrapper">
       <div class="wrapper-masthead">
   <div class="container">
@@ -33,121 +33,179 @@
   </div>
 </div>
       <div id="main" role="main" class="container">
-        <div class="posts clearfix">
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">01 May 2016</div>
-      <h1><a href="/Python-Android-Mobile-Web-Automation/">Python Android Mobile Web Automation</a></h1>
+        <article class="post">
+  <center>
+  	<h1>Python Android Mobile Web Automation</h1>
+  	<div class="date">Posted May  1, 2016</div>
+  </center>
+  <div class="entry">
+    <h2 id="android-sdk-appium-selenium-appium-python-client-and-nose-in-python">Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python</h2>
 
-      <div class="entry">
-      	<p>Android SDK, Appium, Selenium and Nose</p>
-        <!-- <h2 id="android-sdk-appium-selenium-appium-python-client-and-nose-in-python">Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will write a simple Selenium test in Python for Android Mobile Web. We will make use of the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> command... -->  
-      </div>
-      
-      <a href="/Python-Android-Mobile-Web-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">25 Apr 2016</div>
-      <h1><a href="/Python-Web-Browser-Automation-Behave/">Python Web Automation (Behave)</a></h1>
+<h3 id="introduction">Introduction</h3>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Behave and Nose</p>
-        <!-- <h2 id="selenium-page-objects-behave-and-nose-in-python">Selenium, Page Objects, Behave and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>Earlier, I wrote a <a href="http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/">post</a> about using Selenium with Lettuce in a Python context. In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Behave/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">16 Apr 2016</div>
-      <h1><a href="/Visual-Regression-Testing/">Visual Regression Testing</a></h1>
+<p>In this post, we will write a simple Selenium test in Python for Android Mobile Web.  We will make use of the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> command line tools, <a href="http://appium.io/">Appium</a> and the Selenium functionality made available by the <a href="https://github.com/appium/python-client">Appium Python Client</a>.</p>
 
-      <div class="entry">
-      	<p>Needle, Selenium, Nose and Python</p>
-        <!-- <h2 id="needle-selenium-and-nose-in-python">Needle, Selenium and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="https://github.com/bfirsh/needle">Needle</a> which allows you to automatically check that your visuals render correctly by taking screenshots of portions of a website... -->  
-      </div>
-      
-      <a href="/Visual-Regression-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">13 Feb 2016</div>
-      <h1><a href="/Selenium-Grid-Setup/">Selenium Grid Setup</a></h1>
+<h3 id="installation">Installation</h3>
 
-      <div class="entry">
-      	<p>Selenium Grid, ChromeDriver, Selenium and Python</p>
-        <!-- <h2 id="selenium-grid-chromedriver-and-selenium-in-python">Selenium Grid, ChromeDriver and Selenium in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a> within a Python context. SeleniumGrid allows you to run your tests on different machines against different browsers... -->  
-      </div>
-      
-      <a href="/Selenium-Grid-Setup/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">07 Feb 2016</div>
-      <h1><a href="/Java-REST-API-Testing/">Java REST API Testing</a></h1>
+<h5 id="android-sdk">Android SDK</h5>
 
-      <div class="entry">
-      	<p>REST Assured, Cucumber-JVM and Gradle</p>
-        <!-- <h2 id="rest-assured-cucumber-jvm-and-gradle-in-java">REST Assured, Cucumber-JVM and Gradle in Java</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the power of <a href="http://gradle.org/">Gradle</a> to drive <a href="https://github.com/jayway/rest-assured">REST Assured</a>. REST Assured is a Java implementation of an API testing... -->  
-      </div>
-      
-      <a href="/Java-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Jan 2016</div>
-      <h1><a href="/JavaScript-REST-API-Testing/">JavaScript REST API Testing</a></h1>
+<p>Download the <a href="http://developer.android.com/sdk/index.html">Android SDK</a>.  You do not need to install Android Studio, so feel free to just download the command line tools.  Unzip the Android SDK to a directory of your choosing.  Set your <code>ANDROID_HOME</code> to the location of your Android SDK, e.g., <code>/Users/jasonthye/Library/Android/sdk</code>.  Add <code>$ANDROID_HOME/platform-tools</code> and <code>$ANDROID_HOME/tools</code> to your <code>PATH</code>.</p>
 
-      <div class="entry">
-      	<p>Node.js, Frisby and Jasmine</p>
-        <!-- <h2 id="nodejs-frisby-and-jasmine-in-javascript">Node.js, Frisby and Jasmine in JavaScript</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the <a href="https://nodejs.org/en/">Node.js</a> JavaScript runtime with two packages. The first, <a href="http://frisbyjs.com/">Frisby</a>, is an API testing framework and the second, <a... -->  
-      </div>
-      
-      <a href="/JavaScript-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">28 Nov 2015</div>
-      <h1><a href="/Python-Security-Automation/">Python Security Automation</a></h1>
+<p>Once this is done, we need to run the Android SDK Manager to download the relevant packages to create an Android Virtual Device.  To do this, run the following command:</p>
 
-      <div class="entry">
-      	<p>Selenium, OWASP ZAP and Lettuce</p>
-        <!-- <h2 id="selenium-lettuce-and-owasp-zap-in-python">Selenium, Lettuce and OWASP ZAP in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with <a href="http://lettuce.it/">Lettuce</a>, in a Python context to create tests to drive the browser. We will then... -->  
-      </div>
-      
-      <a href="/Python-Security-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Nov 2015</div>
-      <h1><a href="/Python-Web-Browser-Automation-Lettuce/">Python Web Automation (Lettuce)</a></h1>
+<blockquote>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Lettuce and Nose</p>
-        <!-- <h2 id="selenium-page-objects-lettuce-and-nose-in-python">Selenium, Page Objects, Lettuce and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> within a Python context. This is my first usage of Python, and I thought it would... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Lettuce/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">09 Nov 2015</div>
-      <h1><a href="/Welcome/">Welcome</a></h1>
+  <pre><code class="language-shell">bash-3.2$ android sdk  
+</code></pre>
+</blockquote>
 
-      <div class="entry">
-      	<p>Welcome to The Creative Tester!</p>
-        <!-- <h2 id="welcome">Welcome</h2>
+<p>To allow the creation of a Android Virtual Device, ensure for a chosen Android version (e.g., Android 6.0), that you have both the SDK Platform and a System Image (e.g., Intel x86 Atom System Image) packages installed.  Once installed, run the following command to to start Android Virtual Device Manager:</p>
 
-<p>This is just a small place on the Internet to capture my thoughts, discoveries and experiments.</p>
- -->  
-      </div>
-      
-      <a href="/Welcome/" class="small-link">More...</a>
-    </article>
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ android avd  
+</code></pre>
+</blockquote>
+
+<p>Create and start an Android Virtual Device.  When started, you should be able to see that the device can be detected via the Android Device Bridge by running the following command:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ adb devices
+List of devices attached
+emulator-5554   device
+</code></pre>
+</blockquote>
+
+<p>You have now successfully installed the Android SDK.  For the rest of the guide we will not use the recently created emulatated device, instead, we will make use of a real device.  Ensure that your device has USB Debugging enabled which can be done after Developer Options has been enabled on your device.  Once this is done, connect your device and run <code>adb devices</code> to ensure it has been connected.</p>
+
+<h5 id="appium">Appium</h5>
+
+<p>Appium can easily be downloaded as a desktop application from <a href="http://appium.io/downloads.html">here</a>.  Alternatively, you can install and run Appium as a Node.js application.  To do this, first install <a href="https://nodejs.org/en/">Node.js</a>.  As part of the installation, you will also install <a href="https://docs.npmjs.com/getting-started/what-is-npm">npm</a>, which is the package manager for Node.js, allowing for easy access, installation and management of packages in the Node.js repository.</p>
+
+<p>Ensure that you have successfully installed Node.js:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ node --version
+v4.2.4
+</code></pre>
+</blockquote>
+
+<p>Ensure that you have successfully installed npm:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ npm --version
+2.14.12
+</code></pre>
+</blockquote>
+
+<p>You can now use the following npm commands to install the Appium package:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ sudo npm install appium -g
+</code></pre>
+</blockquote>
+
+<p>Ensure that Appium has been succesfully installed by running the following command:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ appium
+[Appium] Welcome to Appium v1.5.1 (REV 083ae3ce3fd7f5111d5214462a2c7644ea4f5253)
+[Appium] Appium REST http interface listener started on 0.0.0.0:4723
+</code></pre>
+</blockquote>
+
+<h5 id="python">Python</h5>
+
+<p>Install <a href="https://www.python.org/downloads/release/python-2710/">Python 2.7.10</a>.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.</p>
+
+<p>Ensure that you have successfully installed Python:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ python --version  
+Python 2.7.10
+</code></pre>
+</blockquote>
+
+<p>Ensure that you have successfully installed pip:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+</code></pre>
+</blockquote>
+
+<p>You can now use the following commands to install the Appium Python Client and Nose packages:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip install Appium-Python-Client
+bash-3.2$ pip install nose
+</code></pre>
+</blockquote>
+
+<h3 id="initial-setup">Initial Setup</h3>
+
+<p>We are going to write our first automated test against <a href="http://www.google.com">Google</a>.  By using the <code>unittest</code> framework, we can make use of the setUp() and tearDown() methods to define the initialization and cleanup for the fixture.  You can run <code>adb devices -l</code> to get the model of your connected device, which should be used in the <code>deviceName</code> variable.  If you are running with an emulated device, you may wish to change your <code>browserName</code> variable to use <code>'Browser'</code>, as emulated devices are not shippied with Chrome.  With this information, you can now create a file, <code>appium_example.py</code> with the following contents:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">import unittest
+from appium import webdriver
+
+class AndroidMobileWebTest(unittest.TestCase):
+    def setUp(self):
+        desired_capabilities = {
+            'platformName': 'Android',
+            'platformVersion': '6.0',
+            'deviceName': 'Nexus_5',
+            'browserName': 'Chrome'
+        }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_capabilities)
+
+    def test_mobileweb(self):
+        self.driver.get('http://www.google.com')
+        self.driver.find_element_by_name('q').clear()
+        self.driver.find_element_by_name('q').send_keys('Appium')
+        self.driver.find_element_by_name('q').submit()
+
+    def tearDown(self):
+        self.driver.quit()
+
+</code></pre>
+</blockquote>
+
+<h3 id="execution">Execution</h3>
+
+<p>Start Appium, and ensure your device is connected with USB Debugging enabled and is not locked.  You can now run <code>nosetests appium-example.py</code> and you should get the following successful results after your test is run in your device:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ nosetests appium-example.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 19.118s
+
+OK
+</code></pre>
+</blockquote>
+
+<h3 id="full-example">Full Example</h3>
+
+<p><a href="https://github.com/the-creative-tester/python-android-mobile-web-automation-example">https://github.com/the-creative-tester/python-android-mobile-web-automation-example</a></p>
+
+  </div>
+
   
-</div>
+</article>
       </div>
+    </div>
       <div id="contact" class="wrapper-footer">
   <div class="container">
     <footer class="footer">
@@ -183,7 +241,6 @@
     </footer>
   </div>
 </div>
-            
-    </div>
+      
   </body>
 </html>

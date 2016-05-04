@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <title>Python Web Browser Automation – THE CREATIVE TESTER – Jason Thye</title>
+    <title>Python Security Automation – THE CREATIVE TESTER – Jason Thye</title>
 
     <meta name="author" content="THE CREATIVE TESTER" />
     <meta name="description" content="Jason Thye">
@@ -35,40 +35,290 @@
       <div id="main" role="main" class="container">
         <article class="post">
   <center>
-  	<h1>Python Web Browser Automation</h1>
-  	<div class="date">Posted October 26, 2015</div>
+  	<h1>Python Security Automation</h1>
+  	<div class="date">Posted November 28, 2015</div>
   </center>
   <div class="entry">
-    <h2 id="h2-heading-looks-like-this">H2 Heading Looks Like This</h2>
+    <h2 id="selenium-lettuce-and-owasp-zap-in-python">Selenium, Lettuce and OWASP ZAP in Python</h2>
 
-<p>Sample paragraph goes here and looks like this. Bacon ipsum dolor sit amet turducken meatloaf boudin pork loin meatball biltong, fatback capicola turkey pork chop. Short ribs boudin landjaeger kevin brisket ground round.</p>
+<h3 id="introduction">Introduction</h3>
 
-<h3 id="h3-heading-looks-like-this">H3 Heading Looks Like This</h3>
+<p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with <a href="http://lettuce.it/">Lettuce</a>, in a Python context to create tests to drive the browser.  We will then integrate these tests with <a href="https://github.com/zaproxy/zaproxy/">OWASP ZAP</a>, which is a penetration testing tool for discovering vulnerabilities in browser-based applications.</p>
 
-<p>Spare ribs strip steak pastrami corned beef bresaola porchetta. Cow fatback tongue prosciutto, short ribs hamburger drumstick beef ribs swine t-bone pancetta meatball strip steak ground round tenderloin.</p>
+<h3 id="installation">Installation</h3>
 
-<ol>
-  <li>Sample ordered list</li>
-  <li>List item</li>
-  <li>Another list item</li>
-</ol>
+<h5 id="python">Python</h5>
 
-<h4 id="h4-heading-looks-like-this">H4 Heading Looks Like This</h4>
+<p>Install <a href="https://www.python.org/downloads/release/python-2710/">Python 2.7.10</a>.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.</p>
 
-<p>Corned beef pig pancetta drumstick tail, andouille spare ribs jowl prosciutto biltong hamburger short loin pork brisket. Frankfurter kielbasa brisket meatloaf pastrami fatback. Cow t-bone pork chop chuck short ribs spare ribs. Pancetta flank porchetta, turkey tail ball tip tri-tip leberkas beef.</p>
-
-<blockquote>
-  <p>This is a sample blockquote. Landjaeger shoulder ham capicola. 
-Pork shoulder fatback, flank pork belly rump short loin meatloaf filet mignon kevin turducken spare ribs sirloin short ribs ham hock.</p>
-</blockquote>
+<p>Ensure that you have successfully installed Python:</p>
 
 <blockquote>
 
-  <pre><code class="language-python">def what?
-  42
-end
+  <pre><code class="language-shell">bash-3.2$ python --version  
+Python 2.7.10
 </code></pre>
 </blockquote>
+
+<p>Ensure that you have successfully installed pip:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+</code></pre>
+</blockquote>
+
+<p>You can now use the following commands to install the Selenium, OWASP ZAP, Lettuce and Nose packages:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip install selenium
+bash-3.2$ pip install python-owasp-zap-v2.4
+bash-3.2$ pip install lettuce
+bash-3.2$ pip install nose
+</code></pre>
+</blockquote>
+
+<h5 id="sublime-text">Sublime Text</h5>
+
+<p>Install <a href="http://www.sublimetext.com/3">Sublime Text 3</a>.</p>
+
+<h5 id="firefox">Firefox</h5>
+
+<p>Install <a href="https://www.mozilla.org/en-US/firefox/all/">Firefox</a>.</p>
+
+<h3 id="gruyere">Gruyere</h3>
+
+<p><a href="https://google-gruyere.appspot.com/">Gruyere</a> is a small web application that has purposely exposed multiple security vulnerabilities.  An instance of Gruyere can be accessed <a href="https://google-gruyere.appspot.com/start">here</a>.  We will make use of Lettuce to start up OWASP ZAP server on a given port.  We will then trigger a simple Selenium test against Gruyere through the OWASP ZAP server and port, which allows OWASP ZAP to intercept and save the requests sent to the application server by the Selenium test. We will then finally make use of Lettuce to trigger a Active Scan through OWASP ZAP and produce a report.</p>
+
+<h3 id="initial-setup">Initial Setup</h3>
+
+<p>Clone the repository located <a href="https://github.com/the-creative-tester/python-zap-example">here</a>:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ git clone https://github.com/the-creative-tester/python-zap-example.git
+</code></pre>
+</blockquote>
+
+<p>You will notice the latest version of ZAP, 2.4.2 is contained in /bin/</p>
+
+<h3 id="zap-configuration-in-lettuce">ZAP Configuration in Lettuce</h3>
+
+<p>First, let’s start the OWASP ZAP server on a specified port of 8090.  Note, we are start ZAP in daemon or headless mode, and we are also disabling the <a href="https://github.com/zaproxy/zaproxy/wiki/FAQapikey">API key</a> through <code>'bin/zap_2.4.2/zap.sh','-daemon', '-config api.disablekey=true'</code>.  We will also create a Firefox profile that is automatically configured for the OWASP ZAP server and port, which allows all traffic from Firefox to be sent through the started OWASP ZAP server:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">import os
+import subprocess
+from lettuce import before, world, after
+from selenium import webdriver
+from selenium.webdriver.common.proxy import *
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from time import sleep
+from zapv2 import ZAPv2
+from pprint import pprint
+
+@before.all
+def open_shop():
+    start_zap_server()
+    firefox_profile = prepare_firefox_profile()
+    open_drivers(firefox_profile)
+
+def start_zap_server():
+    subprocess.Popen(['bin/zap_2.4.2/zap.sh','-daemon', '-config api.disablekey=true'],stdout=open(os.devnull,'w'))
+    world.zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8090', 'https': 'https://127.0.0.1:8090'})
+    sleep(5)
+
+def prepare_firefox_profile():
+    zap_proxy_host = "127.0.0.1"
+    zap_proxy_port = 8090
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference("network.proxy.type", 1)
+    firefox_profile.set_preference("network.proxy.http", zap_proxy_host)
+    firefox_profile.set_preference("network.proxy.http_port", int(zap_proxy_port))
+    firefox_profile.set_preference("network.proxy.ssl",zap_proxy_host)
+    firefox_profile.set_preference("network.proxy.ssl_port", int(zap_proxy_port))
+    firefox_profile.set_preference("browser.startup.homepage", "about:blank")
+    firefox_profile.set_preference("startup.homepage_welcome_url", "about:blank")
+    firefox_profile.set_preference("startup.homepage_welcome_url.additional", "about:blank")
+    firefox_profile.set_preference("webdriver_assume_untrusted_issuer", False)
+    firefox_profile.set_preference("accept_untrusted_certs", True)
+    firefox_profile.update_preferences()
+    return firefox_profile
+
+def open_drivers(firefox_profile):
+    world.driver = get_firefox(firefox_profile)
+    world.driver.set_page_load_timeout(20)
+    world.driver.implicitly_wait(20)
+    world.driver.maximize_window()
+
+def get_firefox(firefox_profile):
+    # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
+    try:
+        driver = webdriver.Firefox(firefox_profile=firefox_profile)
+    except Exception:
+        my_local_firefox_bin = os.environ.get('FIREFOX_BIN')
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+
+</code></pre>
+</blockquote>
+
+<h3 id="selenium--lettuce-setup">Selenium + Lettuce Setup</h3>
+
+<p>Our test that we are executing against Gruyere is defined in <code>features/gruyere.feature</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-gherkin">Feature: Gruyere
+
+  Scenario: Gruyere
+    Given I navigate to Gruyere
+    When I choose to Agree &amp; Start
+    Then I am taken to "Gruyere: Home"
+
+    Given I choose to Sign Up
+    When I choose to Create Account with user name "blue" and password "cheese"
+    Then I am taken to "Gruyere: Error"
+
+    Given I choose to Sign In
+    When I choose to Login with user name "blue" and password "cheese"
+    Then I am taken to "Gruyere: Home"
+</code></pre>
+</blockquote>
+
+<p>The corresponding steps for <code>gruyere.feature</code> are defined in <code>features/steps/gruyere.py</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+
+@step('I navigate to Gruyere')
+def step_impl(step):
+    world.driver.get("http://google-gruyere.appspot.com/start")
+
+@step('I choose to Agree &amp; Start')
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, "Agree &amp; Start").click()
+
+@step('I am taken to "([^"]*)"')
+def step_impl(step, page_title):
+    assert_equal(world.driver.title, page_title)
+
+@step('I choose to Sign Up')
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, "Sign up").click()
+
+@step('I choose to Create Account with user name "([^"]*)" and password "([^"]*)"')
+def step_impl(step, user_name, password):
+    world.driver.find_element(By.NAME, "uid").send_keys(user_name)
+    world.driver.find_element(By.NAME, "pw").send_keys(password)
+    world.driver.find_element(By.XPATH, "//input[@value='Create account']").click()
+
+@step('I choose to Sign In')
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, "Sign in").click()
+
+@step('I choose to Login with user name "([^"]*)" and password "([^"]*)"')
+def step_impl(step, user_name, password):
+    world.driver.find_element(By.NAME, "uid").send_keys(user_name)
+    world.driver.find_element(By.NAME, "pw").send_keys(password)
+    world.driver.find_element(By.XPATH, "//input[@value='Login']").click()
+
+</code></pre>
+</blockquote>
+
+<h3 id="zap-execution-in-lettuce">ZAP Execution in Lettuce</h3>
+
+<p>After we have finished the execution of the Selenium test, we will then instruct ZAP to run a Spider Scan, an Active Scan and finally produce an XML report:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">@after.all
+def close_shop(total):
+    print "Total %d of %d scenarios passed!" % (total.scenarios_passed, total.scenarios_ran)
+    close_drivers()
+    do_some_zap_stuff()
+
+def close_drivers():
+    if world.driver:
+        world.driver.quit()
+
+def do_some_zap_stuff():
+    target = "http://google-gruyere.appspot.com"
+    print "opening target: " + target
+    world.zap.urlopen(target)
+    sleep(2.5)
+    print "starting spider scan" 
+    world.zap.spider.scan(target)
+    while (int(world.zap.spider.status()) &lt; 100):
+        print "spider scan progress %: " + world.zap.spider.status()
+        sleep(1)
+    print "starting active scan"
+    world.zap.ascan.scan(target)
+    sleep(2.5)
+    while (int(world.zap.ascan.status()) &lt; 100):
+        print "active scan progress %: " + world.zap.ascan.status()
+        sleep(1)
+    pprint(world.zap.core.alerts())
+    report_type = 'xml'
+    report_file = 'sample_report.xml'
+    with open(report_file, 'a') as f:
+        xml = world.zap.core.xmlreport()
+        f.write(xml)
+        print('Success: {1} report saved to {0}'.format(report_file, report_type.upper()))
+    world.zap.core.shutdown()
+
+</code></pre>
+</blockquote>
+
+<h3 id="execution">Execution</h3>
+
+<p>You can now run <code>lettuce</code>, and you should see something similar to the following results:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">Total 1 of 1 scenarios passed!
+opening target: http://google-gruyere.appspot.com
+starting spider scan
+spider scan progress %: 0
+spider scan progress %: 14
+spider scan progress %: 20
+spider scan progress %: 40
+spider scan progress %: 53
+spider scan progress %: 65
+spider scan progress %: 74
+spider scan progress %: 82
+spider scan progress %: 94
+[{u'alert': u'Cookie set without HttpOnly flag',
+  u'attack': u'943720935142; path=/',
+  u'confidence': u'Medium',
+  u'cweid': u'0',
+  u'description': u'A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.',
+  u'evidence': u'GRUYERE_ID=943720935142; path=/',
+  u'id': u'0',
+  u'messageId': u'1',
+  u'other': u'',
+  u'param': u'GRUYERE_ID',
+  u'reference': u'www.owasp.org/index.php/HttpOnly',
+  u'risk': u'Low',
+  u'solution': u'Ensure that the HttpOnly flag is set for all cookies.',
+  u'url': u'http://google-gruyere.appspot.com/start',
+  u'wascid': u'13'},
+  ..
+  ..
+]
+</code></pre>
+</blockquote>
+
+<h3 id="full-example">Full Example</h3>
+
+<p><a href="https://github.com/the-creative-tester/python-zap-example">https://github.com/the-creative-tester/python-zap-example</a></p>
 
   </div>
 

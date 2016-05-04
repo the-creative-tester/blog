@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   h1, h2, h3, h4, h5, h6 {
     line-height: 1;
   }
@@ -96,10 +96,10 @@ h1 {
   margin: 10px 0;
 }
 h1 a {
-  color: #ffb96b;
+  color: #394b80;
 }
 h1 a:hover {
-  color: #e98d25;
+  color: #263255;
 }
 
 .post h1 {
@@ -117,11 +117,12 @@ h1 a:hover {
   height: 240px;
   overflow: hidden;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   #home .post {
     margin: 0px 0px 0px 0px;
     width: 100%;
     height: 100%;
+    text-align: center;
   }
 }
 
@@ -143,9 +144,12 @@ h1 a:hover {
   letter-spacing: -.03em;
 }
 #home h1.site-name a {
-  color: #555;
+  color: #ffffff;
 }
-@media screen and (max-width: 640px) {
+#home h1.site-name a:hover {
+  color: #ffffff;
+}
+@media screen and (max-width: 959px) {
   #home h1.site-name {
     margin: 0px 0px 0px 0px;
   }
@@ -177,8 +181,9 @@ p {
   line-height: 40px;
   text-align: center;
   margin-bottom: 30px;
+  color: #ffffff;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   #home p.site-description {
     margin: 0px 0px 30px 0px;
   }
@@ -230,7 +235,7 @@ strong, b {
 blockquote {
   margin: 1.8em .8em;
   padding: 0.1em 1em;
-  background-color: #f2f2f2;
+  background-color: #3f3f3f;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -266,15 +271,19 @@ img {
 /*********************/
 /* LAYOUT / SECTIONS */
 /*********************/
+.wrapper-masthead {
+  background: #394b80;
+}
+
 .content-wrapper {
   min-height: 600px;
 }
 
 .masthead {
   padding: 20px 0 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0px;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   .masthead {
     text-align: center;
   }
@@ -287,7 +296,7 @@ img {
   margin-right: 15px;
   margin-bottom: 15px;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   .site-avatar {
     float: none;
     display: block;
@@ -301,7 +310,7 @@ img {
 .site-info {
   float: left;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   .site-info {
     float: none;
     display: block;
@@ -319,7 +328,13 @@ img {
   text-align: right;
   margin-right: 20px;
 }
-@media screen and (max-width: 640px) {
+.site-name a {
+  color: #ffffff;
+}
+.site-name a:hover {
+  color: #ffffff;
+}
+@media screen and (max-width: 959px) {
   .site-name {
     text-align: center;
     margin: 0px 0px 0px 0px;
@@ -328,12 +343,13 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
+  color: #ffffff;
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: right;
   margin-right: 20px;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   .site-description {
     text-align: center;
     margin: 0px 0px 0px 0px;
@@ -346,7 +362,7 @@ nav {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   nav {
     float: none;
     margin-top: 9px;
@@ -360,7 +376,7 @@ nav a {
   display: block;
   float: right;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   nav a {
     display: inline-block;
     float: none;
@@ -374,7 +390,7 @@ nav a {
 article {
   margin: 0 20px;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 959px) {
   article {
     margin: 0 20px;
   }
@@ -385,6 +401,7 @@ article {
   border-left: 1px dotted #777;
   padding: 0.1em 1em;
   color: #777;
+  overflow-x: auto;
 }
 .post .eyebrow {
   font-size: 12px;
@@ -402,7 +419,7 @@ article {
   display: block;
 }
 .post .small-link:hover {
-  color: #d42;
+  color: #777;
 }
 .post .large-link {
   font-size: 20px;
@@ -421,10 +438,8 @@ article {
 }
 
 .wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #ccc;
+  margin-top: 0px;
+  background: #394b80;
 }
 
 footer {
@@ -436,7 +451,7 @@ footer {
 /* SYNTAX HIGHLIGHTING */
 /***********************/
 .highlight {
-  background-color: #333;
+  background-color: #3f3f3f;
   padding: 5px 10px;
   margin: 20px 0;
 }
@@ -448,9 +463,8 @@ footer {
 }
 
 code {
-  font-family: 'Courier', monospace;
-  font-size: 14px;
-  color: #999;
+  font: normal 10pt Consolas, Monaco, monospace;
+  color: #9b859d;
 }
 
 /* Comment */

@@ -7,77 +7,1902 @@
     <atom:link href="http://the-creative-tester.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Python Web Browser Automation</title>
-        <description>&lt;h2 id=&quot;h2-heading-looks-like-this&quot;&gt;H2 Heading Looks Like This&lt;/h2&gt;
+        <title>Python Android Mobile Web Automation</title>
+        <description>&lt;h2 id=&quot;android-sdk-appium-selenium-appium-python-client-and-nose-in-python&quot;&gt;Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python&lt;/h2&gt;
 
-&lt;p&gt;Sample paragraph goes here and looks like this. Bacon ipsum dolor sit amet turducken meatloaf boudin pork loin meatball biltong, fatback capicola turkey pork chop. Short ribs boudin landjaeger kevin brisket ground round.&lt;/p&gt;
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
-&lt;h3 id=&quot;h3-heading-looks-like-this&quot;&gt;H3 Heading Looks Like This&lt;/h3&gt;
+&lt;p&gt;In this post, we will write a simple Selenium test in Python for Android Mobile Web.  We will make use of the &lt;a href=&quot;http://developer.android.com/sdk/index.html&quot;&gt;Android SDK&lt;/a&gt; command line tools, &lt;a href=&quot;http://appium.io/&quot;&gt;Appium&lt;/a&gt; and the Selenium functionality made available by the &lt;a href=&quot;https://github.com/appium/python-client&quot;&gt;Appium Python Client&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Spare ribs strip steak pastrami corned beef bresaola porchetta. Cow fatback tongue prosciutto, short ribs hamburger drumstick beef ribs swine t-bone pancetta meatball strip steak ground round tenderloin.&lt;/p&gt;
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Sample ordered list&lt;/li&gt;
-  &lt;li&gt;List item&lt;/li&gt;
-  &lt;li&gt;Another list item&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h5 id=&quot;android-sdk&quot;&gt;Android SDK&lt;/h5&gt;
 
-&lt;h4 id=&quot;h4-heading-looks-like-this&quot;&gt;H4 Heading Looks Like This&lt;/h4&gt;
+&lt;p&gt;Download the &lt;a href=&quot;http://developer.android.com/sdk/index.html&quot;&gt;Android SDK&lt;/a&gt;.  You do not need to install Android Studio, so feel free to just download the command line tools.  Unzip the Android SDK to a directory of your choosing.  Set your &lt;code&gt;ANDROID_HOME&lt;/code&gt; to the location of your Android SDK, e.g., &lt;code&gt;/Users/jasonthye/Library/Android/sdk&lt;/code&gt;.  Add &lt;code&gt;$ANDROID_HOME/platform-tools&lt;/code&gt; and &lt;code&gt;$ANDROID_HOME/tools&lt;/code&gt; to your &lt;code&gt;PATH&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Corned beef pig pancetta drumstick tail, andouille spare ribs jowl prosciutto biltong hamburger short loin pork brisket. Frankfurter kielbasa brisket meatloaf pastrami fatback. Cow t-bone pork chop chuck short ribs spare ribs. Pancetta flank porchetta, turkey tail ball tip tri-tip leberkas beef.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a sample blockquote. Landjaeger shoulder ham capicola. 
-Pork shoulder fatback, flank pork belly rump short loin meatloaf filet mignon kevin turducken spare ribs sirloin short ribs ham hock.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Once this is done, we need to run the Android SDK Manager to download the relevant packages to create an Android Virtual Device.  To do this, run the following command:&lt;/p&gt;
 
 &lt;blockquote&gt;
 
-  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;def what?
-  42
-end
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ android sdk  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;To allow the creation of a Android Virtual Device, ensure for a chosen Android version (e.g., Android 6.0), that you have both the SDK Platform and a System Image (e.g., Intel x86 Atom System Image) packages installed.  Once installed, run the following command to to start Android Virtual Device Manager:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ android avd  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Create and start an Android Virtual Device.  When started, you should be able to see that the device can be detected via the Android Device Bridge by running the following command:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ adb devices
+List of devices attached
+emulator-5554   device
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You have now successfully installed the Android SDK.  For the rest of the guide we will not use the recently created emulatated device, instead, we will make use of a real device.  Ensure that your device has USB Debugging enabled which can be done after Developer Options has been enabled on your device.  Once this is done, connect your device and run &lt;code&gt;adb devices&lt;/code&gt; to ensure it has been connected.&lt;/p&gt;
+
+&lt;h5 id=&quot;appium&quot;&gt;Appium&lt;/h5&gt;
+
+&lt;p&gt;Appium can easily be downloaded as a desktop application from &lt;a href=&quot;http://appium.io/downloads.html&quot;&gt;here&lt;/a&gt;.  Alternatively, you can install and run Appium as a Node.js application.  To do this, first install &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt;.  As part of the installation, you will also install &lt;a href=&quot;https://docs.npmjs.com/getting-started/what-is-npm&quot;&gt;npm&lt;/a&gt;, which is the package manager for Node.js, allowing for easy access, installation and management of packages in the Node.js repository.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Node.js:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ node --version
+v4.2.4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed npm:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ npm --version
+2.14.12
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following npm commands to install the Appium package:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ sudo npm install appium -g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that Appium has been succesfully installed by running the following command:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ appium
+[Appium] Welcome to Appium v1.5.1 (REV 083ae3ce3fd7f5111d5214462a2c7644ea4f5253)
+[Appium] Appium REST http interface listener started on 0.0.0.0:4723
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;python&quot;&gt;Python&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.python.org/downloads/release/python-2710/&quot;&gt;Python 2.7.10&lt;/a&gt;.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Python:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ python --version  
+Python 2.7.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed pip:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following commands to install the Appium Python Client and Nose packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip install Appium-Python-Client
+bash-3.2$ pip install nose
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;We are going to write our first automated test against &lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;.  By using the &lt;code&gt;unittest&lt;/code&gt; framework, we can make use of the setUp() and tearDown() methods to define the initialization and cleanup for the fixture.  You can run &lt;code&gt;adb devices -l&lt;/code&gt; to get the model of your connected device, which should be used in the &lt;code&gt;deviceName&lt;/code&gt; variable.  If you are running with an emulated device, you may wish to change your &lt;code&gt;browserName&lt;/code&gt; variable to use &lt;code&gt;&#39;Browser&#39;&lt;/code&gt;, as emulated devices are not shippied with Chrome.  With this information, you can now create a file, &lt;code&gt;appium_example.py&lt;/code&gt; with the following contents:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;import unittest
+from appium import webdriver
+
+class AndroidMobileWebTest(unittest.TestCase):
+    def setUp(self):
+        desired_capabilities = {
+            &#39;platformName&#39;: &#39;Android&#39;,
+            &#39;platformVersion&#39;: &#39;6.0&#39;,
+            &#39;deviceName&#39;: &#39;Nexus_5&#39;,
+            &#39;browserName&#39;: &#39;Chrome&#39;
+        }
+        self.driver = webdriver.Remote(&#39;http://localhost:4723/wd/hub&#39;, desired_capabilities)
+
+    def test_mobileweb(self):
+        self.driver.get(&#39;http://www.google.com&#39;)
+        self.driver.find_element_by_name(&#39;q&#39;).clear()
+        self.driver.find_element_by_name(&#39;q&#39;).send_keys(&#39;Appium&#39;)
+        self.driver.find_element_by_name(&#39;q&#39;).submit()
+
+    def tearDown(self):
+        self.driver.quit()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;Start Appium, and ensure your device is connected with USB Debugging enabled and is not locked.  You can now run &lt;code&gt;nosetests appium-example.py&lt;/code&gt; and you should get the following successful results after your test is run in your device:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ nosetests appium-example.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 19.118s
+
+OK
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/python-android-mobile-web-automation-example&quot;&gt;https://github.com/the-creative-tester/python-android-mobile-web-automation-example&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 26 Oct 2015 00:00:00 +1100</pubDate>
-        <link>http://the-creative-tester.github.io/Python-Browser-Automation/</link>
-        <guid isPermaLink="true">http://the-creative-tester.github.io/Python-Browser-Automation/</guid>
+        <pubDate>Sun, 01 May 2016 00:00:00 +1000</pubDate>
+        <link>http://the-creative-tester.github.io/Python-Android-Mobile-Web-Automation/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Python-Android-Mobile-Web-Automation/</guid>
+      </item>
+    
+      <item>
+        <title>Python Web Automation (Behave)</title>
+        <description>&lt;h2 id=&quot;selenium-page-objects-behave-and-nose-in-python&quot;&gt;Selenium, Page Objects, Behave and Nose in Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;Earlier, I wrote a &lt;a href=&quot;http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/&quot;&gt;post&lt;/a&gt; about using Selenium with Lettuce in a Python context.  In this post, we will have a look at using &lt;a href=&quot;http://www.seleniumhq.org/projects/webdriver/&quot;&gt;Selenium WebDriver&lt;/a&gt; with &lt;a href=&quot;https://github.com/behave/behave&quot;&gt;Behave&lt;/a&gt;.  Behave is very similar to Lettuce, in that it allows for tests to be written in a natural language style, but it does seem a bit simpler to use and setup.  We will also make use of &lt;a href=&quot;http://nose.readthedocs.org/en/latest/&quot;&gt;Nose&lt;/a&gt; for its assertions.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;python&quot;&gt;Python&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.python.org/downloads/release/python-2710/&quot;&gt;Python 2.7.10&lt;/a&gt;.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Python:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ python --version  
+Python 2.7.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed pip:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following commands to install the Selenium, Behave and Nose packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip install selenium
+bash-3.2$ pip install behave
+bash-3.2$ pip install nose
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;We are going to write our first automated test against &lt;a href=&quot;https://pypi.python.org/pypi&quot;&gt;PyPI&lt;/a&gt;.  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code&gt;pypi_automated_tests/
+  features/
+    __init__.py
+    pages/
+    	__init__.py
+    steps/
+    	__init__.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;__init__.py&lt;/code&gt; files can be left empty, but will allow for the containing directories to recognised as Python packages.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-behave&quot;&gt;Using Behave&lt;/h3&gt;
+
+&lt;p&gt;To make use of Behave, we will first have to create a new file &lt;code&gt;pypi_automated_tests/features/environment.py&lt;/code&gt;.  This file can be used by Behave to define the functions that run &lt;code&gt;before_all()&lt;/code&gt; or &lt;code&gt;after_all()&lt;/code&gt; certain events in your test.  In this file, place the following code:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium import webdriver
+
+def before_all(context):
+    context.browser = webdriver.Firefox()
+    # context.browser = webdriver.Chrome() if you have set chromedriver in your PATH
+    context.browser.set_page_load_timeout(10)
+    context.browser.implicitly_wait(10)
+    context.browser.maximize_window()
+
+def after_all(context):
+    context.browser.quit()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Create a new file &lt;code&gt;pypi_automated_tests/features/search.feature&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-gherkin&quot;&gt;Feature: Search
+
+  Scenario: Search PyPI
+    Given I navigate to the PyPi Home page
+    When I search for &quot;behave&quot;
+    Then I am taken to the PyPi Search Results page
+    And I see a search result &quot;behave 1.2.5&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, let’s create a new file &lt;code&gt;pypi_automated_tests/features/steps/search_steps.py&lt;/code&gt;.  In this file, let’s first define a shell for our steps:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+
+@step(&#39;I navigate to the PyPi Home page&#39;)
+def step_impl(context):
+    context.browser.get(&quot;https://pypi.python.org/pypi&quot;)
+    assert_equal(context.browser.title, &quot;PyPI - the Python Package Index : Python Package Index&quot;)
+
+@step(&#39;I search for &quot;{search_term}&quot;&#39;)
+def step_impl(context, search_term):
+    context.browser.find_element(By.ID, &quot;term&quot;).send_keys(search_term)
+    context.browser.find_element(By.ID, &quot;submit&quot;).click()
+
+@step(&#39;I am taken to the PyPi Search Results page&#39;)
+def step_impl(context):
+    assert_equal(context.browser.title, &quot;Index of Packages Matching &#39;behave&#39; : Python Package Index&quot;)
+
+@step(&#39;I see a search result &quot;{search_result}&quot;&#39;)
+def step_impl(context, search_result):
+    assert_true(context.browser.find_element(By.LINK_TEXT, search_result))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you run &lt;code&gt;behave&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt; you will now see that the test was run successfully:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ behave
+Feature: Search # features/search.feature:1
+
+  Scenario: Search PyPI                             # features/search.feature:3
+    Given I navigate to the PyPi Home page          # features/steps/search_steps.py:4 1.498s
+    When I search for &quot;behave&quot;                      # features/steps/search_steps.py:9 2.556s
+    Then I am taken to the PyPi Search Results page # features/steps/search_steps.py:14 0.011s
+    And I see a search result &quot;behave 1.2.5&quot;        # features/steps/search_steps.py:18 0.120s
+
+1 feature passed, 0 failed, 0 skipped
+1 scenario passed, 0 failed, 0 skipped
+4 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m4.184s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;using-page-objects&quot;&gt;Using Page Objects&lt;/h3&gt;
+
+&lt;p&gt;To make use of Page Objects, let’s first create &lt;code&gt;pypi_automated_tests/features/browser.py&lt;/code&gt;.  Let’s move our WebDriver functionality from &lt;code&gt;environment.py&lt;/code&gt; to &lt;code&gt;browser.py&lt;/code&gt; (which also makes it accessible to our Page Objects):&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium import webdriver
+
+class Browser(object):
+
+    driver = webdriver.Firefox()
+    # driver = webdriver.Chrome() if you have set chromedriver in your PATH
+    driver.implicitly_wait(30)
+    driver.set_page_load_timeout(30)
+    driver.maximize_window()
+
+    def close(context):
+        context.driver.close()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now also update &lt;code&gt;environment.py&lt;/code&gt; to look like this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium import webdriver
+from browser import Browser
+
+def before_all(context):
+    context.browser = Browser()
+    context.home_page = HomePage()
+    context.search_results_page = SearchResultsPage()
+
+def after_all(context):
+    context.browser.close()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now move the functionality that resided in &lt;code&gt;pypi_automated_tests/features/steps/search_steps.py&lt;/code&gt; to two new files, &lt;code&gt;pypi_automated_tests/features/pages/home_page.py&lt;/code&gt; and &lt;code&gt;pypi_automated_tests/features/pages/search_results_page.py&lt;/code&gt;.  Firstly, in &lt;code&gt;pypi_automated_tests/features/pages/home_page.py&lt;/code&gt; make the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium.webdriver.common.by import By
+from browser import Browser
+
+class HomePageLocator(object):
+    # Home Page Locators
+
+    HEADER_TEXT = (By.XPATH, &quot;//h1&quot;)
+    SEARCH_FIELD = (By.ID, &quot;term&quot;)
+    SUBMIT_BUTTON = (By.ID, &quot;submit&quot;)
+
+
+class HomePage(Browser):
+    # Home Page Actions
+
+    def fill(self, text, *locator):
+        self.driver.find_element(*locator).send_keys(text)
+
+    def click_element(self, *locator):
+        self.driver.find_element(*locator).click()
+
+    def navigate(self, address):
+        self.driver.get(address)
+
+    def get_page_title(self):
+        return self.driver.title
+
+    def search(self, search_term):
+        self.fill(search_term, *HomePageLocator.SEARCH_FIELD)
+        self.click_element(*HomePageLocator.SUBMIT_BUTTON)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Secondly, in &lt;code&gt;pypi_automated_tests/features/pages/search_results.py&lt;/code&gt; make the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium.webdriver.common.by import By
+from browser import Browser
+
+class SearchResultsPageLocator(object):
+    # Search Results Page Locators
+
+    HEADER_TEXT = (By.XPATH, &quot;//h1&quot;)
+
+
+class SearchResultsPage(Browser):
+    # Search Results Page Actions
+
+    def get_element(self, *locator):
+        return self.driver.find_element(*locator)
+
+    def get_page_title(self):
+        return self.driver.title
+
+    def find_search_result(self, search_result):
+        return self.get_element(By.LINK_TEXT, search_result)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, let’s update &lt;code&gt;pypi_automated_tests/features/steps/search_steps.py&lt;/code&gt; to make use of the newly added Page Objects:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+
+@step(&#39;I navigate to the PyPi Home page&#39;)
+def step_impl(context):
+    context.home_page.navigate(&quot;https://pypi.python.org/pypi&quot;)
+    assert_equal(context.home_page.get_page_title(), &quot;PyPI - the Python Package Index : Python Package Index&quot;)
+
+@step(&#39;I search for &quot;{search_term}&quot;&#39;)
+def step_impl(context, search_term):
+    context.home_page.search(search_term)
+
+@step(&#39;I am taken to the PyPi Search Results page&#39;)
+def step_impl(context):
+    assert_equal(context.search_results_page.get_page_title(), &quot;Index of Packages Matching &#39;behave&#39; : Python Package Index&quot;)
+
+@step(&#39;I see a search result &quot;{search_result}&quot;&#39;)
+def step_impl(context, search_result):
+    assert_true(context.search_results_page.find_search_result(search_result))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Finally, in our &lt;code&gt;pypi_automated_tests/features/environment.py&lt;/code&gt; we will need to make these Page Objects avaiable through by making the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium import webdriver
+from browser import Browser
+from pages.home_page import HomePage
+from pages.search_results_page import SearchResultsPage
+
+def before_all(context):
+    context.browser = Browser()
+    context.home_page = HomePage()
+    context.search_results_page = SearchResultsPage()
+
+def after_all(context):
+    context.browser.close()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run &lt;code&gt;behave&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt;, and you should get the following successful results:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ behave
+Feature: Search # features/search.feature:1
+
+  Scenario: Search PyPI                             # features/search.feature:3
+    Given I navigate to the PyPi Home page          # features/steps/search_steps.py:4 1.807s
+    When I search for &quot;behave&quot;                      # features/steps/search_steps.py:9 5.057s
+    Then I am taken to the PyPi Search Results page # features/steps/search_steps.py:13 0.014s
+    And I see a search result &quot;behave 1.2.5&quot;        # features/steps/search_steps.py:17 0.142s
+
+1 feature passed, 0 failed, 0 skipped
+1 scenario passed, 0 failed, 0 skipped
+4 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m7.020s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/python-behave-web-browser-automation-example&quot;&gt;https://github.com/the-creative-tester/python-behave-web-browser-automation-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 Apr 2016 00:00:00 +1000</pubDate>
+        <link>http://the-creative-tester.github.io/Python-Web-Browser-Automation-Behave/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Python-Web-Browser-Automation-Behave/</guid>
+      </item>
+    
+      <item>
+        <title>Visual Regression Testing</title>
+        <description>&lt;h2 id=&quot;needle-selenium-and-nose-in-python&quot;&gt;Needle, Selenium and Nose in Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using &lt;a href=&quot;https://github.com/bfirsh/needle&quot;&gt;Needle&lt;/a&gt; which allows you to automatically check that your visuals render correctly by taking screenshots of portions of a website and comparing them against known good screenshots.  We can then use &lt;a href=&quot;http://pdiff.sourceforge.net/&quot;&gt;PerceptualDiff&lt;/a&gt; as an image comparison utility to show the difference between the screenshots.  We will write a simple Selenium test using Needle and PerceptualDiff to automate the checking of the header bar for the &lt;a href=&quot;http://www.smh.com.au/&quot;&gt;Sydney Morning Herald&lt;/a&gt; home page.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;python&quot;&gt;Python&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.python.org/downloads/release/python-2710/&quot;&gt;Python 2.7.10&lt;/a&gt;.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Python:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ python --version  
+Python 2.7.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed pip:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following commands to install the Selenium, Needle and Nose packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip install selenium
+bash-3.2$ pip install needle
+bash-3.2$ pip install nose
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;perceptualdiff&quot;&gt;PerceptualDiff&lt;/h5&gt;
+
+&lt;p&gt;Download the latest version of &lt;a href=&quot;https://sourceforge.net/projects/pdiff/files/&quot;&gt;PerceptualDiff&lt;/a&gt;.  Include the PerceptualDiff folder in your &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;Create a file such as &lt;code&gt;sydney-morning-herald-network-strip-test.py&lt;/code&gt; and write a simple Selenium test that invokes the &lt;code&gt;setUp()&lt;/code&gt; and &lt;code&gt;tearDown()&lt;/code&gt; methods for initialisation and cleanup of the fixture:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;import unittest
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get(&#39;http://www.smh.com.au/&#39;)
+
+    def tearDown(self):
+        self.driver.quit()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Run the test using &lt;code&gt;nosetests sydney-morning-herald-network-strip-test.py&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 15.795s
+
+OK
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;using-needle-and-perceptualdiff&quot;&gt;Using Needle and PerceptualDiff&lt;/h3&gt;
+
+&lt;p&gt;To make use of Needle and PerceptualDiff we will have to make a few small changes in &lt;code&gt;sydney-morning-herald-network-strip-test.py&lt;/code&gt;.  In this file make the following changes to import and use NeedleTestCase, which also removes the need to use &lt;code&gt;setup()&lt;/code&gt; and &lt;code&gt;tearDown()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get(&#39;http://www.smh.com.au/&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, also make the following changes to enable the PerceptualDiff engine, which will allow for a visual difference between captures to be generated (the default engine does not provide this):&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = &#39;needle.engines.perceptualdiff_engine.Engine&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Also make the following changes to set the browser’s viewport (this will allow for consistency between capture sizes):&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = &#39;needle.engines.perceptualdiff_engine.Engine&#39;
+    viewport_width = 1024
+    viewport_height = 768
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Add the &lt;code&gt;assertScreenshot()&lt;/code&gt; which requires two arguments, a CSS selector for the element that you are capturing and a filename for the captured image.&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = &#39;needle.engines.perceptualdiff_engine.Engine&#39;
+    viewport_width = 1024
+    viewport_height = 768
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get(&#39;http://www.smh.com.au/&#39;)
+        self.assertScreenshot(&#39;#network-strip&#39;, &#39;network-strip-capture&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;On first execution of the test, you need to capture a baseline image by using the &lt;code&gt;--with-save-baseline&lt;/code&gt; paramter:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py --with-save-baseline
+.
+----------------------------------------------------------------------
+Ran 1 test in 24.711s
+
+OK
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This should now create &lt;code&gt;screenshots/baseline/network-strip-capture.png&lt;/code&gt;.  Open the file and you should see a timestamp.  Upon a second execution of the test you can remove the &lt;code&gt;--with-save-baseline&lt;/code&gt; parameter, and you should see something similar to this extract:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py
+..
+FAIL: Images are visibly different
+87 pixels are different
+..
+Ran 1 test in 23.810s
+
+FAILED (failures=1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This should now create &lt;code&gt;screenshots/network-strip-capture.png&lt;/code&gt;.  Open the file and you should see a different timestamp.  Also open &lt;code&gt;screenshots/network-strip-capture.diff.png&lt;/code&gt; and you should see the area where the difference was found.&lt;/p&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/needle-visual-regression-testing-example&quot;&gt;https://github.com/the-creative-tester/needle-visual-regression-testing-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 16 Apr 2016 00:00:00 +1000</pubDate>
+        <link>http://the-creative-tester.github.io/Visual-Regression-Testing/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Visual-Regression-Testing/</guid>
+      </item>
+    
+      <item>
+        <title>Selenium Grid Setup</title>
+        <description>&lt;h2 id=&quot;selenium-grid-chromedriver-and-selenium-in-python&quot;&gt;Selenium Grid, ChromeDriver and Selenium in Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using &lt;a href=&quot;http://www.seleniumhq.org/projects/grid/&quot;&gt;Selenium Grid&lt;/a&gt; within a Python context.  SeleniumGrid allows you to run your tests on different machines against different browsers in parallel. If you haven’t done so already, ensure that you have followed all the setup steps that are contained in &lt;a href=&quot;https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example&quot;&gt;https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;chrome-driver&quot;&gt;Chrome Driver&lt;/h5&gt;
+
+&lt;p&gt;Download &lt;a href=&quot;https://sites.google.com/a/chromium.org/chromedriver/downloads&quot;&gt;ChromeDriver&lt;/a&gt;.  Include the ChromeDriver location in your &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/p&gt;
+
+&lt;h5 id=&quot;selenium-grid&quot;&gt;Selenium Grid&lt;/h5&gt;
+
+&lt;p&gt;Download the latest version of &lt;a href=&quot;http://selenium-release.storage.googleapis.com/index.html&quot;&gt;Selenium Grid&lt;/a&gt;.  This guide will make use of &lt;code&gt;selenium-server-standalone-2.52.0.jar&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A grid consists of a single hub, and one or more nodes. Both are started using the selenium-server.jar executable.&lt;/p&gt;
+
+&lt;p&gt;The hub receives a test to be executed along with information on which browser and platform where the test should be run. It knows the configuration of each node that has been registered to the hub. Using this information it selects an available node that has the requested browser-platform combination to run the test against.  In this tutorial, will run Selenium Grid locally.&lt;/p&gt;
+
+&lt;p&gt;First, start the hub:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ java -jar selenium-server-standalone-2.52.0.jar -role hub
+21:58:17.788 INFO - Launching Selenium Grid hub
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Second, start the node:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ java -jar selenium-server-standalone-2.52.0.jar -role node  -hub http://localhost:4444/grid/register
+21:59:23.993 INFO - Launching a Selenium Grid node
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure your setup has been successful by navigating to &lt;a href=&quot;http://127.0.0.1:4444/grid/console&quot;&gt;http://127.0.0.1:4444/grid/console&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;Clone a sample project that already has Selenium and Lettuce setup:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash-3.2$ git clone https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example
+Cloning into &#39;python-lettuce-web-browser-automation-example&#39;...
+remote: Counting objects: 25, done.
+remote: Total 25 (delta 0), reused 0 (delta 0), pack-reused 25
+Unpacking objects: 100% (25/25), done.
+Checking connectivity... done.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;using-selenium-grid&quot;&gt;Using Selenium Grid&lt;/h3&gt;
+
+&lt;p&gt;To make use of Selenium Grid we will have to make a small change in &lt;code&gt;terrain.py&lt;/code&gt;.  In this file, modify the &lt;code&gt;get_firefox()&lt;/code&gt; function definiton:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;def get_firefox():
+    try:
+        # driver = webdriver.Firefox()
+        driver = webdriver.Remote(
+            command_executor=&#39;http://127.0.0.1:4444/wd/hub&#39;,
+            desired_capabilities=DesiredCapabilities.CHROME)
+    except Exception:
+        my_local_firefox_bin = os.environ.get(&#39;FIREFOX_BIN&#39;)
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run &lt;code&gt;lettuce&lt;/code&gt; and you should see the tests run against ChromeDriver through Selenium Grid!&lt;/p&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/python-selenium-grid-web-browser-automation-example&quot;&gt;https://github.com/the-creative-tester/python-selenium-grid-web-browser-automation-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 13 Feb 2016 00:00:00 +1100</pubDate>
+        <link>http://the-creative-tester.github.io/Selenium-Grid-Setup/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Selenium-Grid-Setup/</guid>
+      </item>
+    
+      <item>
+        <title>Java REST API Testing</title>
+        <description>&lt;h2 id=&quot;rest-assured-cucumber-jvm-and-gradle-in-java&quot;&gt;REST Assured, Cucumber-JVM and Gradle in Java&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using the power of &lt;a href=&quot;http://gradle.org/&quot;&gt;Gradle&lt;/a&gt; to drive &lt;a href=&quot;https://github.com/jayway/rest-assured&quot;&gt;REST Assured&lt;/a&gt;.  REST Assured is a Java implementation of an API testing framework.  We will then be making use of &lt;a href=&quot;https://github.com/cucumber/cucumber-jvm&quot;&gt;Cucumber-JVM&lt;/a&gt;, which is a Java implementation of Cucumber.  These can be all be used together to create and execute automated yet descriptive REST API tests.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;gradle&quot;&gt;Gradle&lt;/h5&gt;
+
+&lt;p&gt;Download and extract &lt;a href=&quot;http://gradle.org/gradle-download/&quot;&gt;Gradle&lt;/a&gt;.  You will also have to set your add GRADLE_HOME/bin to your PATH environment variable.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Gradle:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ gradle -v
+
+------------------------------------------------------------
+Gradle 2.10
+------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In a directory of your choice, you are now going to use Gradle’s &lt;a href=&quot;https://docs.gradle.org/current/userguide/build_init_plugin.html&quot;&gt;Build Init Plugin&lt;/a&gt; to bootstrap the process of creating a new Gradle build:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ gradle init --type java-library
+:wrapper
+:init
+
+BUILD SUCCESSFUL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As part of this command, you would now also have automatically generated &lt;a href=&quot;https://docs.gradle.org/current/userguide/gradle_wrapper.html&quot;&gt;Gradle Wrapper&lt;/a&gt;.  Gradle Wrapper allows anybody to work on your project without having to install Gradle.  It ensures that the right version of Gradle that the build was designed for is shipped as part of the project repository.  As a result, you should have now the following project structure created:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ ls -ogR
+total 40
+-rw-r--r--  1   1220  7 Feb 23:01 build.gradle
+drwxr-xr-x  3    102  7 Feb 23:01 gradle
+-rwxr-xr-x  1   4971  7 Feb 23:01 gradlew
+-rw-r--r--  1   2404  7 Feb 23:01 gradlew.bat
+-rw-r--r--  1    646  7 Feb 23:01 settings.gradle
+drwxr-xr-x  4    136  7 Feb 23:01 src
+
+./gradle:
+total 0
+drwxr-xr-x  4   136  7 Feb 23:01 wrapper
+
+./gradle/wrapper:
+total 120
+-rw-r--r--  1   53636  7 Feb 23:01 gradle-wrapper.jar
+-rw-r--r--  1     232  7 Feb 23:01 gradle-wrapper.properties
+
+./src:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 main
+drwxr-xr-x  3   102  7 Feb 23:01 test
+
+./src/main:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+
+./src/main/java:
+total 8
+-rw-r--r--  1   299  7 Feb 23:01 Library.java
+
+./src/test:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+
+./src/test/java:
+total 8
+-rw-r--r--  1   488  7 Feb 23:01 LibraryTest.java
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can remove the &lt;code&gt;src/main&lt;/code&gt; directory, and also the &lt;code&gt;src/test/java/LibraryTest.java&lt;/code&gt; file.  Create the following new folders, &lt;code&gt;src/test/resources&lt;/code&gt;, &lt;code&gt;src/test/java/restassuredexample&lt;/code&gt;, &lt;code&gt;src/test/java/restassuredexample/cucumber&lt;/code&gt; and &lt;code&gt;src/test/java/restassuredexample/cucumber/steps&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;open-notify---international-space-station-current-location&quot;&gt;Open Notify - International Space Station Current Location&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://open-notify.org/&quot;&gt;Open Notify&lt;/a&gt; is an open source project to provide an API for NASA data.  One such API is the &lt;a href=&quot;http://open-notify.org/Open-Notify-API/ISS-Location-Now/&quot;&gt;International Space Station Current Location&lt;/a&gt; which returns the current longitude and latitude of the ISS.  This is the target API that we will write our test against.&lt;/p&gt;
+
+&lt;h3 id=&quot;gradle-setup&quot;&gt;Gradle Setup&lt;/h3&gt;
+
+&lt;p&gt;We are going to write our first automated test against &lt;a href=&quot;http://api.open-notify.org/iss-now&quot;&gt;http://api.open-notify.org/iss-now&lt;/a&gt;.  We will first need to make some changes to &lt;code&gt;build.gradle&lt;/code&gt; to download and setup our dependencies:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-config&quot;&gt;// apply the java plugin to add support for Java
+apply plugin: &#39;java&#39;
+
+// in this section declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// in this section declare the dependencies for your production and test code
+dependencies {
+    compile &#39;org.slf4j:slf4j-api:1.7.13&#39;
+    testCompile &#39;junit:junit:4.12&#39;
+    testCompile &#39;info.cukes:cucumber-java:1.2.0&#39;
+    testCompile &#39;info.cukes:cucumber-junit:1.2.0&#39;
+    testCompile &#39;com.jayway.restassured:rest-assured:2.4.1&#39;
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+// setup the cucumber task
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = &quot;cucumber.api.cli.Main&quot;
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [&#39;--plugin&#39;, &#39;pretty&#39;, &#39;--glue&#39;, &#39;restassuredexample&#39;, &#39;src/test/resources&#39;]
+        }
+    }
+}
+
+test {
+    systemProperties = System.properties
+    testLogging.showStandardStreams = true
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;cucumber-jvm-setup&quot;&gt;Cucumber-JVM Setup&lt;/h3&gt;
+
+&lt;p&gt;Create a new file, &lt;code&gt;Cucumber.java&lt;/code&gt; in &lt;code&gt;src/test/java/restassuredexample/cucumber&lt;/code&gt; with the following contents:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package restassuredexample.cucumber;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import cucumber.api.junit.Cucumber;
+import cucumber.api.CucumberOptions;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+    features = {&quot;src/test/resources&quot;}
+)
+public class CucumberRunner {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let’s now create a new feature file, &lt;code&gt;iss-current-location.feature&lt;/code&gt; in &lt;code&gt;src/test/resources&lt;/code&gt; to test &lt;a href=&quot;http://api.open-notify.org/iss-now&quot;&gt;http://api.open-notify.org/iss-now&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-gherkin&quot;&gt;Feature: International Space Station Current Location
+
+  Scenario: Retrieve International Space Station Current Location
+    Given I access the ISS Current Location
+    When I retrieve the ISS Current Location
+    Then I see the ISS Current Location
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Write the matching step definitions, &lt;code&gt;InternationalSpaceStationCurrentLocationSteps.java&lt;/code&gt;, in &lt;code&gt;src/test/java/restassuredexample/cucumber/steps&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package restassuredexample.cucumber.steps;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
+import restassuredexample.cucumber.InternationalSpaceStationCurrentLocationDefinition;
+
+public class InternationalSpaceStationCurrentLocationSteps {
+
+    InternationalSpaceStationCurrentLocationDefinition service;
+
+    @Given(&quot;^I access the ISS Current Location$&quot;)
+    public void i_access_the_ISS_Current_Location() throws Throwable {
+        service = new InternationalSpaceStationCurrentLocationDefinition();
+    }
+
+    @When(&quot;^I retrieve the ISS Current Location$&quot;)
+    public void i_retrieve_the_ISS_Current_Location() throws Throwable {
+        service.requestInternationalSpaceStationCurrentLocation();
+    }
+
+    @Then(&quot;^I see the ISS Current Location$&quot;)
+    public void i_see_the_ISS_Current_Location() throws Throwable {
+        service.validateInternationalSpaceStationCurrentLocationContents();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;rest-assured-setup&quot;&gt;REST Assured Setup&lt;/h3&gt;
+
+&lt;p&gt;Write the matching service configuration, &lt;code&gt;InternationalSpaceStationCurrentLocationConfiguration.java&lt;/code&gt;, in &lt;code&gt;src/test/java/restassuredexample/cucumber&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package restassuredexample.cucumber;
+
+public abstract class InternationalSpaceStationCurrentLocationConfiguration {
+
+    public static final String OPEN_NOTIFY_API_URI = &quot;http://api.open-notify.org&quot;;
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Write the matching service definition, &lt;code&gt;InternationalSpaceStationCurrentLocationDefinition.java&lt;/code&gt;, in &lt;code&gt;src/test/java/restassuredexample/cucumber&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package restassuredexample.cucumber;
+
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
+
+import static com.jayway.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+
+public class InternationalSpaceStationCurrentLocationDefinition {
+
+    public InternationalSpaceStationCurrentLocationDefinition() {
+        RestAssured.baseURI = InternationalSpaceStationCurrentLocationConfiguration.OPEN_NOTIFY_API_URI;
+    }
+
+    public void requestInternationalSpaceStationCurrentLocation() {
+        Response response =
+                given().
+                        contentType(&quot;application/json&quot;).
+                when().
+                        get(&quot;/iss-now/&quot;).
+                then().
+                        statusCode(200).
+                        extract().response();
+    }
+
+    public void validateInternationalSpaceStationCurrentLocationContents() {
+        Response response =
+                given().
+                        contentType(&quot;application/json&quot;).
+                when().
+                        get(&quot;/iss-now/&quot;).
+                then().
+                        body(containsString(&quot;iss_position&quot;)).
+                        body(containsString(&quot;message&quot;)).
+                        body(containsString(&quot;timestamp&quot;)).
+                        body((&quot;message&quot;), equalTo(&quot;success&quot;)).
+                extract().response();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run your REST Assured with Cucumber-JVM test by using &lt;code&gt;./gradlew cucumber&lt;/code&gt; or &lt;code&gt;./gradlew test&lt;/code&gt;, and you should see something similar to the following results:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ ./gradlew cucumber
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jar UP-TO-DATE
+:assemble UP-TO-DATE
+:compileTestJava UP-TO-DATE
+:cucumber
+Feature: International Space Station Current Location
+
+  Scenario: Retrieve International Space Station Current Location # iss-current-location.feature:3
+    Given I access the ISS Current Location                       # InternationalSpaceStationCurrentLocationSteps.i_access_the_ISS_Current_Location()
+    When I retrieve the ISS Current Location                      # InternationalSpaceStationCurrentLocationSteps.i_retrieve_the_ISS_Current_Location()
+    Then I see the ISS Current Location                           # InternationalSpaceStationCurrentLocationSteps.i_see_the_ISS_Current_Location()
+
+1 Scenarios (1 passed)
+3 Steps (3 passed)
+0m3.523s
+
+
+BUILD SUCCESSFUL
+
+Total time: 9.271 secs
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/rest-assured-api-testing-example&quot;&gt;https://github.com/the-creative-tester/rest-assured-api-testing-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 07 Feb 2016 00:00:00 +1100</pubDate>
+        <link>http://the-creative-tester.github.io/Java-REST-API-Testing/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Java-REST-API-Testing/</guid>
+      </item>
+    
+      <item>
+        <title>JavaScript REST API Testing</title>
+        <description>&lt;h2 id=&quot;nodejs-frisby-and-jasmine-in-javascript&quot;&gt;Node.js, Frisby and Jasmine in JavaScript&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using the &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt; JavaScript runtime with two packages.  The first, &lt;a href=&quot;http://frisbyjs.com/&quot;&gt;Frisby&lt;/a&gt;, is an API testing framework and the second, &lt;a href=&quot;http://jasmine.github.io/&quot;&gt;Jasmine&lt;/a&gt;, is a test runner.  These can be used together to create and execute automated REST API tests.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;nodejs&quot;&gt;Node.js&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt;.  As part of the installation, you will also install &lt;a href=&quot;https://docs.npmjs.com/getting-started/what-is-npm&quot;&gt;npm&lt;/a&gt;, which is the package manager for Node.js, allowing for easy access, installation and management of packages in the Node.js repository.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Node.js:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ node --version
+v4.2.4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed npm:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ npm --version
+2.14.12
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following npm commands to install the Frisby and Jasmine packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ sudo npm install frisby -g
+bash-3.2$ sudo npm install jasmine-node -g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;sublime-text&quot;&gt;Sublime Text&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;http://www.sublimetext.com/3&quot;&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;open-notify---international-space-station-current-location&quot;&gt;Open Notify - International Space Station Current Location&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://open-notify.org/&quot;&gt;Open Notify&lt;/a&gt; is an open source project to provide an API for NASA data.  One such API is the &lt;a href=&quot;http://open-notify.org/Open-Notify-API/ISS-Location-Now/&quot;&gt;International Space Station Current Location&lt;/a&gt; which returns the current longitude and latitude of the ISS.  This is the target API that we will write our test against.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;We are going to write our first automated test against &lt;a href=&quot;http://api.open-notify.org/iss-now&quot;&gt;http://api.open-notify.org/iss-now&lt;/a&gt;.  Create a new directory for your API test automation project, and open that directory in Sublime Text 3.  Now create a new file in that directory.  Tests scripts are usually named &lt;code&gt;*spec.js&lt;/code&gt; in order for jasmine-node to find them. For this post, I will use &lt;code&gt;iss-spec.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-frisby&quot;&gt;Using Frisby&lt;/h3&gt;
+
+&lt;p&gt;In your newly created file, place the following code to allow you to utilise the previously installed Frisby module:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;var frisby = require(&#39;frisby&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let’s write a simple test. We will first make use of the Frisby &lt;code&gt;create()&lt;/code&gt; method to define the new test, and the parameter supplied defines the name of the test. Next, the &lt;code&gt;get()&lt;/code&gt; method performs a HTTP GET request on the supplied URL. We can use the &lt;code&gt;expectStatus()&lt;/code&gt; method to verify the returned HTTP status code, and the &lt;code&gt;expectHeaderContains()&lt;/code&gt; method can be used to verify contents within the returned header. Since the API returns its payload in JSON, the content-type should be ‘application/json’ on the request. The last method we will use is &lt;code&gt;toss()&lt;/code&gt;, which is used to execute the test. Here’s an example of these methods being used:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;var frisby = require(&#39;frisby&#39;);
+
+frisby.create(&#39;GET: International Space Station Current Location&#39;)
+          .get(&#39;http://api.open-notify.org/iss-now&#39;)
+          .expectStatus(200)
+          .expectHeaderContains(&#39;content-type&#39;, &#39;application/json&#39;)
+          .toss();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let’s now make this test a bit more useful, by using the &lt;code&gt;expectJSONTypes()&lt;/code&gt; method to check the structure of the response rather than the data:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;var frisby = require(&#39;frisby&#39;);
+
+frisby.create(&#39;GET: International Space Station Current Location&#39;)
+          .get(&#39;http://api.open-notify.org/iss-now&#39;)
+          .expectStatus(200)
+          .expectHeaderContains(&#39;content-type&#39;, &#39;application/json&#39;)
+          .expectJSONTypes({
+            message: String,
+            timestamp: Number,
+            iss_position: {
+                latitude: Number,
+                longitude: Number
+            }
+          })
+          .toss();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can also use the &lt;code&gt;expectJSON()&lt;/code&gt; method to check the data of the response:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;var frisby = require(&#39;frisby&#39;);
+
+frisby.create(&#39;GET: International Space Station Current Location&#39;)
+          .get(&#39;http://api.open-notify.org/iss-now&#39;)
+          .expectStatus(200)
+          .expectHeaderContains(&#39;content-type&#39;, &#39;application/json&#39;)
+          .expectJSONTypes({
+            message: String,
+            timestamp: Number,
+            iss_position: {
+                latitude: Number,
+                longitude: Number
+            }
+          })
+          .expectJSON({
+            message: &quot;success&quot;
+          })
+          .toss();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run your Frisby test by using jasmine-node, and you should see something similar to the following results:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ jasmine-node iss_spec.js 
+
+Finished in 1.736 seconds
+1 test, 7 assertions, 0 failures, 0 skipped
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/frisby-api-testing-example&quot;&gt;https://github.com/the-creative-tester/frisby-api-testing-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 10 Jan 2016 00:00:00 +1100</pubDate>
+        <link>http://the-creative-tester.github.io/JavaScript-REST-API-Testing/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/JavaScript-REST-API-Testing/</guid>
+      </item>
+    
+      <item>
+        <title>Python Security Automation</title>
+        <description>&lt;h2 id=&quot;selenium-lettuce-and-owasp-zap-in-python&quot;&gt;Selenium, Lettuce and OWASP ZAP in Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using &lt;a href=&quot;http://www.seleniumhq.org/projects/webdriver/&quot;&gt;Selenium WebDriver&lt;/a&gt; with &lt;a href=&quot;http://lettuce.it/&quot;&gt;Lettuce&lt;/a&gt;, in a Python context to create tests to drive the browser.  We will then integrate these tests with &lt;a href=&quot;https://github.com/zaproxy/zaproxy/&quot;&gt;OWASP ZAP&lt;/a&gt;, which is a penetration testing tool for discovering vulnerabilities in browser-based applications.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;python&quot;&gt;Python&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.python.org/downloads/release/python-2710/&quot;&gt;Python 2.7.10&lt;/a&gt;.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Python:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ python --version  
+Python 2.7.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed pip:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following commands to install the Selenium, OWASP ZAP, Lettuce and Nose packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip install selenium
+bash-3.2$ pip install python-owasp-zap-v2.4
+bash-3.2$ pip install lettuce
+bash-3.2$ pip install nose
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;sublime-text&quot;&gt;Sublime Text&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;http://www.sublimetext.com/3&quot;&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;firefox&quot;&gt;Firefox&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.mozilla.org/en-US/firefox/all/&quot;&gt;Firefox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;gruyere&quot;&gt;Gruyere&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://google-gruyere.appspot.com/&quot;&gt;Gruyere&lt;/a&gt; is a small web application that has purposely exposed multiple security vulnerabilities.  An instance of Gruyere can be accessed &lt;a href=&quot;https://google-gruyere.appspot.com/start&quot;&gt;here&lt;/a&gt;.  We will make use of Lettuce to start up OWASP ZAP server on a given port.  We will then trigger a simple Selenium test against Gruyere through the OWASP ZAP server and port, which allows OWASP ZAP to intercept and save the requests sent to the application server by the Selenium test. We will then finally make use of Lettuce to trigger a Active Scan through OWASP ZAP and produce a report.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;Clone the repository located &lt;a href=&quot;https://github.com/the-creative-tester/python-zap-example&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ git clone https://github.com/the-creative-tester/python-zap-example.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You will notice the latest version of ZAP, 2.4.2 is contained in /bin/&lt;/p&gt;
+
+&lt;h3 id=&quot;zap-configuration-in-lettuce&quot;&gt;ZAP Configuration in Lettuce&lt;/h3&gt;
+
+&lt;p&gt;First, let’s start the OWASP ZAP server on a specified port of 8090.  Note, we are start ZAP in daemon or headless mode, and we are also disabling the &lt;a href=&quot;https://github.com/zaproxy/zaproxy/wiki/FAQapikey&quot;&gt;API key&lt;/a&gt; through &lt;code&gt;&#39;bin/zap_2.4.2/zap.sh&#39;,&#39;-daemon&#39;, &#39;-config api.disablekey=true&#39;&lt;/code&gt;.  We will also create a Firefox profile that is automatically configured for the OWASP ZAP server and port, which allows all traffic from Firefox to be sent through the started OWASP ZAP server:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;import os
+import subprocess
+from lettuce import before, world, after
+from selenium import webdriver
+from selenium.webdriver.common.proxy import *
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from time import sleep
+from zapv2 import ZAPv2
+from pprint import pprint
+
+@before.all
+def open_shop():
+    start_zap_server()
+    firefox_profile = prepare_firefox_profile()
+    open_drivers(firefox_profile)
+
+def start_zap_server():
+    subprocess.Popen([&#39;bin/zap_2.4.2/zap.sh&#39;,&#39;-daemon&#39;, &#39;-config api.disablekey=true&#39;],stdout=open(os.devnull,&#39;w&#39;))
+    world.zap = ZAPv2(proxies={&#39;http&#39;: &#39;http://127.0.0.1:8090&#39;, &#39;https&#39;: &#39;https://127.0.0.1:8090&#39;})
+    sleep(5)
+
+def prepare_firefox_profile():
+    zap_proxy_host = &quot;127.0.0.1&quot;
+    zap_proxy_port = 8090
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference(&quot;network.proxy.type&quot;, 1)
+    firefox_profile.set_preference(&quot;network.proxy.http&quot;, zap_proxy_host)
+    firefox_profile.set_preference(&quot;network.proxy.http_port&quot;, int(zap_proxy_port))
+    firefox_profile.set_preference(&quot;network.proxy.ssl&quot;,zap_proxy_host)
+    firefox_profile.set_preference(&quot;network.proxy.ssl_port&quot;, int(zap_proxy_port))
+    firefox_profile.set_preference(&quot;browser.startup.homepage&quot;, &quot;about:blank&quot;)
+    firefox_profile.set_preference(&quot;startup.homepage_welcome_url&quot;, &quot;about:blank&quot;)
+    firefox_profile.set_preference(&quot;startup.homepage_welcome_url.additional&quot;, &quot;about:blank&quot;)
+    firefox_profile.set_preference(&quot;webdriver_assume_untrusted_issuer&quot;, False)
+    firefox_profile.set_preference(&quot;accept_untrusted_certs&quot;, True)
+    firefox_profile.update_preferences()
+    return firefox_profile
+
+def open_drivers(firefox_profile):
+    world.driver = get_firefox(firefox_profile)
+    world.driver.set_page_load_timeout(20)
+    world.driver.implicitly_wait(20)
+    world.driver.maximize_window()
+
+def get_firefox(firefox_profile):
+    # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
+    try:
+        driver = webdriver.Firefox(firefox_profile=firefox_profile)
+    except Exception:
+        my_local_firefox_bin = os.environ.get(&#39;FIREFOX_BIN&#39;)
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;selenium--lettuce-setup&quot;&gt;Selenium + Lettuce Setup&lt;/h3&gt;
+
+&lt;p&gt;Our test that we are executing against Gruyere is defined in &lt;code&gt;features/gruyere.feature&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-gherkin&quot;&gt;Feature: Gruyere
+
+  Scenario: Gruyere
+    Given I navigate to Gruyere
+    When I choose to Agree &amp;amp; Start
+    Then I am taken to &quot;Gruyere: Home&quot;
+
+    Given I choose to Sign Up
+    When I choose to Create Account with user name &quot;blue&quot; and password &quot;cheese&quot;
+    Then I am taken to &quot;Gruyere: Error&quot;
+
+    Given I choose to Sign In
+    When I choose to Login with user name &quot;blue&quot; and password &quot;cheese&quot;
+    Then I am taken to &quot;Gruyere: Home&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The corresponding steps for &lt;code&gt;gruyere.feature&lt;/code&gt; are defined in &lt;code&gt;features/steps/gruyere.py&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+
+@step(&#39;I navigate to Gruyere&#39;)
+def step_impl(step):
+    world.driver.get(&quot;http://google-gruyere.appspot.com/start&quot;)
+
+@step(&#39;I choose to Agree &amp;amp; Start&#39;)
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, &quot;Agree &amp;amp; Start&quot;).click()
+
+@step(&#39;I am taken to &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, page_title):
+    assert_equal(world.driver.title, page_title)
+
+@step(&#39;I choose to Sign Up&#39;)
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, &quot;Sign up&quot;).click()
+
+@step(&#39;I choose to Create Account with user name &quot;([^&quot;]*)&quot; and password &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, user_name, password):
+    world.driver.find_element(By.NAME, &quot;uid&quot;).send_keys(user_name)
+    world.driver.find_element(By.NAME, &quot;pw&quot;).send_keys(password)
+    world.driver.find_element(By.XPATH, &quot;//input[@value=&#39;Create account&#39;]&quot;).click()
+
+@step(&#39;I choose to Sign In&#39;)
+def step_impl(step):
+    world.driver.find_element(By.LINK_TEXT, &quot;Sign in&quot;).click()
+
+@step(&#39;I choose to Login with user name &quot;([^&quot;]*)&quot; and password &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, user_name, password):
+    world.driver.find_element(By.NAME, &quot;uid&quot;).send_keys(user_name)
+    world.driver.find_element(By.NAME, &quot;pw&quot;).send_keys(password)
+    world.driver.find_element(By.XPATH, &quot;//input[@value=&#39;Login&#39;]&quot;).click()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;zap-execution-in-lettuce&quot;&gt;ZAP Execution in Lettuce&lt;/h3&gt;
+
+&lt;p&gt;After we have finished the execution of the Selenium test, we will then instruct ZAP to run a Spider Scan, an Active Scan and finally produce an XML report:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;@after.all
+def close_shop(total):
+    print &quot;Total %d of %d scenarios passed!&quot; % (total.scenarios_passed, total.scenarios_ran)
+    close_drivers()
+    do_some_zap_stuff()
+
+def close_drivers():
+    if world.driver:
+        world.driver.quit()
+
+def do_some_zap_stuff():
+    target = &quot;http://google-gruyere.appspot.com&quot;
+    print &quot;opening target: &quot; + target
+    world.zap.urlopen(target)
+    sleep(2.5)
+    print &quot;starting spider scan&quot; 
+    world.zap.spider.scan(target)
+    while (int(world.zap.spider.status()) &amp;lt; 100):
+        print &quot;spider scan progress %: &quot; + world.zap.spider.status()
+        sleep(1)
+    print &quot;starting active scan&quot;
+    world.zap.ascan.scan(target)
+    sleep(2.5)
+    while (int(world.zap.ascan.status()) &amp;lt; 100):
+        print &quot;active scan progress %: &quot; + world.zap.ascan.status()
+        sleep(1)
+    pprint(world.zap.core.alerts())
+    report_type = &#39;xml&#39;
+    report_file = &#39;sample_report.xml&#39;
+    with open(report_file, &#39;a&#39;) as f:
+        xml = world.zap.core.xmlreport()
+        f.write(xml)
+        print(&#39;Success: {1} report saved to {0}&#39;.format(report_file, report_type.upper()))
+    world.zap.core.shutdown()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run &lt;code&gt;lettuce&lt;/code&gt;, and you should see something similar to the following results:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;Total 1 of 1 scenarios passed!
+opening target: http://google-gruyere.appspot.com
+starting spider scan
+spider scan progress %: 0
+spider scan progress %: 14
+spider scan progress %: 20
+spider scan progress %: 40
+spider scan progress %: 53
+spider scan progress %: 65
+spider scan progress %: 74
+spider scan progress %: 82
+spider scan progress %: 94
+[{u&#39;alert&#39;: u&#39;Cookie set without HttpOnly flag&#39;,
+  u&#39;attack&#39;: u&#39;943720935142; path=/&#39;,
+  u&#39;confidence&#39;: u&#39;Medium&#39;,
+  u&#39;cweid&#39;: u&#39;0&#39;,
+  u&#39;description&#39;: u&#39;A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.&#39;,
+  u&#39;evidence&#39;: u&#39;GRUYERE_ID=943720935142; path=/&#39;,
+  u&#39;id&#39;: u&#39;0&#39;,
+  u&#39;messageId&#39;: u&#39;1&#39;,
+  u&#39;other&#39;: u&#39;&#39;,
+  u&#39;param&#39;: u&#39;GRUYERE_ID&#39;,
+  u&#39;reference&#39;: u&#39;www.owasp.org/index.php/HttpOnly&#39;,
+  u&#39;risk&#39;: u&#39;Low&#39;,
+  u&#39;solution&#39;: u&#39;Ensure that the HttpOnly flag is set for all cookies.&#39;,
+  u&#39;url&#39;: u&#39;http://google-gruyere.appspot.com/start&#39;,
+  u&#39;wascid&#39;: u&#39;13&#39;},
+  ..
+  ..
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/python-zap-example&quot;&gt;https://github.com/the-creative-tester/python-zap-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 28 Nov 2015 00:00:00 +1100</pubDate>
+        <link>http://the-creative-tester.github.io/Python-Security-Automation/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Python-Security-Automation/</guid>
+      </item>
+    
+      <item>
+        <title>Python Web Automation (Lettuce)</title>
+        <description>&lt;h2 id=&quot;selenium-page-objects-lettuce-and-nose-in-python&quot;&gt;Selenium, Page Objects, Lettuce and Nose in Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, we will have a look at using &lt;a href=&quot;http://www.seleniumhq.org/projects/webdriver/&quot;&gt;Selenium WebDriver&lt;/a&gt; within a Python context.  This is my first usage of Python, and I thought it would be useful to share how to use and setup Selenium WebDriver for those that are new to Web Browser Automation.  We will make use of the &lt;a href=&quot;http://selenium-python.readthedocs.org/page-objects.html&quot;&gt;Page Objects&lt;/a&gt; design pattern which allows for reusability and also reduction in duplicated code.  We will then make use of &lt;a href=&quot;http://lettuce.it/&quot;&gt;Lettuce&lt;/a&gt;, which is a BDD tool based on Cucumber which allows us to describe our features and scenarios in a natural language wrapping steps that ultimately call our Python functions and drive the browser.  We will also make use of &lt;a href=&quot;http://nose.readthedocs.org/en/latest/testing_tools.html&quot;&gt;Nose&lt;/a&gt;, which allows us to use friendly aids to help with our assertions.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;h5 id=&quot;python&quot;&gt;Python&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.python.org/downloads/release/python-2710/&quot;&gt;Python 2.7.10&lt;/a&gt;.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have successfully installed Python:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ python --version  
+Python 2.7.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensure that you have successfully installed pip:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can now use the following commands to install the Selenium, Lettuce and Nose packages:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ pip install selenium
+bash-3.2$ pip install lettuce
+bash-3.2$ pip install nose
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;sublime-text&quot;&gt;Sublime Text&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;http://www.sublimetext.com/3&quot;&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;firefox&quot;&gt;Firefox&lt;/h5&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://www.mozilla.org/en-US/firefox/all/&quot;&gt;Firefox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-setup&quot;&gt;Initial Setup&lt;/h3&gt;
+
+&lt;p&gt;We are going to write our first automated test against &lt;a href=&quot;https://pypi.python.org/pypi&quot;&gt;PyPI&lt;/a&gt;.  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code&gt;pypi_automated_tests/
+  features/
+    __init__.py
+    pages/
+    	__init__.py
+    steps/
+    	__init__.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;__init__.py&lt;/code&gt; files can be left empty, but will allow for the containing directories to recognised as Python packages.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-lettuce&quot;&gt;Using Lettuce&lt;/h3&gt;
+
+&lt;p&gt;To make use of Lettuce, we will first have to create a new file &lt;code&gt;pypi_automated_tests/terrain.py&lt;/code&gt;.  Have a read about the usage of terrain &lt;a href=&quot;http://lettuce.it/reference/terrain.html&quot;&gt;here&lt;/a&gt;, but in summary, &lt;code&gt;terrain.py&lt;/code&gt; is the place to put all your &lt;code&gt;@before.all&lt;/code&gt; and &lt;code&gt;@after_all&lt;/code&gt; configuration, but also allows us to make use of &lt;code&gt;world&lt;/code&gt;, a place to hold anything that you want to use across your automated tests.  In this file, place the following code:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;import os
+from lettuce import before, world, after
+from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+
+@before.all
+def open_shop():
+    open_drivers()
+
+@after.all
+def close_shop(total):
+    print &quot;Total %d of %d scenarios passed!&quot; % (total.scenarios_passed, total.scenarios_ran)
+    close_drivers()
+
+def open_drivers():
+    world.driver = get_firefox()
+    world.driver.set_page_load_timeout(10)
+    world.driver.implicitly_wait(10)
+    world.driver.maximize_window()
+
+def get_firefox():
+    # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
+    try:
+        driver = webdriver.Firefox()
+    except Exception:
+        my_local_firefox_bin = os.environ.get(&#39;FIREFOX_BIN&#39;)
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+
+def close_drivers():
+    if world.driver:
+        world.driver.quit()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Run &lt;code&gt;lettuce&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt;.  You should have successfully launched an instance of Firefox! Now, let’s create a new file &lt;code&gt;pypi_automated_tests/features/search.feature&lt;/code&gt;.  In this file, let’s describe the scenario that we want to test:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-gherkin&quot;&gt;Feature: Search
+
+  Scenario: Search PyPI
+    Given I navigate to the PyPi Home page
+    When I search for &quot;lettuce&quot;
+    Then I am taken to the PyPi Search Results page
+    And I see a search result &quot;lettuce 0.2.21&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you run &lt;code&gt;lettuce&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt; you will see that we now have to implement the steps for the above feature.  Now, let’s create a new file &lt;code&gt;pypi_automated_tests/steps/search_steps.py&lt;/code&gt;.  In this file, let’s first define a shell for our steps:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from lettuce import step
+
+@step(&#39;Given I navigate to the PyPi Home page&#39;)
+def step_impl(step):
+    assert True, &#39;This step must be implemented&#39;
+
+@step(&#39;When I search for &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_term):
+    assert True, &#39;This step must be implemented&#39;
+
+@step(&#39;Then I am taken to the PyPi Search Results page&#39;)
+def step_impl(step):
+    assert True, &#39;This step must be implemented&#39;
+
+@step(&#39;And I see a search result &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_result):
+    assert True, &#39;This step must be implemented&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you run &lt;code&gt;lettuce&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt; you will now see that the shell of the implemented steps has succesfully executed due to &lt;code&gt;assert True&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-selenium&quot;&gt;Using Selenium&lt;/h3&gt;
+
+&lt;p&gt;Let’s make some changes to &lt;code&gt;pypi_automated_tests/steps/search_steps.py&lt;/code&gt;.  We will add &lt;code&gt;from lettuce import step, world&lt;/code&gt; so that we can make use of the &lt;code&gt;world.driver&lt;/code&gt; that we had setup in &lt;code&gt;pypi_automated_tests/terrain.py&lt;/code&gt;. We will also add &lt;code&gt;from nose.tools import assert_equal, assert_true&lt;/code&gt; so that we can use matchers. We can then start to use the &lt;a href=&quot;http://selenium-python.readthedocs.org/&quot;&gt;Selenium Python Bindings&lt;/a&gt; to drive the browser:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+from selenium.webdriver.common.by import By
+
+@step(&#39;Given I navigate to the PyPi Home page&#39;)
+def step_impl(step):
+    world.driver.get(&quot;https://pypi.python.org/pypi&quot;)
+    assert_equal(world.driver.title, &quot;PyPI - the Python Package Index : Python Package Index&quot;)
+
+@step(&#39;When I search for &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_term):
+    world.driver.find_element(By.ID, &quot;term&quot;).send_keys(search_term)
+    world.driver.find_element(By.ID, &quot;submit&quot;).click()
+
+@step(&#39;Then I am taken to the PyPi Search Results page&#39;)
+def step_impl(step):
+    assert_equal(world.driver.title, &quot;Index of Packages Matching &#39;lettuce&#39; : Python Package Index&quot;)
+
+@step(&#39;And I see a search result &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_result):
+    assert_true(world.driver.find_element(By.LINK_TEXT, search_result))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you run &lt;code&gt;lettuce&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt; you will now see that the implemented steps has succesfully executed.  At this point you have completed your Selenium WebDriver test!&lt;/p&gt;
+
+&lt;h3 id=&quot;using-page-objects&quot;&gt;Using Page Objects&lt;/h3&gt;
+
+&lt;p&gt;To make use of Page Objects, let’s first move the functionality that resided in &lt;code&gt;pypi_automated_tests/steps/search_steps.py&lt;/code&gt; to two new files, &lt;code&gt;pypi_automated_tests/pages/home_page.py&lt;/code&gt; and &lt;code&gt;pypi_automated_tests/pages/search_results_page.py&lt;/code&gt;.  Firstly, in &lt;code&gt;pypi_automated_tests/pages/home_page.py&lt;/code&gt; make the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium.webdriver.common.by import By
+
+class HomePageLocator(object):
+    # Home Page Locators
+
+    HEADER_TEXT = (By.XPATH, &quot;//h1&quot;)
+    SEARCH_FIELD = (By.ID, &quot;term&quot;)
+    SUBMIT_BUTTON = (By.ID, &quot;submit&quot;)
+
+
+class HomePage(object):
+    # Home Page Actions
+
+    def __init__(self, browser):
+        self.driver = browser
+
+    def fill(self, text, *locator):
+        self.driver.find_element(*locator).send_keys(text)
+
+    def click_element(self, *locator):
+        self.driver.find_element(*locator).click()
+
+    def navigate(self, address):
+        self.driver.get(address)
+
+    def get_page_title(self):
+        return self.driver.title
+
+    def search(self, search_term):
+        self.fill(search_term, *HomePageLocator.SEARCH_FIELD)
+        self.click_element(*HomePageLocator.SUBMIT_BUTTON)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Secondly, in &lt;code&gt;pypi_automated_tests/pages/search_results.py&lt;/code&gt; make the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from selenium.webdriver.common.by import By
+
+class SearchResultsPageLocator(object):
+    # Search Results Page Locators
+
+    HEADER_TEXT = (By.XPATH, &quot;//h1&quot;)
+
+
+class SearchResultsPage(object):
+    # Search Results Page Actions
+
+    def __init__(self, browser):
+        self.driver = browser
+
+    def get_element(self, *locator):
+        return self.driver.find_element(*locator)
+
+    def get_page_title(self):
+        return self.driver.title
+
+    def find_search_result(self, search_result):
+        return self.get_element(By.LINK_TEXT, search_result)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, let’s update &lt;code&gt;pypi_automated_tests/steps/search_steps.py&lt;/code&gt; to make use of the newly added Page Objects:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from lettuce import step, world
+from nose.tools import assert_equal, assert_true
+
+@step(&#39;Given I navigate to the PyPi Home page&#39;)
+def step_impl(step):
+    world.home_page.navigate(&quot;https://pypi.python.org/pypi&quot;)
+    assert_equal(world.home_page.get_page_title(), &quot;PyPI - the Python Package Index : Python Package Index&quot;)
+
+@step(&#39;When I search for &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_term):
+    world.home_page.search(search_term)
+
+@step(&#39;Then I am taken to the PyPi Search Results page&#39;)
+def step_impl(step):
+    assert_equal(world.search_results_page.get_page_title(), &quot;Index of Packages Matching &#39;lettuce&#39; : Python Package Index&quot;)
+
+@step(&#39;And I see a search result &quot;([^&quot;]*)&quot;&#39;)
+def step_impl(step, search_result):
+    assert_true(world.search_results_page.find_search_result(search_result))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Finally, in our &lt;code&gt;pypi_automated_tests/terrain.py&lt;/code&gt; we will need to make these Page Objects avaiable through &lt;code&gt;world&lt;/code&gt; by making the following updates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;import os
+from lettuce import before, world, after
+from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from features.pages.home_page import HomePage
+from features.pages.search_results_page import SearchResultsPage
+
+@before.all
+def open_shop():
+    open_drivers()
+    prepare_pages(world.driver)
+
+@after.all
+def close_shop(total):
+    print &quot;Total %d of %d scenarios passed!&quot; % (total.scenarios_passed, total.scenarios_ran)
+    close_drivers()
+
+def open_drivers():
+    world.driver = get_firefox()
+    world.driver.set_page_load_timeout(10)
+    world.driver.implicitly_wait(10)
+    world.driver.maximize_window()
+
+def get_firefox():
+    # Locate Firefox from the default directory otherwise use FIREFOX_BIN #
+    try:
+        driver = webdriver.Firefox()
+    except Exception:
+        my_local_firefox_bin = os.environ.get(&#39;FIREFOX_BIN&#39;)
+        firefox_binary = FirefoxBinary(my_local_firefox_bin)
+        driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    return driver
+
+def prepare_pages(driver):
+    world.home_page = HomePage(driver)
+    world.search_results_page = SearchResultsPage(driver)
+
+def close_drivers():
+    if world.driver:
+        world.driver.quit()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;execution&quot;&gt;Execution&lt;/h3&gt;
+
+&lt;p&gt;You can now run &lt;code&gt;lettuce&lt;/code&gt; from &lt;code&gt;pypi_automated_tests/&lt;/code&gt;, and you should get the following successful results:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;bash-3.2$ lettuce
+
+Feature: Search                                     # features/search.feature:1
+
+  Scenario: Search PyPI                             # features/search.feature:3
+    Given I navigate to the PyPi Home page          # features/steps/search_steps.py:5
+    When I search for &quot;lettuce&quot;                     # features/steps/search_steps.py:10
+    Then I am taken to the PyPi Search Results page # features/steps/search_steps.py:14
+    And I see a search result &quot;lettuce 0.2.21&quot;      # features/steps/search_steps.py:18
+Total 1 of 1 scenarios passed!
+
+1 feature (1 passed)
+1 scenario (1 passed)
+4 steps (4 passed)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;full-example&quot;&gt;Full Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example&quot;&gt;https://github.com/the-creative-tester/python-lettuce-web-browser-automation-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 10 Nov 2015 00:00:00 +1100</pubDate>
+        <link>http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/</link>
+        <guid isPermaLink="true">http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/</guid>
       </item>
     
       <item>
         <title>Welcome</title>
-        <description>&lt;h2 id=&quot;h2-heading-looks-like-this&quot;&gt;H2 Heading Looks Like This&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;welcome&quot;&gt;Welcome&lt;/h2&gt;
 
-&lt;p&gt;Sample paragraph goes here and looks like this. Bacon ipsum dolor sit amet turducken meatloaf boudin pork loin meatball biltong, fatback capicola turkey pork chop. Short ribs boudin landjaeger kevin brisket ground round.&lt;/p&gt;
-
-&lt;h3 id=&quot;h3-heading-looks-like-this&quot;&gt;H3 Heading Looks Like This&lt;/h3&gt;
-
-&lt;p&gt;Spare ribs strip steak pastrami corned beef bresaola porchetta. Cow fatback tongue prosciutto, short ribs hamburger drumstick beef ribs swine t-bone pancetta meatball strip steak ground round tenderloin.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Sample ordered list&lt;/li&gt;
-  &lt;li&gt;List item&lt;/li&gt;
-  &lt;li&gt;Another list item&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;h4-heading-looks-like-this&quot;&gt;H4 Heading Looks Like This&lt;/h4&gt;
-
-&lt;p&gt;Corned beef pig pancetta drumstick tail, andouille spare ribs jowl prosciutto biltong hamburger short loin pork brisket. Frankfurter kielbasa brisket meatloaf pastrami fatback. Cow t-bone pork chop chuck short ribs spare ribs. Pancetta flank porchetta, turkey tail ball tip tri-tip leberkas beef.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a sample blockquote. Landjaeger shoulder ham capicola. 
-Pork shoulder fatback, flank pork belly rump short loin meatloaf filet mignon kevin turducken spare ribs sirloin short ribs ham hock.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-
-  &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;def what?
-  42
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is just a small place on the Internet to capture my thoughts, discoveries and experiments.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 25 Oct 2015 00:00:00 +1100</pubDate>
+        <pubDate>Mon, 09 Nov 2015 00:00:00 +1100</pubDate>
         <link>http://the-creative-tester.github.io/Welcome/</link>
         <guid isPermaLink="true">http://the-creative-tester.github.io/Welcome/</guid>
       </item>

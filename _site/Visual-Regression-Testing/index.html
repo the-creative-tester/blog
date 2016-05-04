@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <title>THE CREATIVE TESTER – Jason Thye</title>
+    <title>Visual Regression Testing – THE CREATIVE TESTER – Jason Thye</title>
 
     <meta name="author" content="THE CREATIVE TESTER" />
     <meta name="description" content="Jason Thye">
@@ -20,7 +20,7 @@
 
   </head>
 
-  <body id="home">
+  <body>
     <div class="content-wrapper">
       <div class="wrapper-masthead">
   <div class="container">
@@ -33,121 +33,209 @@
   </div>
 </div>
       <div id="main" role="main" class="container">
-        <div class="posts clearfix">
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">01 May 2016</div>
-      <h1><a href="/Python-Android-Mobile-Web-Automation/">Python Android Mobile Web Automation</a></h1>
+        <article class="post">
+  <center>
+  	<h1>Visual Regression Testing</h1>
+  	<div class="date">Posted April 16, 2016</div>
+  </center>
+  <div class="entry">
+    <h2 id="needle-selenium-and-nose-in-python">Needle, Selenium and Nose in Python</h2>
 
-      <div class="entry">
-      	<p>Android SDK, Appium, Selenium and Nose</p>
-        <!-- <h2 id="android-sdk-appium-selenium-appium-python-client-and-nose-in-python">Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will write a simple Selenium test in Python for Android Mobile Web. We will make use of the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> command... -->  
-      </div>
-      
-      <a href="/Python-Android-Mobile-Web-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">25 Apr 2016</div>
-      <h1><a href="/Python-Web-Browser-Automation-Behave/">Python Web Automation (Behave)</a></h1>
+<h3 id="introduction">Introduction</h3>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Behave and Nose</p>
-        <!-- <h2 id="selenium-page-objects-behave-and-nose-in-python">Selenium, Page Objects, Behave and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>Earlier, I wrote a <a href="http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/">post</a> about using Selenium with Lettuce in a Python context. In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Behave/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">16 Apr 2016</div>
-      <h1><a href="/Visual-Regression-Testing/">Visual Regression Testing</a></h1>
+<p>In this post, we will have a look at using <a href="https://github.com/bfirsh/needle">Needle</a> which allows you to automatically check that your visuals render correctly by taking screenshots of portions of a website and comparing them against known good screenshots.  We can then use <a href="http://pdiff.sourceforge.net/">PerceptualDiff</a> as an image comparison utility to show the difference between the screenshots.  We will write a simple Selenium test using Needle and PerceptualDiff to automate the checking of the header bar for the <a href="http://www.smh.com.au/">Sydney Morning Herald</a> home page.</p>
 
-      <div class="entry">
-      	<p>Needle, Selenium, Nose and Python</p>
-        <!-- <h2 id="needle-selenium-and-nose-in-python">Needle, Selenium and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="https://github.com/bfirsh/needle">Needle</a> which allows you to automatically check that your visuals render correctly by taking screenshots of portions of a website... -->  
-      </div>
-      
-      <a href="/Visual-Regression-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">13 Feb 2016</div>
-      <h1><a href="/Selenium-Grid-Setup/">Selenium Grid Setup</a></h1>
+<h3 id="installation">Installation</h3>
 
-      <div class="entry">
-      	<p>Selenium Grid, ChromeDriver, Selenium and Python</p>
-        <!-- <h2 id="selenium-grid-chromedriver-and-selenium-in-python">Selenium Grid, ChromeDriver and Selenium in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a> within a Python context. SeleniumGrid allows you to run your tests on different machines against different browsers... -->  
-      </div>
-      
-      <a href="/Selenium-Grid-Setup/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">07 Feb 2016</div>
-      <h1><a href="/Java-REST-API-Testing/">Java REST API Testing</a></h1>
+<h5 id="python">Python</h5>
 
-      <div class="entry">
-      	<p>REST Assured, Cucumber-JVM and Gradle</p>
-        <!-- <h2 id="rest-assured-cucumber-jvm-and-gradle-in-java">REST Assured, Cucumber-JVM and Gradle in Java</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the power of <a href="http://gradle.org/">Gradle</a> to drive <a href="https://github.com/jayway/rest-assured">REST Assured</a>. REST Assured is a Java implementation of an API testing... -->  
-      </div>
-      
-      <a href="/Java-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Jan 2016</div>
-      <h1><a href="/JavaScript-REST-API-Testing/">JavaScript REST API Testing</a></h1>
+<p>Install <a href="https://www.python.org/downloads/release/python-2710/">Python 2.7.10</a>.  Please ensure that you allow the installer to update your PATH.  As part of your installation, please also ensure that you install pip, which is a tool that allows easy management of any Python packages that you wish to use.  Installers for versions prior to Python 2.7.9 will not have pip bundled, so if you do choose to use an earlier version, please ensure you manually install pip.</p>
 
-      <div class="entry">
-      	<p>Node.js, Frisby and Jasmine</p>
-        <!-- <h2 id="nodejs-frisby-and-jasmine-in-javascript">Node.js, Frisby and Jasmine in JavaScript</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the <a href="https://nodejs.org/en/">Node.js</a> JavaScript runtime with two packages. The first, <a href="http://frisbyjs.com/">Frisby</a>, is an API testing framework and the second, <a... -->  
-      </div>
-      
-      <a href="/JavaScript-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">28 Nov 2015</div>
-      <h1><a href="/Python-Security-Automation/">Python Security Automation</a></h1>
+<p>Ensure that you have successfully installed Python:</p>
 
-      <div class="entry">
-      	<p>Selenium, OWASP ZAP and Lettuce</p>
-        <!-- <h2 id="selenium-lettuce-and-owasp-zap-in-python">Selenium, Lettuce and OWASP ZAP in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with <a href="http://lettuce.it/">Lettuce</a>, in a Python context to create tests to drive the browser. We will then... -->  
-      </div>
-      
-      <a href="/Python-Security-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Nov 2015</div>
-      <h1><a href="/Python-Web-Browser-Automation-Lettuce/">Python Web Automation (Lettuce)</a></h1>
+<blockquote>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Lettuce and Nose</p>
-        <!-- <h2 id="selenium-page-objects-lettuce-and-nose-in-python">Selenium, Page Objects, Lettuce and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> within a Python context. This is my first usage of Python, and I thought it would... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Lettuce/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">09 Nov 2015</div>
-      <h1><a href="/Welcome/">Welcome</a></h1>
+  <pre><code class="language-shell">bash-3.2$ python --version  
+Python 2.7.10
+</code></pre>
+</blockquote>
 
-      <div class="entry">
-      	<p>Welcome to The Creative Tester!</p>
-        <!-- <h2 id="welcome">Welcome</h2>
+<p>Ensure that you have successfully installed pip:</p>
 
-<p>This is just a small place on the Internet to capture my thoughts, discoveries and experiments.</p>
- -->  
-      </div>
-      
-      <a href="/Welcome/" class="small-link">More...</a>
-    </article>
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip --version
+pip 6.1.1 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages (python 2.7)
+</code></pre>
+</blockquote>
+
+<p>You can now use the following commands to install the Selenium, Needle and Nose packages:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ pip install selenium
+bash-3.2$ pip install needle
+bash-3.2$ pip install nose
+</code></pre>
+</blockquote>
+
+<h5 id="perceptualdiff">PerceptualDiff</h5>
+
+<p>Download the latest version of <a href="https://sourceforge.net/projects/pdiff/files/">PerceptualDiff</a>.  Include the PerceptualDiff folder in your <code>PATH</code> environment variable.</p>
+
+<h3 id="initial-setup">Initial Setup</h3>
+
+<p>Create a file such as <code>sydney-morning-herald-network-strip-test.py</code> and write a simple Selenium test that invokes the <code>setUp()</code> and <code>tearDown()</code> methods for initialisation and cleanup of the fixture:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">import unittest
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get('http://www.smh.com.au/')
+
+    def tearDown(self):
+        self.driver.quit()
+
+</code></pre>
+</blockquote>
+
+<p>Run the test using <code>nosetests sydney-morning-herald-network-strip-test.py</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-bash">bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 15.795s
+
+OK
+</code></pre>
+</blockquote>
+
+<h3 id="using-needle-and-perceptualdiff">Using Needle and PerceptualDiff</h3>
+
+<p>To make use of Needle and PerceptualDiff we will have to make a few small changes in <code>sydney-morning-herald-network-strip-test.py</code>.  In this file make the following changes to import and use NeedleTestCase, which also removes the need to use <code>setup()</code> and <code>tearDown()</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-python">from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get('http://www.smh.com.au/')
+
+</code></pre>
+</blockquote>
+
+<p>Now, also make the following changes to enable the PerceptualDiff engine, which will allow for a visual difference between captures to be generated (the default engine does not provide this):</p>
+
+<blockquote>
+
+  <pre><code class="language-python">from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = 'needle.engines.perceptualdiff_engine.Engine'
+</code></pre>
+</blockquote>
+
+<p>Also make the following changes to set the browser’s viewport (this will allow for consistency between capture sizes):</p>
+
+<blockquote>
+
+  <pre><code class="language-python">from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = 'needle.engines.perceptualdiff_engine.Engine'
+    viewport_width = 1024
+    viewport_height = 768
+
+</code></pre>
+</blockquote>
+
+<p>Add the <code>assertScreenshot()</code> which requires two arguments, a CSS selector for the element that you are capturing and a filename for the captured image.</p>
+
+<blockquote>
+
+  <pre><code class="language-python">from needle.cases import NeedleTestCase
+from selenium import webdriver
+
+class SydneyMorningHeraldNetworkStripTest(NeedleTestCase):
+
+    engine_class = 'needle.engines.perceptualdiff_engine.Engine'
+    viewport_width = 1024
+    viewport_height = 768
+
+    def test_check_network_strip_of_sydney_morning_herald_home_page(self):
+        self.driver.set_page_load_timeout(20)
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get('http://www.smh.com.au/')
+        self.assertScreenshot('#network-strip', 'network-strip-capture')
+
+</code></pre>
+</blockquote>
+
+<h3 id="execution">Execution</h3>
+
+<p>On first execution of the test, you need to capture a baseline image by using the <code>--with-save-baseline</code> paramter:</p>
+
+<blockquote>
+
+  <pre><code class="language-bash">bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py --with-save-baseline
+.
+----------------------------------------------------------------------
+Ran 1 test in 24.711s
+
+OK
+</code></pre>
+</blockquote>
+
+<p>This should now create <code>screenshots/baseline/network-strip-capture.png</code>.  Open the file and you should see a timestamp.  Upon a second execution of the test you can remove the <code>--with-save-baseline</code> parameter, and you should see something similar to this extract:</p>
+
+<blockquote>
+
+  <pre><code class="language-bash">bash-3.2$ nosetests sydney-morning-herald-network-strip-test.py
+..
+FAIL: Images are visibly different
+87 pixels are different
+..
+Ran 1 test in 23.810s
+
+FAILED (failures=1)
+</code></pre>
+</blockquote>
+
+<p>This should now create <code>screenshots/network-strip-capture.png</code>.  Open the file and you should see a different timestamp.  Also open <code>screenshots/network-strip-capture.diff.png</code> and you should see the area where the difference was found.</p>
+
+<h3 id="full-example">Full Example</h3>
+
+<p><a href="https://github.com/the-creative-tester/needle-visual-regression-testing-example">https://github.com/the-creative-tester/needle-visual-regression-testing-example</a></p>
+
+  </div>
+
   
-</div>
+</article>
       </div>
+    </div>
       <div id="contact" class="wrapper-footer">
   <div class="container">
     <footer class="footer">
@@ -183,7 +271,6 @@
     </footer>
   </div>
 </div>
-            
-    </div>
+      
   </body>
 </html>

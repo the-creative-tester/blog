@@ -48,9 +48,9 @@ h1 {
   font-size: 60px;
   margin: 10px 0;
   a {
-    color: $orange;
+    color: #394b80;
     &:hover {
-      color: $darkOrange;
+      color: #263255;
     }
   }
 }
@@ -96,7 +96,10 @@ h1 {
   text-align: center;
   letter-spacing: -.03em;
   a {
-    color: $darkGray;
+    color: #ffffff;
+    &:hover {
+      color: #ffffff;
+    }
   }
   @include mobile {
     margin: 0px 0px 0px 0px;
@@ -130,6 +133,7 @@ p {
   // max-width: 310px;
   text-align: center;
   margin-bottom: 30px;
+  color: #ffffff;
   @include mobile {
     margin: 0px 0px 30px 0px;
   }
@@ -219,12 +223,17 @@ img {
 /* LAYOUT / SECTIONS */
 /*********************/
 
+.wrapper-masthead {
+  background: #394b80;
+}
+
 .content-wrapper {
   min-height: 600px;
 }
+
 .masthead {
   padding: 20px 0 0;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 0px;
   @include mobile {
     text-align: center;
   }
@@ -266,6 +275,13 @@ img {
   font-size: 28px;
   text-align: right;
   margin-right: 20px;
+  a {
+    color: #ffffff;
+    &:hover {
+      color: #ffffff;
+    }
+  
+  }
   @include mobile {
     text-align: center;
     margin: 0px 0px 0px 0px;
@@ -274,6 +290,7 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
+  color: #ffffff;
   font-size: 14px;
   font-family: $helveticaNeue;
   text-align: right;
@@ -348,7 +365,7 @@ article {
     color: $medGray;
     display: block;
       &:hover {
-        color: $red;
+        color: $gray;
       }
   }
   .large-link {
@@ -369,7 +386,8 @@ article {
 }
 
 .wrapper-footer {
-  margin-top: 50px;
+  margin-top: 0px;
+  background: #394b80;
 }
 
 footer {

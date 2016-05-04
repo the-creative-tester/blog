@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <title>THE CREATIVE TESTER – Jason Thye</title>
+    <title>Java REST API Testing – THE CREATIVE TESTER – Jason Thye</title>
 
     <meta name="author" content="THE CREATIVE TESTER" />
     <meta name="description" content="Jason Thye">
@@ -20,7 +20,7 @@
 
   </head>
 
-  <body id="home">
+  <body>
     <div class="content-wrapper">
       <div class="wrapper-masthead">
   <div class="container">
@@ -33,121 +33,323 @@
   </div>
 </div>
       <div id="main" role="main" class="container">
-        <div class="posts clearfix">
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">01 May 2016</div>
-      <h1><a href="/Python-Android-Mobile-Web-Automation/">Python Android Mobile Web Automation</a></h1>
+        <article class="post">
+  <center>
+  	<h1>Java REST API Testing</h1>
+  	<div class="date">Posted February  7, 2016</div>
+  </center>
+  <div class="entry">
+    <h2 id="rest-assured-cucumber-jvm-and-gradle-in-java">REST Assured, Cucumber-JVM and Gradle in Java</h2>
 
-      <div class="entry">
-      	<p>Android SDK, Appium, Selenium and Nose</p>
-        <!-- <h2 id="android-sdk-appium-selenium-appium-python-client-and-nose-in-python">Android SDK, Appium, Selenium (Appium Python Client) and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will write a simple Selenium test in Python for Android Mobile Web. We will make use of the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> command... -->  
-      </div>
-      
-      <a href="/Python-Android-Mobile-Web-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">25 Apr 2016</div>
-      <h1><a href="/Python-Web-Browser-Automation-Behave/">Python Web Automation (Behave)</a></h1>
+<h3 id="introduction">Introduction</h3>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Behave and Nose</p>
-        <!-- <h2 id="selenium-page-objects-behave-and-nose-in-python">Selenium, Page Objects, Behave and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>Earlier, I wrote a <a href="http://the-creative-tester.github.io/Python-Web-Browser-Automation-Lettuce/">post</a> about using Selenium with Lettuce in a Python context. In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Behave/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">16 Apr 2016</div>
-      <h1><a href="/Visual-Regression-Testing/">Visual Regression Testing</a></h1>
+<p>In this post, we will have a look at using the power of <a href="http://gradle.org/">Gradle</a> to drive <a href="https://github.com/jayway/rest-assured">REST Assured</a>.  REST Assured is a Java implementation of an API testing framework.  We will then be making use of <a href="https://github.com/cucumber/cucumber-jvm">Cucumber-JVM</a>, which is a Java implementation of Cucumber.  These can be all be used together to create and execute automated yet descriptive REST API tests.</p>
 
-      <div class="entry">
-      	<p>Needle, Selenium, Nose and Python</p>
-        <!-- <h2 id="needle-selenium-and-nose-in-python">Needle, Selenium and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="https://github.com/bfirsh/needle">Needle</a> which allows you to automatically check that your visuals render correctly by taking screenshots of portions of a website... -->  
-      </div>
-      
-      <a href="/Visual-Regression-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">13 Feb 2016</div>
-      <h1><a href="/Selenium-Grid-Setup/">Selenium Grid Setup</a></h1>
+<h3 id="installation">Installation</h3>
 
-      <div class="entry">
-      	<p>Selenium Grid, ChromeDriver, Selenium and Python</p>
-        <!-- <h2 id="selenium-grid-chromedriver-and-selenium-in-python">Selenium Grid, ChromeDriver and Selenium in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/grid/">Selenium Grid</a> within a Python context. SeleniumGrid allows you to run your tests on different machines against different browsers... -->  
-      </div>
-      
-      <a href="/Selenium-Grid-Setup/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">07 Feb 2016</div>
-      <h1><a href="/Java-REST-API-Testing/">Java REST API Testing</a></h1>
+<h5 id="gradle">Gradle</h5>
 
-      <div class="entry">
-      	<p>REST Assured, Cucumber-JVM and Gradle</p>
-        <!-- <h2 id="rest-assured-cucumber-jvm-and-gradle-in-java">REST Assured, Cucumber-JVM and Gradle in Java</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the power of <a href="http://gradle.org/">Gradle</a> to drive <a href="https://github.com/jayway/rest-assured">REST Assured</a>. REST Assured is a Java implementation of an API testing... -->  
-      </div>
-      
-      <a href="/Java-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Jan 2016</div>
-      <h1><a href="/JavaScript-REST-API-Testing/">JavaScript REST API Testing</a></h1>
+<p>Download and extract <a href="http://gradle.org/gradle-download/">Gradle</a>.  You will also have to set your add GRADLE_HOME/bin to your PATH environment variable.</p>
 
-      <div class="entry">
-      	<p>Node.js, Frisby and Jasmine</p>
-        <!-- <h2 id="nodejs-frisby-and-jasmine-in-javascript">Node.js, Frisby and Jasmine in JavaScript</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using the <a href="https://nodejs.org/en/">Node.js</a> JavaScript runtime with two packages. The first, <a href="http://frisbyjs.com/">Frisby</a>, is an API testing framework and the second, <a... -->  
-      </div>
-      
-      <a href="/JavaScript-REST-API-Testing/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">28 Nov 2015</div>
-      <h1><a href="/Python-Security-Automation/">Python Security Automation</a></h1>
+<p>Ensure that you have successfully installed Gradle:</p>
 
-      <div class="entry">
-      	<p>Selenium, OWASP ZAP and Lettuce</p>
-        <!-- <h2 id="selenium-lettuce-and-owasp-zap-in-python">Selenium, Lettuce and OWASP ZAP in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> with <a href="http://lettuce.it/">Lettuce</a>, in a Python context to create tests to drive the browser. We will then... -->  
-      </div>
-      
-      <a href="/Python-Security-Automation/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">10 Nov 2015</div>
-      <h1><a href="/Python-Web-Browser-Automation-Lettuce/">Python Web Automation (Lettuce)</a></h1>
+<blockquote>
 
-      <div class="entry">
-      	<p>Selenium, Page Objects, Lettuce and Nose</p>
-        <!-- <h2 id="selenium-page-objects-lettuce-and-nose-in-python">Selenium, Page Objects, Lettuce and Nose in Python</h2> <h3 id="introduction">Introduction</h3> <p>In this post, we will have a look at using <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a> within a Python context. This is my first usage of Python, and I thought it would... -->  
-      </div>
-      
-      <a href="/Python-Web-Browser-Automation-Lettuce/" class="small-link">More...</a>
-    </article>
-  
-    <article class="post" style="background:">    
-      <div class="eyebrow">09 Nov 2015</div>
-      <h1><a href="/Welcome/">Welcome</a></h1>
+  <pre><code class="language-shell">bash-3.2$ gradle -v
 
-      <div class="entry">
-      	<p>Welcome to The Creative Tester!</p>
-        <!-- <h2 id="welcome">Welcome</h2>
+------------------------------------------------------------
+Gradle 2.10
+------------------------------------------------------------
+</code></pre>
+</blockquote>
 
-<p>This is just a small place on the Internet to capture my thoughts, discoveries and experiments.</p>
- -->  
-      </div>
-      
-      <a href="/Welcome/" class="small-link">More...</a>
-    </article>
+<p>In a directory of your choice, you are now going to use Gradle’s <a href="https://docs.gradle.org/current/userguide/build_init_plugin.html">Build Init Plugin</a> to bootstrap the process of creating a new Gradle build:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ gradle init --type java-library
+:wrapper
+:init
+
+BUILD SUCCESSFUL
+</code></pre>
+</blockquote>
+
+<p>As part of this command, you would now also have automatically generated <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html">Gradle Wrapper</a>.  Gradle Wrapper allows anybody to work on your project without having to install Gradle.  It ensures that the right version of Gradle that the build was designed for is shipped as part of the project repository.  As a result, you should have now the following project structure created:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ ls -ogR
+total 40
+-rw-r--r--  1   1220  7 Feb 23:01 build.gradle
+drwxr-xr-x  3    102  7 Feb 23:01 gradle
+-rwxr-xr-x  1   4971  7 Feb 23:01 gradlew
+-rw-r--r--  1   2404  7 Feb 23:01 gradlew.bat
+-rw-r--r--  1    646  7 Feb 23:01 settings.gradle
+drwxr-xr-x  4    136  7 Feb 23:01 src
+
+./gradle:
+total 0
+drwxr-xr-x  4   136  7 Feb 23:01 wrapper
+
+./gradle/wrapper:
+total 120
+-rw-r--r--  1   53636  7 Feb 23:01 gradle-wrapper.jar
+-rw-r--r--  1     232  7 Feb 23:01 gradle-wrapper.properties
+
+./src:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 main
+drwxr-xr-x  3   102  7 Feb 23:01 test
+
+./src/main:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+
+./src/main/java:
+total 8
+-rw-r--r--  1   299  7 Feb 23:01 Library.java
+
+./src/test:
+total 0
+drwxr-xr-x  3   102  7 Feb 23:01 java
+
+./src/test/java:
+total 8
+-rw-r--r--  1   488  7 Feb 23:01 LibraryTest.java
+
+</code></pre>
+</blockquote>
+
+<p>You can remove the <code>src/main</code> directory, and also the <code>src/test/java/LibraryTest.java</code> file.  Create the following new folders, <code>src/test/resources</code>, <code>src/test/java/restassuredexample</code>, <code>src/test/java/restassuredexample/cucumber</code> and <code>src/test/java/restassuredexample/cucumber/steps</code>.</p>
+
+<h3 id="open-notify---international-space-station-current-location">Open Notify - International Space Station Current Location</h3>
+
+<p><a href="http://open-notify.org/">Open Notify</a> is an open source project to provide an API for NASA data.  One such API is the <a href="http://open-notify.org/Open-Notify-API/ISS-Location-Now/">International Space Station Current Location</a> which returns the current longitude and latitude of the ISS.  This is the target API that we will write our test against.</p>
+
+<h3 id="gradle-setup">Gradle Setup</h3>
+
+<p>We are going to write our first automated test against <a href="http://api.open-notify.org/iss-now">http://api.open-notify.org/iss-now</a>.  We will first need to make some changes to <code>build.gradle</code> to download and setup our dependencies:</p>
+
+<blockquote>
+
+  <pre><code class="language-config">// apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// in this section declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// in this section declare the dependencies for your production and test code
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'junit:junit:4.12'
+    testCompile 'info.cukes:cucumber-java:1.2.0'
+    testCompile 'info.cukes:cucumber-junit:1.2.0'
+    testCompile 'com.jayway.restassured:rest-assured:2.4.1'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+// setup the cucumber task
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'restassuredexample', 'src/test/resources']
+        }
+    }
+}
+
+test {
+    systemProperties = System.properties
+    testLogging.showStandardStreams = true
+}
+</code></pre>
+</blockquote>
+
+<h3 id="cucumber-jvm-setup">Cucumber-JVM Setup</h3>
+
+<p>Create a new file, <code>Cucumber.java</code> in <code>src/test/java/restassuredexample/cucumber</code> with the following contents:</p>
+
+<blockquote>
+
+  <pre><code class="language-java">package restassuredexample.cucumber;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import cucumber.api.junit.Cucumber;
+import cucumber.api.CucumberOptions;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+    features = {"src/test/resources"}
+)
+public class CucumberRunner {
+
+}
+</code></pre>
+</blockquote>
+
+<p>Let’s now create a new feature file, <code>iss-current-location.feature</code> in <code>src/test/resources</code> to test <a href="http://api.open-notify.org/iss-now">http://api.open-notify.org/iss-now</a>:</p>
+
+<blockquote>
+
+  <pre><code class="language-gherkin">Feature: International Space Station Current Location
+
+  Scenario: Retrieve International Space Station Current Location
+    Given I access the ISS Current Location
+    When I retrieve the ISS Current Location
+    Then I see the ISS Current Location
+</code></pre>
+</blockquote>
+
+<p>Write the matching step definitions, <code>InternationalSpaceStationCurrentLocationSteps.java</code>, in <code>src/test/java/restassuredexample/cucumber/steps</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-java">package restassuredexample.cucumber.steps;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
+import restassuredexample.cucumber.InternationalSpaceStationCurrentLocationDefinition;
+
+public class InternationalSpaceStationCurrentLocationSteps {
+
+    InternationalSpaceStationCurrentLocationDefinition service;
+
+    @Given("^I access the ISS Current Location$")
+    public void i_access_the_ISS_Current_Location() throws Throwable {
+        service = new InternationalSpaceStationCurrentLocationDefinition();
+    }
+
+    @When("^I retrieve the ISS Current Location$")
+    public void i_retrieve_the_ISS_Current_Location() throws Throwable {
+        service.requestInternationalSpaceStationCurrentLocation();
+    }
+
+    @Then("^I see the ISS Current Location$")
+    public void i_see_the_ISS_Current_Location() throws Throwable {
+        service.validateInternationalSpaceStationCurrentLocationContents();
+    }
+}
+</code></pre>
+</blockquote>
+
+<h3 id="rest-assured-setup">REST Assured Setup</h3>
+
+<p>Write the matching service configuration, <code>InternationalSpaceStationCurrentLocationConfiguration.java</code>, in <code>src/test/java/restassuredexample/cucumber</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-java">package restassuredexample.cucumber;
+
+public abstract class InternationalSpaceStationCurrentLocationConfiguration {
+
+    public static final String OPEN_NOTIFY_API_URI = "http://api.open-notify.org";
+
+}
+</code></pre>
+</blockquote>
+
+<p>Write the matching service definition, <code>InternationalSpaceStationCurrentLocationDefinition.java</code>, in <code>src/test/java/restassuredexample/cucumber</code>:</p>
+
+<blockquote>
+
+  <pre><code class="language-java">package restassuredexample.cucumber;
+
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
+
+import static com.jayway.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+
+public class InternationalSpaceStationCurrentLocationDefinition {
+
+    public InternationalSpaceStationCurrentLocationDefinition() {
+        RestAssured.baseURI = InternationalSpaceStationCurrentLocationConfiguration.OPEN_NOTIFY_API_URI;
+    }
+
+    public void requestInternationalSpaceStationCurrentLocation() {
+        Response response =
+                given().
+                        contentType("application/json").
+                when().
+                        get("/iss-now/").
+                then().
+                        statusCode(200).
+                        extract().response();
+    }
+
+    public void validateInternationalSpaceStationCurrentLocationContents() {
+        Response response =
+                given().
+                        contentType("application/json").
+                when().
+                        get("/iss-now/").
+                then().
+                        body(containsString("iss_position")).
+                        body(containsString("message")).
+                        body(containsString("timestamp")).
+                        body(("message"), equalTo("success")).
+                extract().response();
+    }
+}
+</code></pre>
+</blockquote>
+
+<h3 id="execution">Execution</h3>
+
+<p>You can now run your REST Assured with Cucumber-JVM test by using <code>./gradlew cucumber</code> or <code>./gradlew test</code>, and you should see something similar to the following results:</p>
+
+<blockquote>
+
+  <pre><code class="language-shell">bash-3.2$ ./gradlew cucumber
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jar UP-TO-DATE
+:assemble UP-TO-DATE
+:compileTestJava UP-TO-DATE
+:cucumber
+Feature: International Space Station Current Location
+
+  Scenario: Retrieve International Space Station Current Location # iss-current-location.feature:3
+    Given I access the ISS Current Location                       # InternationalSpaceStationCurrentLocationSteps.i_access_the_ISS_Current_Location()
+    When I retrieve the ISS Current Location                      # InternationalSpaceStationCurrentLocationSteps.i_retrieve_the_ISS_Current_Location()
+    Then I see the ISS Current Location                           # InternationalSpaceStationCurrentLocationSteps.i_see_the_ISS_Current_Location()
+
+1 Scenarios (1 passed)
+3 Steps (3 passed)
+0m3.523s
+
+
+BUILD SUCCESSFUL
+
+Total time: 9.271 secs
+
+</code></pre>
+</blockquote>
+
+<h3 id="full-example">Full Example</h3>
+
+<p><a href="https://github.com/the-creative-tester/rest-assured-api-testing-example">https://github.com/the-creative-tester/rest-assured-api-testing-example</a></p>
+
+  </div>
+
   
-</div>
+</article>
       </div>
+    </div>
       <div id="contact" class="wrapper-footer">
   <div class="container">
     <footer class="footer">
@@ -183,7 +385,6 @@
     </footer>
   </div>
 </div>
-            
-    </div>
+      
   </body>
 </html>
