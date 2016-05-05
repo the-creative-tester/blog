@@ -38,13 +38,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
   margin: 0;
   padding: 0;
-
-  @include mobile {
-    line-height: 1;
-  }
 }
   
 h1 {  
+  font-family: 'Abel', sans-serif;
   font-size: 60px;
   margin: 10px 0;
   a {
@@ -67,7 +64,7 @@ h1 {
   vertical-align: top;
   padding: 10px 10px 10px 10px;
   margin: 0 0 0 0;
-  height: 240px;
+  height: 210px;
   overflow: hidden;
   @include mobile {
     margin: 0px 0px 0px 0px;
@@ -81,12 +78,13 @@ h1 {
   font-size: 24px;
   line-height: 1.2;
   // min-height: 60px;
-  margin: 0 0 12px;
+  margin: 0 0 0 0;
   letter-spacing: normal;
   font-weight: 700;
 }
 
 #home h1.site-name {
+  font-family: 'Abel', sans-serif;
   font-size: 72px;
   line-height: 74px;
   font-weight: 700;
@@ -94,7 +92,6 @@ h1 {
   margin-top: 30px;
   margin-bottom: 20px;
   text-align: center;
-  letter-spacing: -.03em;
   a {
     color: #ffffff;
     &:hover {
@@ -102,7 +99,8 @@ h1 {
     }
   }
   @include mobile {
-    margin: 0px 0px 0px 0px;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
 }
 
@@ -127,15 +125,16 @@ p {
 }
 
 #home p.site-description {
+  margin: 0px 0px 10px 0px;
   font-size: 30px;
   font-weight: 300;
   line-height: 40px;
   // max-width: 310px;
   text-align: center;
-  margin-bottom: 30px;
+  margin-right: 0px;
   color: #ffffff;
   @include mobile {
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 10px 0px;
   }
 }
 #home .entry p {
@@ -232,7 +231,7 @@ img {
 }
 
 .masthead {
-  padding: 20px 0 0;
+  padding: 10px 0 0;
   border-bottom: 0px;
   @include mobile {
     text-align: center;
@@ -269,12 +268,10 @@ img {
 .site-name {
   margin: 0;
   color: $darkGray;
-  cursor: pointer;
-  font-family: $helveticaNeue; 
+  font-family: 'Abel', sans-serif;
   font-weight: 300;
   font-size: 28px;
-  text-align: right;
-  margin-right: 20px;
+  text-align: center;
   a {
     color: #ffffff;
     &:hover {
@@ -282,23 +279,13 @@ img {
     }
   
   }
-  @include mobile {
-    text-align: center;
-    margin: 0px 0px 0px 0px;
-  }
 }
 
 .site-description {
-  margin: -5px 0 0 0;
   color: #ffffff;
   font-size: 14px;
-  font-family: $helveticaNeue;
-  text-align: right;
-  margin-right: 20px;
-  @include mobile {
-    text-align: center;
-    margin: 0px 0px 0px 0px;
-  }
+  font-family: 'Abel', sans-serif;
+  text-align: center;
 }
 
 nav {
@@ -323,7 +310,7 @@ nav {
     @include mobile {
       display: inline-block;
       float: none;
-      margin: 0 10px;
+      margin: 0 0px;
       color: $darkGray;
       width: 150px;
       text-align: left;
