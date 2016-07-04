@@ -35,7 +35,7 @@ Checking connectivity... done.
 
 ### Provider Setup
 
-Navigate into the ```provider``` directory, where you will see a sample RESTful Web Service that was built using Sprint Boot and Gradle through this [guide](https://spring.io/guides/gs/rest-service/).  Try running the service by using the following command:
+Navigate into the ```provider``` directory, where you will see a sample RESTful Web Service that was built using Sprint Boot and Gradle through this [guide](https://spring.io/guides/gs/actuator-service/).  Try running the service by using the following command:
 
 >
 ~~~ shell
