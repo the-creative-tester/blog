@@ -12,7 +12,7 @@ colour:
 
 ### Introduction
 
-In this post, we will write an automated test that utilises (Selenium WebDriver)[http://www.seleniumhq.org/], [Cucumber-JVM](https://cucumber.io/docs/reference/jvm) and [Gradle](https://gradle.org/).  We will also make use of [Selenium Grid](https://github.com/SeleniumHQ/selenium/wiki/Grid2) in Gradle.
+In this post, we will write an automated test that utilises [Selenium WebDriver](http://www.seleniumhq.org/), [Cucumber-JVM](https://cucumber.io/docs/reference/jvm) and [Gradle](https://gradle.org/).  We will also make use of [Selenium Grid](https://github.com/SeleniumHQ/selenium/wiki/Grid2) in Gradle.
 
 In this guide we will automate a browser navigating [Cucumber](https://cucumber.io/).  We will start off with a very basic test, but will then slowly build on top of it to incorporate Cucumber and Page Objects.
 
@@ -77,8 +77,7 @@ dependencies {
 task startSeleniumHub() << {
     ant.java(classname : 'org.openqa.grid.selenium.GridLauncher', 
             fork:true,
-            classpath : configurations.runtime.asPath
-        ) {
+            classpath : configurations.runtime.asPath) {
         arg(value : '-role')
         arg(value : 'hub')
     }
@@ -156,7 +155,7 @@ public class ExampleTest
   {
     driver.get("https://cucumber.io/");
     WebElement element = driver.findElement(By.linkText("Docs"));
-        element.click();
+    element.click();
     assertTrue(driver.getTitle().contains(Cucumber));
   }
 >
@@ -472,7 +471,7 @@ import static org.junit.Assert.assertTrue;
 >
 public class CucumberSteps
 {
-
+>
     RemoteWebDriver driver = DriverFactory.driver;
     CucumberHomePage cucumberHomePage = PageFactory.initElements(driver, CucumberHomePage.class);
 >
