@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java Web Browser Automation
+title: Java Web Automation (Cucumber)
 desc: Selenium, Page Objects, Cucumber-JVM and Gradle
 proj-num: 11
 colour: 
