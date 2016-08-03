@@ -151,7 +151,7 @@ public class ExampleTest
   }
 >
   @Test    
-  public void thiIsTheActualTest() 
+  public void thisIsTheActualTest() 
   {
     driver.get("https://cucumber.io/");
     WebElement element = driver.findElement(By.linkText("Docs"));
