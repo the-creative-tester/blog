@@ -117,7 +117,73 @@ Ensure your setup has been successful by navigating to <http://127.0.0.1:4444/gr
 
 ### Introducing Selenium
 
-With Selenium Grid running in the background, we can now write a very simple test by creating ```ExampleTest.java``` in ```/src/test/java/```:
+We can now write a very simple test that utilises WebDriver by creating ```ExampleTest.java``` in ```/src/test/java/```:
+
+>
+~~~ java
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.junit.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertTrue;
+>
+public class ExampleTest 
+{
+>
+  WebDriver driver;
+>
+  @Before
+  public void setUp()
+  {
+    driver = new FirefoxDriver();
+  }
+>
+  @After
+  public void tearDown() 
+  {
+    driver.quit();
+  }
+>
+  @Test    
+  public void thisIsTheActualTest() 
+  {
+    driver.get("https://cucumber.io/");
+    WebElement element = driver.findElement(By.linkText("Docs"));
+    element.click();
+    assertTrue(driver.getTitle().contains("Cucumber"));
+  }
+>
+}
+>
+~~~
+
+Now, try running the test and observe that Firefox is launched and the test is run:
+
+>
+~~~ bash
+bash-3.2$ ./gradlew clean build
+:clean
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jar
+:assemble
+:compileTestJava
+:processTestResources UP-TO-DATE
+:testClasses
+:test
+:check
+:build
+>
+BUILD SUCCESSFUL
+>
+Total time: 18.906 secs
+~~~
+
+Let's now update ```ExampleTest.java``` to utilise RemoteWebDriver and the Selenium Grid that you have started in the background:
 
 >
 ~~~ java
