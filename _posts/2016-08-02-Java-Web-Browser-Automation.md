@@ -156,7 +156,7 @@ public class ExampleTest
     driver.get("https://cucumber.io/");
     WebElement element = driver.findElement(By.linkText("Docs"));
     element.click();
-    assertTrue(driver.getTitle().contains(Cucumber));
+    assertTrue(driver.getTitle().contains("Cucumber"));
   }
 >
 }
