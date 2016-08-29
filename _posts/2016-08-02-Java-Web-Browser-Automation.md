@@ -117,7 +117,7 @@ Ensure your setup has been successful by navigating to <http://127.0.0.1:4444/gr
 
 ### Introducing Selenium
 
-We can now write a very simple test that utilises WebDriver by creating ```ExampleTest.java``` in ```/src/test/java/```:
+We can now write a very simple test that utilises WebDriver by creating ```ExampleTest.java``` in ```/src/test/java/```.  We will make use of JUnit's ```@Before```, ```@After``` and ```@Test``` annoations:
 
 >
 ~~~ java
@@ -266,7 +266,7 @@ Feature: Cucumber Home Page
     Then I see a browser title containing "Cucumber"
 ~~~
 
-Create the file ```CucumberRunner.java``` in ```/src/test/java/``` and place the following contents:
+Create the file ```CucumberRunner.java``` in ```/src/test/java/``` and place the following contents to act as the glue for our implementation:
 
 >
 ~~~ java
@@ -282,7 +282,7 @@ public class CucumberRunner
 >
 ~~~
 
-Rename the file ```ExampleTest.java``` to ```CucumberSteps.java```, and move the file to ```/src/test/java/steps/``` and place the following contents:
+Rename the file ```ExampleTest.java``` to ```CucumberSteps.java```, and move the file to ```/src/test/java/steps/``` and place the following contents.  We will be making use of Cucumber-JVM's annotations ```@Before``` and ```@After``` as well as ```@Given```, ```@When``` and ```@Then``` to match the steps written in ```Cucumber.feature```:
 
 >
 ~~~ java
@@ -363,7 +363,7 @@ Total time: 22.261 secs
 
 ### Introducing Page Objects
 
-Let's now introduce the concept of Page Objects.  Create the file ```CucumberHomePage.java``` in ```/src/test/java/pages/``` and place the following contents:
+Let's now introduce the concept of Page Objects.  Create the file ```CucumberHomePage.java``` in ```/src/test/java/pages/``` and place the following contents using the ```@FindBy``` annotation to look for the element:
 
 >
 ~~~ java
