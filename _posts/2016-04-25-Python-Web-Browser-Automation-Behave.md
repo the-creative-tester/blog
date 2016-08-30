@@ -47,7 +47,102 @@ bash-3.2$ pip install nose
 
 ### Initial Setup
 
-We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  Now create a folder structure similar to this:
+We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  
+
+##### Basic Selenium WebDriver Usage
+
+Create a new file called ```sample-test.py``` and place the following contents:
+
+>
+~~~ python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+>
+driver = webdriver.Firefox()
+driver.get("https://pypi.python.org/pypi")
+driver.find_element(By.ID, "term").send_keys("Selenium")
+driver.find_element(By.ID, "submit").click()
+driver.quit()
+~~~
+
+Run the test using ```python sample-test.py```:
+
+>
+~~~ shell
+bash-3.2$ python test.py
+~~~
+
+##### Using Python's Unit Testing Framework (unittest)
+
+Here we will start to make use of nose.  The nose library extends unittest to act as a test runner.
+
+>
+~~~ python
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+>
+class SampleTest(unittest.TestCase):
+>
+    def pypi_test(self):
+        self.driver = webdriver.Firefox()
+        self.driver.get("https://pypi.python.org/pypi")
+        self.driver.find_element(By.ID, "term").send_keys("Selenium")
+        self.driver.find_element(By.ID, "submit").click()
+        self.driver.quit()
+>
+~~~
+
+Run the test using ```nosetests``` or ```nosetests sample-test.py```:
+
+>
+~~~ shell
+bash-3.2$ nosetests
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.294s
+>
+OK
+~~~
+
+Let's now update the test to include unittest's ```setUp()``` and ```tearDown()``` methods.  Update ```sample-test.py``` with the following contents:
+
+>
+~~~ python
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+>
+class SampleTest(unittest.TestCase):
+>
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+>
+    def pypi_test(self):
+        self.driver.get("https://pypi.python.org/pypi")
+        self.driver.find_element(By.ID, "term").send_keys("Selenium")
+        self.driver.find_element(By.ID, "submit").click()
+>
+    def tearDown(self):
+        self.driver.quit()
+>
+~~~
+
+Run the test using ```nosetests``` or ```nosetests sample-test.py```:
+
+>
+~~~ shell
+bash-3.2$ nosetests
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.563s
+>
+OK
+~~~
+
+### Using Behave
+
+Create a folder structure similar to this:
 
 >
 ~~~
@@ -55,16 +150,12 @@ pypi_automated_tests/
   features/
     __init__.py
     pages/
-    	__init__.py
+        __init__.py
     steps/
-    	__init__.py
+        __init__.py
 ~~~
 
-The ```__init__.py``` files can be left empty, but will allow for the containing directories to recognised as Python packages.
-
-### Using Behave
-
-To make use of Behave, we will first have to create a new file ```pypi_automated_tests/features/environment.py```.  This file can be used by Behave to define the functions that run ```before_all()``` or ```after_all()``` certain events in your test.  In this file, place the following code:
+The ```__init__.py``` files can be left empty, but will allow for the containing directories to recognised as Python packages.  To make use of Behave, we will first have to create a new file ```pypi_automated_tests/features/environment.py```.  This file can be used by Behave to define the functions that run ```before_all()``` or ```after_all()``` events in your test, which is very similar to unittest's ```setUp()``` and ```tearDown()``` methods.  In this file, place the following code:
 
 >
 ~~~ python
