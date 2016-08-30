@@ -73,7 +73,7 @@ driver.find_element(By.ID, "submit").click()
 driver.quit()
 ~~~
 
-Run the test using ```python sample-test.py```:
+Run the test using ```python sample-test.py``` and observe that Firefox is started:
 
 >
 ~~~ shell
