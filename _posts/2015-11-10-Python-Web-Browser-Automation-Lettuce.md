@@ -82,7 +82,7 @@ bash-3.2$ python test.py
 
 ##### Using Python's Unit Testing Framework (unittest)
 
-Here we will start to make use of nose.  The nose library extends unittest to act as a test runner.
+Here we will start to make use of nose.  The nose library extends unittest to act as a test runner, which provides more meaningful results at execution.
 
 >
 ~~~ python
