@@ -269,8 +269,6 @@ from browser import Browser
 >
 def before_all(context):
     context.browser = Browser()
-    context.home_page = HomePage()
-    context.search_results_page = SearchResultsPage()
 >
 def after_all(context):
     context.browser.close()
@@ -337,6 +335,23 @@ class SearchResultsPage(Browser):
 >
     def find_search_result(self, search_result):
         return self.get_element(By.LINK_TEXT, search_result)
+>
+~~~
+
+You can now again update ```environment.py``` to initialise the 2 new Page Objects:
+
+>
+~~~ python
+from selenium import webdriver
+from browser import Browser
+>
+def before_all(context):
+    context.browser = Browser()
+    context.home_page = HomePage()
+    context.search_results_page = SearchResultsPage()
+>
+def after_all(context):
+    context.browser.close()
 >
 ~~~
 
