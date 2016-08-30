@@ -381,7 +381,7 @@ def step_impl(context, search_result):
 >
 ~~~
 
-Finally, in our ```pypi_automated_tests/features/environment.py``` we will need to make these Page Objects avaiable through by making the following updates:
+Finally, in our ```pypi_automated_tests/features/environment.py``` we will need to make these Page Objects avaiable by making the following updates:
 
 >
 ~~~ python
