@@ -45,6 +45,14 @@ bash-3.2$ pip install behave
 bash-3.2$ pip install nose
 ~~~
 
+##### Sublime Text
+
+Install [Sublime Text 3](http://www.sublimetext.com/3).
+
+##### Firefox
+
+Install [Firefox](https://www.mozilla.org/en-US/firefox/all/).
+
 ### Initial Setup
 
 We are going to write our first automated test against [PyPI](https://pypi.python.org/pypi).  Create a new directory for your test automation project, and open that directory in Sublime Text 3.  
