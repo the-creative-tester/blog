@@ -8,7 +8,7 @@ colour:
 
 
 
-## Selenium, Page Objects, Cucumber-JVM and Gradle in Python
+## Selenium, Page Objects, Cucumber-JVM and Gradle in Java
 
 ### Introduction
 
