@@ -77,7 +77,7 @@ Run the test using ```python sample-test.py``` and observe that Firefox is start
 
 >
 ~~~ shell
-bash-3.2$ python test.py
+bash-3.2$ python sample-test.py
 ~~~
 
 ##### Using Python's Unit Testing Framework (unittest)
