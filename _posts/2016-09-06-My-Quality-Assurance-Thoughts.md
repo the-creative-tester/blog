@@ -79,7 +79,7 @@ Next, your organisation is a place where you can learn and share what other area
 
 ### Your Community
 
-Next, your community is a place where you can learn and share what other organisations are doing in the Quality Assurance field.  It is a place where you can see learn from a diverse range of industries and backgrounds, but it also gives you the opportunity to give back to the community and the next generation of professionals in the field of Quality Assurance.
+Next, your community is a place where you can learn and share what other organisations are doing in the Quality Assurance field.  It is a place where you can see and learn from a diverse range of industries and backgrounds, but it also gives you the opportunity to give back to the community and the next generation of professionals in the field of Quality Assurance.
 
 ![Quality Assurance Your Community](../images/Quality-YourCommunity.png){: .center-image }
 
