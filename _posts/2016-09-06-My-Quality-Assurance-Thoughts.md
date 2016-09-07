@@ -44,7 +44,7 @@ I genuinely enjoy working with people.  I often spend up to 8 hours a day with s
 
 * **Learning**.  Learn from others.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.
 * **Sharing**.  Share what you have learnt to others.
-* **Innovating**.  Always find opportunities to innovate or be creative.  Every problem or challenge you face is a chance to come up with an innovative solution.  Innovation drives learning, and learning drives sharing.
+* **Innovating**.  Always find opportunities to innovate or be creative.  Every problem or challenge you face is a chance to come up with an innovative solution.  Looking for creative ways of solving a problem will drive learning, and learning drives sharing.
 
 #### Software and Hardware
 
