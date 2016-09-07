@@ -8,22 +8,22 @@ colour:
 
 
 
-!(../images/Quality-Title.png){: .center-image }
+![Quality Assurance Title ](../images/Quality-Title.png){: .center-image }
 
 ### Introduction
 
 ### Your Team
 
-!(../images/Quality-YourTeam.png){: .center-image }
+![Quality Assurance Your Team](../images/Quality-YourTeam.png){: .center-image }
 
 ### Your Organisation
 
-!(../images/Quality-YourOrganisation.png){: .center-image }
+![Quality Assurance Your Organisation](../images/Quality-YourOrganisation.png){: .center-image }
 
 ### Your Community
 
-!(../images/Quality-YourCommunity.png){: .center-image }
+![Quality Assurance Your Community](../images/Quality-YourCommunity.png){: .center-image }
 
 ### Full Infographic
 
-!(../images/Quality.png){: .center-image }
+![Quality Assurance Full Infographic](../images/Quality.png){: .center-image }
