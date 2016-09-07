@@ -28,15 +28,27 @@ Your team is the first place where you can be an advocate for all things related
 
 #### User Stories
 
-* **Define Quality**.  One of the first things that I was ever taught to do was to be able to facilitate a discussion on the definition of quality.  This can apply to an user story, a feature or even for the whole project.  The definition of quality that I once heard is that _"quality is some value to some person at some point in time_".  The role of the QA is to ensure that all relevant characteristics (or value) of what makes up quality is discussed and included in the user story.  Common examples that I have always had to deal with, include, Correctness, Performance, Security, Compatibility and Maintainability.  Knowing the scope of these characteristics will often help drive discussions around the correct acceptance criteria to be included in the user story, or even identifying what is needed at a feature or project level.
-* **Automation**.  Compared to a human, a machine is less likely to make mistakes in checking a given set of steps or instructions.  It is often discussed that QA is a combination of checking (automation) and testing (exploration).  With this in mind, it is often best to automate the highly repetitive tasks.  As a QA, you want to ensure the right amount of tests are written at the right level.  You want to also ensure that both the most riskiest items from a business and technical point of view are automated.  As per the previous point, it is not only the Correctness characteristic that can be automated.  It is very possible to automate the likes of Security, Performance and Compatibility testing.
-* **Exploration**.  With a well-rounded knowledge of the customer and the technology that has been delivered, a QA has the ability to perform exploratory testing.  With the boring, repetitive testing now automated, a QA can spend their time performing the more valuable exploratory testing.  Exploratory testing is often known as simultaneous learning, test design, and test execution for a piece of software.
+1. Define Quality  
+
+   One of the first things that I was ever taught to do was to be able to facilitate a discussion on the definition of quality.  This can apply to an user story, a feature or even for the whole project.  The definition of quality that I once heard is that _"quality is some value to some person at some point in time_".  The role of the QA is to ensure that all relevant characteristics (or value) of what makes up quality is discussed and included in the user story.  Common examples that I have always had to deal with, include, Correctness, Performance, Security, Compatibility and Maintainability.  Knowing the scope of these characteristics will often help drive discussions around the correct acceptance criteria to be included in the user story, or even identifying what is needed at a feature or project level.
+2. Automation  
+
+   Compared to a human, a machine is less likely to make mistakes in checking a given set of steps or instructions.  It is regularly discussed that the role of a QA is a combination of checking (automation) and testing (exploration).  With this in mind, it is often best to automate the highly repetitive _checking_ tasks.  As a QA, you want to ensure the right amount of tests are written at the right level.  You want to also ensure that both the most riskiest items from a business and technical point of view are automated.  As per the previous point, it is not only the Correctness characteristic that can be automated.  It is very possible to automate the likes of Security, Performance and Compatibility testing.
+3. Exploration 
+   
+   With a well-rounded knowledge of the customer and the technology that has been delivered, a QA has the ability to perform exploratory testing.  With the boring, repetitive testing now automated, a QA can spend their time performing the more valuable exploratory testing.  Exploratory testing is often known as simultaneous learning, test design, and test execution for a piece of software.
 
 #### Processes
 
-* **Fast Feedback**.  In every project that I am part of, I always strive to ensure that everything we do has short feedback cycles.  This includes our automated tests always running in CI, frequent shoulder checks, frequent kick offs, frequent sign offs, frequent showcases, but most importantly small user stories.  I also often try to remove the reliance on stand ups, showcases and retrospectives to give feedback.  These ceremonies are simply placeholders to ensure that _some_ feedback happens, but often there is a much earlier time to do this.  The faster our feedback, the faster we can react to something that has gone wrong.
-* **Collaboration**.  Unfortunately, I often find it the role of a QA to gather all stakeholders at a lot of the shoulder checks, kick offs, sign offs or showcases.  However, each of these steps in a story lifecycle is vitally important to ensure that we all have a shared understanding of what we are building.
-* **Understanding Value**.  Questioning the value of project activities or decisions.  I often find myself in the position of trying to minimise as much waste as possible so that time can be spent on building more features or performing exploratory testing.
+1. Fast Feedback**
+
+    In every project that I am part of, I always strive to ensure that everything we do has short feedback cycles.  This includes our automated tests always running in CI, frequent shoulder checks, frequent kick offs, frequent sign offs, frequent showcases, but most importantly small user stories.  I also often try to remove the reliance on stand ups, showcases and retrospectives to give feedback.  These ceremonies are simply placeholders to ensure that _some_ feedback happens, but often there is a much earlier time to do this.  The faster our feedback, the faster we can react to something that has gone wrong.
+2. Collaboration
+  
+   Unfortunately, I often find it the role of a QA to gather all stakeholders at a lot of the shoulder checks, kick offs, sign offs or showcases.  However, each of these steps in a story lifecycle is vitally important to ensure that we all have a shared understanding of what we are building.  I've found that using techniques such as BDD or Three Amigos can help facilitate collaboration.
+3. Understanding Value 
+
+   Questioning the value of project activities or decisions.  I often find myself in the position of trying to minimise as much waste as possible so that time can be spent on building more features or performing exploratory testing.
 
 #### People
 
