@@ -44,7 +44,7 @@ Your team is the first place where you can be an advocate for all things related
 2. **Collaboration**
   
    Unfortunately, I often find it the role of a QA to gather all stakeholders at a lot of the shoulder checks, kick offs, sign offs or showcases.  However, each of these steps in a story lifecycle is vitally important to ensure that we all have a shared understanding of what we are building.  I've found that using techniques such as BDD or Three Amigos can help facilitate collaboration.
-3. **Understanding Value **
+3. **Valuable?**
 
    Questioning the value of project activities or decisions.  I often find myself in the position of trying to minimise as much waste as possible so that time can be spent on building more features or performing exploratory testing.
 
@@ -52,15 +52,10 @@ Your team is the first place where you can be an advocate for all things related
 
 I genuinely enjoy working with people.  I often spend up to 8 hours a day with some of these people, and I believe building a strong (quality) relationship can go a long way.
 
-1. **Learning**
+1. **Learning and Sharing**
    
-   Learn from others.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.
-2. **Sharing**
-   
-   Share what you have learnt to others.
-3. **Innovating**
+   Learn from others.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.  Always share what you have learnt to others.
 
-   Always find opportunities to innovate or be creative.  Every problem or challenge you face is a chance to come up with an innovative solution.  Looking for creative ways of solving a problem will drive learning, and learning drives sharing.
 
 #### Software and Hardware
 
@@ -77,13 +72,11 @@ Next, your organisation is a place where you can learn and share what other area
 1. **Awareness**
 
    I often find myself proactively reaching out to areas of my organisation about some of the services that the team can offer.  With automated testing and early collaboration, it removes the need for many testing related activities (e.g., UAT) to occur.  By educating our stakeholders, we have the ability to remove this waste and instead spend our time on more valuable activities.  
-2. **Learning**
+2. **Learning and Sharing**
  
-   It is also important to reach out to other areas of the organisation in the same field as you.  There is great value in establishing a community or forum for QAs across an organisation who are working on different projects.  These communities can facilitate knowledge sharing and learning of the different tools and technologies used across an organisation, but can also facilitate conversations around problems faced by one team may have already been solved by another.
-3. **Sharing**
+   It is also important to reach out to other areas of the organisation in the same field as you.  There is great value in establishing a community or forum for QAs across an organisation who are working on different projects.  These communities can facilitate knowledge sharing and learning of the different tools and technologies used across an organisation, but can also facilitate conversations around problems faced by one team may have already been solved by another.  Always share what you have learnt to others.
 
-   Share what you have learnt to others.
-4. **Innovating**
+3. **Innovating**
 
    Innovation days are a great way to trial a new tool or technology.  Often with project schedules, there isn't always the time to experiement on something not relevant to your project, however, in the last few innovation days I have had the chance to work on Visual Regression Testing, Mobile Testing and also a bit in the DevOps space.
 
@@ -93,18 +86,15 @@ Next, your community is a place where you can learn and share what other organis
 
 ![Quality Assurance Your Community](../images/Quality-YourCommunity.png){: .center-image }
 
-1. **Curiosity**
+1. **Best?**
 
    One of my mentors once asked me "_what does the best QA team look like_".  This question has always remained in the back of my mind, and it is the biggest contributor for my desire and curiosity to learn and know more.  However, I believe that in order to know what _best_ looks like, you need to follow  trends in the industry, which means, being active in the community.  This could be through reading blogs, attending meetups or attending conferences.  Most of the time that I find out about a new technique or a new technology it is through one of these mediums.
-2. **Growing**
+2. **Community Growth**
  
    I now feel that I am at a level where I can start to share some of my experiences and knowledge to others and hopefully grow the QA community.  I like to be involved in local meetup events, but also like to mentor students at a local university.  I feel that I can help bridge the gap between what is taught from a theoretical perspective and what is performed in practice by regularly speaking to students who are looking to pursue a career in Quality Assurance.
-3. **Learning**
+3. **Learning and Sharing**
 
-   As mentioned before, learn through reading blogs, attending meetups or attending conferences.
-4. **Sharing**
-
-   Share what you have learnt to others.
+   As mentioned before, learn through reading blogs, attending meetups or attending conferences.  Alwayws share what you have learnt to others.
 
 ### Full Infographic
 
