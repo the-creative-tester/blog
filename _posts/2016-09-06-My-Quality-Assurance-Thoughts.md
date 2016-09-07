@@ -52,7 +52,7 @@ Your team is the first place where you can be an advocate for all things related
 
 1. **Learning and Sharing**
    
-   You will often spend up to 8 hours a day with some of teammates, and I believe that building a quality relationship can help foster an environment where you can learn and share with each other.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.  Always share what you have learnt to others.
+   You will often spend up to 8 hours a day with some of your teammates, and I believe that building a quality relationship can help foster an environment where you can learn and share with each other.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.  Always share what you have learnt to others.
 
 #### Software and Hardware
 
