@@ -20,7 +20,7 @@ In this post, I will attempt to briefly describe the points that we should look 
 
 ### Your Team
 
-Your team is the first place where you can be an advocate for all things related to quality.  This is where everything that you do will ultimately contribute to the delivery of a higher quality product.  In order to achieve this, we must look at how we can build quality into User Stories, Processes, People as well as Software and Hardware.
+Your team is the first place where you can be an advocate for all things related to quality.  This is where everything that you do will ultimately contribute to the delivery of a higher quality product.  In order to achieve this, we must first look at how we can build quality into 4 different areas, User Stories, Processes, People as well as Software and Hardware.
 
 ![Quality Assurance Your Team](../images/Quality-YourTeam.png){: .center-image }
 
@@ -50,12 +50,9 @@ Your team is the first place where you can be an advocate for all things related
 
 #### People
 
-You will often spend up to 8 hours a day with some of teammates, and I believe that building a quality relationship can go a long way.
-
 1. **Learning and Sharing**
    
-   Learn from others.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.  Always share what you have learnt to others.
-
+   You will often spend up to 8 hours a day with some of teammates, and I believe that building a quality relationship can go a long way to creating an environment where you can learn and share with each other.  A project team often has a diverse selection of people, backgrounds and roles.  This means that every interaction you have is an opportunity to learn something new.  Learn a bit more about a particular technology from a Software Engineer or learn a bit more about the business or product from a Business Analyst or Product Analyst.  Always share what you have learnt to others.
 
 #### Software and Hardware
 
@@ -71,7 +68,7 @@ Next, your organisation is a place where you can learn and share what other area
 
 1. **Awareness**
 
-   I often find myself proactively reaching out to areas of my organisation about some of the services that the team can offer.  With automated testing and early collaboration, it removes the need for many testing related activities (e.g., UAT) to occur.  By educating our stakeholders, we have the ability to remove this waste and instead spend our time on more valuable activities.  
+   I often find myself proactively reaching out to areas of my organisation about some of the services that the team can offer.  With the _automate everything_ approach now such a big part of our day-to-day work, who knows what other areas of the organisation could use that type of thinking.  Also, with automated testing and early collaboration, it may potentially remove the need for many duplicated testing related activities (e.g., UAT) to occur.  By educating our stakeholders, we have the ability to remove this waste and instead spend our time on more valuable activities.
 2. **Learning and Sharing**
  
    It is also important to reach out to other areas of the organisation in the same field as you.  There is great value in establishing a community or forum for QAs across an organisation who are working on different projects.  These communities can facilitate knowledge sharing and learning of the different tools and technologies used across an organisation, but can also facilitate conversations around problems faced by one team may have already been solved by another.  Always share what you have learnt to others.
@@ -88,10 +85,10 @@ Next, your community is a place where you can learn and share what other organis
 
 1. **Best?**
 
-   One of my mentors once asked me "_what does the best QA team look like_".  This question has always remained in the back of my mind, and it is the biggest contributor for my desire and curiosity to learn and know more.  However, I believe that in order to know what _best_ looks like, you need to follow  trends in the industry, which means, being active in the community.  This could be through reading blogs, attending meetups or attending conferences.  Most of the time that I find out about a new technique or a new technology it is through one of these mediums.
+   One of my mentors once asked me "_what does the best QA team look like_".  This question should always remain in the back of your mind, and it is likely to be the biggest contributor for your desire and curiosity to learn and know more.  However, in order to know what _best_ looks like, you need to follow  trends in the industry, which ultimately means being active in the community.  This could be through reading blogs, attending meetups or attending conferences.  In my experience, most of the time that I find out about a new technique or a new technology it is through one of these mediums.
 2. **Community Growth**
  
-   I now feel that I am at a level where I can start to share some of my experiences and knowledge to others and hopefully grow the QA community.  I like to be involved in local meetup events, but also like to mentor students at a local university.  I feel that I can help bridge the gap between what is taught from a theoretical perspective and what is performed in practice by regularly speaking to students who are looking to pursue a career in Quality Assurance.
+   If you feel comfortable, it is also important to share some of your experiences and knowledge to others in the QA community.  There are many forums where you can do this, such as at meetup events, conferences, but also try reaching out to a local university to see if you can impart some of your knowledge to students.  Your experience in the industry can help bridge the gap between what is taught from a theoretical perspective and what is performed in practice by talking to students who are looking to pursue a career in Quality Assurance.
 3. **Learning and Sharing**
 
    As mentioned before, learn through reading blogs, attending meetups or attending conferences.  Alwayws share what you have learnt to others.
