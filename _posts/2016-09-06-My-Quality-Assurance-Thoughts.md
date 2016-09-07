@@ -40,17 +40,17 @@ Your team is the first place where you can be an advocate for all things related
 
 1. **Fast Feedback**
 
-   In every project that I am part of, I always strive to ensure that everything we do has short feedback cycles.  This includes our automated tests always running in CI, frequent shoulder checks, frequent kick offs, frequent sign offs, frequent showcases, but most importantly small user stories.  I also often try to remove the reliance on stand ups, showcases and retrospectives to give feedback.  These ceremonies are simply placeholders to ensure that _some_ feedback happens, but often there is a much earlier time to do this.  The faster our feedback, the faster we can react to something that has gone wrong.
+   In every project that I have been part of, I always strive to ensure that everything we do has short feedback cycles.  This includes our automated tests always running in CI, frequent shoulder checks, frequent kick offs, frequent sign offs, frequent showcases, but most importantly small user stories.  I also often try to remove the reliance on stand ups, showcases and retrospectives to give feedback.  These ceremonies are simply placeholders to ensure that _some_ feedback happens, but often there is a much earlier time to do this.  The faster our feedback, the faster we can react to something that has gone wrong.
 2. **Collaboration**
   
-   Unfortunately, I often find it the role of a QA to gather all stakeholders at a lot of the shoulder checks, kick offs, sign offs or showcases.  However, each of these steps in a story lifecycle is vitally important to ensure that we all have a shared understanding of what we are building.  I've found that using techniques such as BDD or Three Amigos can help facilitate collaboration.
+   Unfortunately, I often find it the role of a QA to gather all stakeholders at each step of the story lifecycle.  This is often done through shoulder checks, kick offs, sign offs or even during showcases.  However, each of these steps is important to ensure that the team has  a shared understanding of what we are building.  This shared understanding will allow us to prevent potential bugs from ever being created, and will prevent the possibility of requirements not being delivered.  I've found that using techniques such as BDD or Three Amigos can help facilitate collaboration.
 3. **Valuable?**
 
    Questioning the value of project activities or decisions.  I often find myself in the position of trying to minimise as much waste as possible so that time can be spent on building more features or performing exploratory testing.
 
 #### People
 
-I genuinely enjoy working with people.  I often spend up to 8 hours a day with some of these people, and I believe building a strong (quality) relationship can go a long way.
+You will often spend up to 8 hours a day with some of teammates, and I believe that building a quality relationship can go a long way.
 
 1. **Learning and Sharing**
    
