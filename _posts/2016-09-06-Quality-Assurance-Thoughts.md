@@ -8,16 +8,22 @@ colour:
 
 
 
-## How To Build Quality In (Everywhere)
+!(../images/Quality-Title.png){: .center-image }
 
 ### Introduction
 
 ### Your Team
 
+!(../images/Quality-YourTeam.png){: .center-image }
+
 ### Your Organisation
+
+!(../images/Quality-YourOrganisation.png){: .center-image }
 
 ### Your Community
 
+!(../images/Quality-YourCommunity.png){: .center-image }
+
 ### Full Infographic
 
-![Quality Infographic](../images/Quality.png){: .center-image }
+!(../images/Quality.png){: .center-image }
