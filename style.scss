@@ -141,6 +141,12 @@ p {
   color: $gray;
 }
 
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
+
 a {
   color: $red;
   text-decoration: none;
