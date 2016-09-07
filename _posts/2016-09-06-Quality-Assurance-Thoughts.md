@@ -20,4 +20,4 @@ colour:
 
 ### Full Infographic
 
-![Quality Infographic](../images/Quality.png)
+![Quality Infographic](../images/Quality.png){: .center-image }
