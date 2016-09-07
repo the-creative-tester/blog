@@ -18,6 +18,8 @@ I believe that as a QA, there is so much more to offer, and that you can be an a
 
 In this post, I will attempt to briefly describe the things I am passionate in driving on a day-to-day basis in my team, in my organisation and in my community.
 
+![Quality Assurance Title](../images/Quality-Title.png){: .center-image }
+
 ### Your Team
 
 Your team is the first place where you can be an advocate for all things related to quality.  This is where everything that you do will ultimately contribute to the delivery of a higher quality product.  In order to achieve this, we must look at User Stories, Processes, People as well as Software and Hardware.
