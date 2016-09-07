@@ -18,7 +18,7 @@ I believe that as a QA, there is so much more to offer, and that you can be an a
 
 In this post, I will attempt to briefly describe the things I am passionate in driving on a day-to-day basis in my team, in my organisation and in my community.
 
-![Quality Assurance Title](../images/Quality-Title.png){: .center-image }
+Click [here](../images/Quality.png) to see the full infographic.
 
 ### Your Team
 
