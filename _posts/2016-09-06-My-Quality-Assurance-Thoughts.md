@@ -42,7 +42,7 @@ Your team is the first place where you can be an advocate for all things quality
 
 ##### Software and Hardware
 
-# DevOps
+* DevOps
 
 ### Your Organisation
 
