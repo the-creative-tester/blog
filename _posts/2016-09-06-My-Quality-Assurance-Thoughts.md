@@ -91,7 +91,7 @@ Next, your community is a place where you can learn and share what other organis
    If you feel comfortable, it is also important to share some of your experiences and knowledge to others in the QA community.  There are many forums where you can do this, such as at meetup events, conferences, but also try reaching out to a local university to see if you can impart some of your knowledge to students.  Your experience in the industry can help bridge the gap between what is taught from a theoretical perspective and what is performed in practice by talking to students who are looking to pursue a career in Quality Assurance.
 3. **Learning and Sharing**
 
-   As mentioned before, learn through reading blogs, attending meetups or attending conferences.  Alwayws share what you have learnt to others.
+   As mentioned before, learn through reading blogs, attending meetups or attending conferences.  Always share what you have learnt to others.
 
 ### Full Infographic
 
